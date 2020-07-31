@@ -27,6 +27,6 @@ export const button = {
   md: {
     width: "120px",
     height: "40px",
-    fontSize: "18px",
+    fontSize: "16px",
   },
 };

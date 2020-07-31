@@ -5,7 +5,7 @@ import Button from "./components/shared/button/Button";
 function App() {
   return (
     <div className='App'>
-      <Button btnColor='gray' outline text='Editar Perfíl' />
+      <Button />
     </div>
   );
 }
