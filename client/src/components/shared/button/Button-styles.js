@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import * as styles from "../../../global-styles";
 
 const StyledElement = styled.div`
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   border-radius: 50px;

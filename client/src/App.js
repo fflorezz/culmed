@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Button from "./components/shared/button/Button";
 import Icon from "./components/shared/icon/Icon";
+import Avatar from "./components/shared/avatar/Avatar";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
       <Icon type="like" />
       <Icon type="add" size="sm" color="primary" />
       <Icon type="views" size="sm" color="complementary" />
+
+      <Avatar size="lg" column />
     </div>
   );
 }
