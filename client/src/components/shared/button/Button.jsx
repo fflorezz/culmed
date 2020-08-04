@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 
 import StyledElement from "./Button-styles";
 
-const Button = ({ btnColor, size, text, outline, handleClick, link }) => {
+const Button = ({ color, size, text, outline, handleClick, link }) => {
   if (link) {
     return (
       <Link to={link} style={{ textDecoration: "none" }}>
-        <StyledElement btnColor={btnColor} size={size} outline={outline}>
+        <StyledElement btnColor={color} size={size} outline={outline}>
           {text}
         </StyledElement>
       </Link>
@@ -17,7 +17,7 @@ const Button = ({ btnColor, size, text, outline, handleClick, link }) => {
   return (
     <StyledElement
       as='button'
-      btnColor={btnColor}
+      btnColor={color}
       size={size}
       outline={outline}
       onClick={handleClick}
@@ -28,7 +28,7 @@ const Button = ({ btnColor, size, text, outline, handleClick, link }) => {
 };
 
 Button.defaultProps = {
-  btnColor: "black",
+  color: "black",
   size: "md",
   text: "Button",
   outline: false,
@@ -39,8 +39,8 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-  btnColor: PropTypes.string,
-  size: PropTypes.string,
+  color: PropTypes.string.isRequired,
+  size: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   link: PropTypes.string,
   outline: PropTypes.bool,

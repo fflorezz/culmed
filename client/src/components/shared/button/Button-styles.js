@@ -10,9 +10,10 @@ const StyledElement = styled.div`
   outline: none;
   margin-top: 5px;
   border: none;
-  width: ${({ size }) => styles.button[size].width};
+  padding: 0 15px;
+  min-width: ${({ size }) => styles.button[size].width};
   height: ${({ size }) => styles.button[size].height};
-  font-size: ${({ size }) => styles.button[size].fontSize};
+  font: ${({ size }) => styles.button[size].font};
   background-color: ${({ btnColor }) => styles.colors[btnColor]};
   color: ${styles.colors["white"]};
   &:hover {
