@@ -3,6 +3,8 @@ import "./App.css";
 import Button from "./components/shared/button/Button";
 import Icon from "./components/shared/icon/Icon";
 import Avatar from "./components/shared/avatar/Avatar";
+import ViewsAndParticipants from "./components/shared/views-and-participants/ViewsAndParticipants";
+import CardImage from "./components/event/event-card/CardImage";
 
 function App() {
   return (
@@ -20,6 +22,9 @@ function App() {
       <Icon type="views" size="sm" color="complementary" />
 
       <Avatar size="lg" column />
+
+      <ViewsAndParticipants />
+      <CardImage />
     </div>
   );
 }

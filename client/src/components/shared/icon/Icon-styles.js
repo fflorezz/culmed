@@ -6,6 +6,7 @@ const StyledIcon = styled.div`
   svg {
     height: ${({ size }) =>
       size ? styles.icon.size[size] : styles.icon["md"]};
+    margin: 0;
     path {
       fill: ${({ color }) =>
         color ? styles.colors[color] : styles.colorsDark.gray};

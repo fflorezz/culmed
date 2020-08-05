@@ -48,25 +48,6 @@ export const icon = {
   },
 };
 
-// export const avatar = {
-//   font: {
-//     name: {
-//       sm: "500 1.4rem roboto, sans-serif",
-//       lg: "700 2rem roboto, sans-serif",
-//     },
-//     follow: {
-//       lg: "300 1.4rem roboto, sans-serif",
-//     },
-//   },
-//   img: {
-//     size: {
-//       sm: "2.5rem",
-//       md: "5rem",
-//       lg: "10rem",
-//     },
-//   },
-// };
-
 export const avatar = {
   sm: {
     name: "500 1.4rem roboto, sans-serif",
