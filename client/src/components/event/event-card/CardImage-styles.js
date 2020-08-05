@@ -4,6 +4,7 @@ import * as styles from "../../../global-styles.js";
 const StyledImage = styled.div`
   position: relative;
   width: 30rem;
+  display: inline-block;
   img {
     width: 100%;
     height: 21.5rem;

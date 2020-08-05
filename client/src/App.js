@@ -5,6 +5,7 @@ import Icon from "./components/shared/icon/Icon";
 import Avatar from "./components/shared/avatar/Avatar";
 import ViewsAndParticipants from "./components/shared/views-and-participants/ViewsAndParticipants";
 import CardImage from "./components/event/event-card/CardImage";
+import EventCard from "./components/event/event-card/EventCard";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
 
       <ViewsAndParticipants />
       <CardImage />
+
+      <EventCard />
     </div>
   );
 }

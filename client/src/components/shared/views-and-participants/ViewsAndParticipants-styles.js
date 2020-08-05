@@ -8,7 +8,7 @@ const StyledViews = styled.div`
     display: inline-flex;
     p {
       color: ${styles.colorsDark.gray};
-      font-weight: 600;
+      font-weight: 500;
       font-size: 1.2rem;
     }
   }

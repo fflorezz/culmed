@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import StyledImage from "./CardImage-styles";
 
 const mockData = {
@@ -24,6 +26,12 @@ const CardImage = ({
       </div>
     </StyledImage>
   );
+};
+
+CardImage.propTypes = {
+  img: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default CardImage;

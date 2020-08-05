@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import StyledViews from "./ViewsAndParticipants-styles";
 import Icon from "./../icon/Icon";
 
@@ -23,6 +25,11 @@ const ViewsAndParticipants = ({
       </div>
     </StyledViews>
   );
+};
+
+ViewsAndParticipants.propTypes = {
+  views: PropTypes.number,
+  participants: PropTypes.number,
 };
 
 export default ViewsAndParticipants;
