@@ -20,6 +20,7 @@ const mockData = {
   views: 127,
   participants: 42,
 };
+
 const EventCard = ({
   eventImg = mockData.eventImg,
   eventDate = mockData.date,
