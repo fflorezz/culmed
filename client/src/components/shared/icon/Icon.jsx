@@ -2,16 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import StyledIcon from "./Icon-styles";
-import { ReactComponent as SearchSVG } from "../../../assets/icons/search.svg";
-import { ReactComponent as AddSVG } from "../../../assets/icons/icon add.svg";
-import { ReactComponent as CalendarSVG } from "../../../assets/icons/icon calendar.svg";
-import { ReactComponent as FileSVG } from "../../../assets/icons/icon file.svg";
-import { ReactComponent as LikeSVG } from "../../../assets/icons/icon like.svg";
-import { ReactComponent as NotificationSVG } from "../../../assets/icons/icon notification.svg";
-import { ReactComponent as TagSVG } from "../../../assets/icons/icon tag.svg";
-import { ReactComponent as TimeSVG } from "../../../assets/icons/icon time.svg";
-import { ReactComponent as ViewsSVG } from "../../../assets/icons/icon views.svg";
-import { ReactComponent as ArrowSVG } from "../../../assets/icons/icon arrow.svg";
+import { ReactComponent as SearchSVG } from "../../../assets/svg/search.svg";
+import { ReactComponent as AddSVG } from "../../../assets/svg/icon add.svg";
+import { ReactComponent as CalendarSVG } from "../../../assets/svg/icon calendar.svg";
+import { ReactComponent as FileSVG } from "../../../assets/svg/icon file.svg";
+import { ReactComponent as LikeSVG } from "../../../assets/svg/icon like.svg";
+import { ReactComponent as NotificationSVG } from "../../../assets/svg/icon notification.svg";
+import { ReactComponent as TagSVG } from "../../../assets/svg/icon tag.svg";
+import { ReactComponent as TimeSVG } from "../../../assets/svg/icon time.svg";
+import { ReactComponent as ViewsSVG } from "../../../assets/svg/icon views.svg";
+import { ReactComponent as ArrowSVG } from "../../../assets/svg/icon arrow.svg";
 
 const Icon = ({ size, type, color }) => {
   const svgs = {
