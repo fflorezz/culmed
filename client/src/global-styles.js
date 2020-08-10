@@ -19,8 +19,13 @@ export const colorsDark = {
 export const colorsLight = {
   primary: "#ff927f",
   secondary: "#CDA4FC",
-  complementary: "#FD713D",
+  complementary: "#f5a476",
   gray: "#F3F3F3",
+};
+
+export const font = {
+  h5: "700 2rem roboto, sans-serif",
+  p: "400 1.6rem roboto, sans-serif",
 };
 
 export const button = {

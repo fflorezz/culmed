@@ -53,7 +53,7 @@ const large = css`
   .follow {
     display: flex;
     align-items: center;
-
+    margin-bottom: 1rem;
     color: ${styles.colorsDark.gray};
     span {
       font-weight: 700;

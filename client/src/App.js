@@ -1,11 +1,13 @@
 import React from "react";
 import "./App.css";
-import Nav from "./components/shared/nav/Nav";
+import Alert from "./components/shared/alert/Alert";
+import AppStyles from "./App-styles";
 
 function App() {
   return (
     <div className="App">
-      <Nav />
+      <AppStyles />
+      <Alert />
     </div>
   );
 }

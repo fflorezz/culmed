@@ -1,8 +1,10 @@
 import React from "react";
 
 import StyledAvatar from "./Avatar-styles";
+import Button from "./../button/Button";
 
 const user = {
+  id: 1,
   img:
     "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   name: "Jhon Doe",
@@ -17,9 +19,10 @@ const Avatar = ({
   followers = user.followers,
   size,
   column,
+  followingBtn,
 }) => {
   return (
-    <StyledAvatar size={size} column={column}>
+    <StyledAvatar size={size} column={column} followingBtn>
       <img src={src} alt="" />
       <div className="text">
         <p className="name">{name}</p>
@@ -32,6 +35,7 @@ const Avatar = ({
             Siguiendo <span>{following}</span>
           </p>
         </div>
+        {followingBtn && <Button size="sm" outline text="Following" />}
       </div>
     </StyledAvatar>
   );

@@ -4,11 +4,23 @@ import { NavLink } from "react-router-dom";
 import * as styles from "../../../global-styles";
 
 import StyledNav from "./Nav-styles";
+import FilterDrop from "./../filter-drop/FilterDrop";
+
+const mockOptions = [
+  { id: 0, name: "Todos" },
+  { id: 1, name: "Cine" },
+  { id: 2, name: "Teatro" },
+  { id: 3, name: "Danza" },
+  { id: 4, name: "Música" },
+];
 
 const Nav = () => {
   return (
     <StyledNav>
       <ul>
+        <li>
+          <FilterDrop options={mockOptions} />
+        </li>
         <li>
           <NavLink
             to="/explorar"
