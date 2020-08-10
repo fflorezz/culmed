@@ -24,8 +24,15 @@ export const colorsLight = {
 };
 
 export const font = {
+  h1: "700 4.9rem Raleway, sans-serif",
+  h2: "700 3.9rem Raleway, sans-serif",
+  h3: "700 3.1rem Raleway, sans-serif",
+  h4: "700 2.5rem Raleway, sans-serif",
   h5: "700 2rem roboto, sans-serif",
-  p: "400 1.6rem roboto, sans-serif",
+  h6: "700 2rem roboto, sans-serif",
+  p1: "400 1.6rem roboto, sans-serif",
+  p2: "400 1.4rem roboto, sans-serif",
+  psm: "400 1.2rem roboto, sans-serif",
 };
 
 export const button = {

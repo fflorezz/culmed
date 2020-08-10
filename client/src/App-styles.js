@@ -14,11 +14,26 @@ html {
 body {
   background-color: ${styles.colors.white};
 }
+h1{
+  font:${styles.font.h1}
+}
+h2{
+  font:${styles.font.h2}
+}
+h3{
+  font:${styles.font.h3}
+}
+h4{
+  font:${styles.font.h4}
+}
 h5{
   font:${styles.font.h5}
 }
+h6{
+  font:${styles.font.h6}
+}
 p{
-  font:${styles.font.p}
+  font:${styles.font.p1}
 }
 a,
 ul,

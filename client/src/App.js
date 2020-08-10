@@ -1,13 +1,14 @@
 import React from "react";
 import "./App.css";
-import Alert from "./components/shared/alert/Alert";
+
 import AppStyles from "./App-styles";
+import CTA from "./components/landing/cta/CTA";
 
 function App() {
   return (
     <div className="App">
       <AppStyles />
-      <Alert />
+      <CTA />
     </div>
   );
 }

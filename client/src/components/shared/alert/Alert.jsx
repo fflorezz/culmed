@@ -22,8 +22,12 @@ const Alert = ({
       <h5>{title}</h5>
       <p>{text}</p>
       <div className="buttons">
-        <Button size="md" color="secondary" text={btnSecondaryText} outline />
-        <Button size="md" color="secondary" text={btnPrimaryText} />
+        {btnPrimaryText && (
+          <Button size="md" color="secondary" text={btnSecondaryText} outline />
+        )}
+        {btnSecondaryText && (
+          <Button size="md" color="secondary" text={btnPrimaryText} />
+        )}
       </div>
     </StyledAlert>
   );
