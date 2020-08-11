@@ -6,13 +6,12 @@ const StyledHeader = styled.header`
   width: 100%;
   height: 6rem;
   background-color: ${styles.colorsLight.gray};
-  border-bottom: 1px, solid ${styles.colors.gray};
+  border-bottom: 1px solid ${styles.colors.gray};
   .main {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 95%;
-    max-width: 128rem;
     height: 100%;
     margin: 0 auto;
     .user {

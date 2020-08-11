@@ -2,13 +2,13 @@ import React from "react";
 import "./App.css";
 
 import AppStyles from "./App-styles";
-import Header from "./components/shared/header/Header";
+import LandingPage from "./components/landing/landing-page/LandingPage";
 
 function App() {
   return (
     <div className="App">
       <AppStyles />
-      <Header />
+      <LandingPage />
     </div>
   );
 }

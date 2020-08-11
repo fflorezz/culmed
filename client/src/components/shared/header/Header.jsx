@@ -7,7 +7,7 @@ import Avatar from "../../user/avatar/Avatar";
 import ProfileDrop from "./../../user/profile-drop/ProfileDrop";
 
 const Header = () => {
-  const isLogin = true;
+  const isLogin = false;
   const [isOpen, setIsOpen] = useState(false);
 
   function toggleDrop() {
