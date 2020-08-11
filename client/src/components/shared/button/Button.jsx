@@ -16,7 +16,7 @@ const Button = ({ color, size, text, outline, handleClick, link }) => {
   }
   return (
     <StyledElement
-      as='button'
+      as="button"
       btnColor={color}
       size={size}
       outline={outline}
@@ -33,9 +33,6 @@ Button.defaultProps = {
   text: "Button",
   outline: false,
   link: "",
-  handleClick: () => {
-    console.log("click");
-  },
 };
 
 Button.propTypes = {

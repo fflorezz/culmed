@@ -55,7 +55,8 @@ export const button = {
 
 export const icon = {
   size: {
-    sm: "1.4rem",
+    xs: "1.4rem",
+    sm: "2rem",
     md: "3rem",
   },
 };

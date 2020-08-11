@@ -8,7 +8,7 @@ const StyledElement = styled.div`
   border-radius: 50px;
   cursor: pointer;
   outline: none;
-  margin-top: 5px;
+  /* margin-top: 5px; */
   border: none;
   padding: 0 15px;
   min-width: ${({ size }) => styles.button[size].width};

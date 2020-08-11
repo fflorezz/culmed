@@ -2,13 +2,13 @@ import React from "react";
 import "./App.css";
 
 import AppStyles from "./App-styles";
-import Logo from "./components/shared/logo/Logo";
+import Header from "./components/shared/header/Header";
 
 function App() {
   return (
     <div className="App">
       <AppStyles />
-      <Logo />
+      <Header />
     </div>
   );
 }

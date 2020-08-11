@@ -9,6 +9,10 @@ const StyledAvatar = styled.div`
     border-radius: 50%;
     width: ${({ size }) => styles.avatar[size].img};
     height: ${({ size }) => styles.avatar[size].img};
+    cursor: pointer;
+    &:hover {
+      opacity: 0.9;
+    }
   }
   .name {
     font: ${({ size }) => styles.avatar[size].name};

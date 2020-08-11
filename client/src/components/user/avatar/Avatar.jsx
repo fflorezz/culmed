@@ -1,7 +1,7 @@
 import React from "react";
 
 import StyledAvatar from "./Avatar-styles";
-import Button from "./../button/Button";
+import Button from "./../../shared/button/Button";
 
 const user = {
   id: 1,
@@ -20,9 +20,19 @@ const Avatar = ({
   size,
   column,
   followingBtn,
+  handleClick,
+  handleMouseEnter,
+  handleMouseLeave,
 }) => {
   return (
-    <StyledAvatar size={size} column={column} followingBtn>
+    <StyledAvatar
+      size={size}
+      column={column}
+      followingBtn
+      onClick={handleClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <img src={src} alt="" />
       <div className="text">
         <p className="name">{name}</p>
