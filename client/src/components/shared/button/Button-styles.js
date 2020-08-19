@@ -10,7 +10,7 @@ const StyledElement = styled.div`
   outline: none;
   /* margin-top: 5px; */
   border: none;
-  padding: 0 15px;
+  padding: 0 2rem;
   min-width: ${({ size }) => styles.button[size].width};
   height: ${({ size }) => styles.button[size].height};
   font: ${({ size }) => styles.button[size].font};
