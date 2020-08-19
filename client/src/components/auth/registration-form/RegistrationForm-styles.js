@@ -25,6 +25,7 @@ const StyledRegistrationForm = styled.div`
   form {
     display: inline-flex;
     flex-direction: column;
+    align-items: flex-start;
     margin-bottom: 8rem;
     label {
       font: ${styles.font.p1};

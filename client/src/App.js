@@ -2,13 +2,13 @@ import React from "react";
 import "./App.css";
 
 import AppStyles from "./App-styles";
-import LoginPage from "./components/auth/login-page/LoginPage";
+import CreateEventPage from "./components/event/create-event-page/CreateEventPage";
 
 function App() {
   return (
     <div className="App">
       <AppStyles />
-      <LoginPage />
+      <CreateEventPage />
     </div>
   );
 }
