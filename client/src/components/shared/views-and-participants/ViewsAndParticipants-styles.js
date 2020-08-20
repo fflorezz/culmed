@@ -6,6 +6,7 @@ const StyledViews = styled.div`
   .views,
   .participants {
     display: inline-flex;
+    align-items: center;
     p {
       color: ${styles.colorsDark.gray};
       font-weight: 500;

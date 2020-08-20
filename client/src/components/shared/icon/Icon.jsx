@@ -12,6 +12,7 @@ import { ReactComponent as TagSVG } from "../../../assets/svg/icon tag.svg";
 import { ReactComponent as TimeSVG } from "../../../assets/svg/icon time.svg";
 import { ReactComponent as ViewsSVG } from "../../../assets/svg/icon views.svg";
 import { ReactComponent as ArrowSVG } from "../../../assets/svg/icon arrow.svg";
+import { ReactComponent as LocationSVG } from "../../../assets/svg/icon location.svg";
 
 const Icon = ({ size, type, color }) => {
   const svgs = {
@@ -25,6 +26,7 @@ const Icon = ({ size, type, color }) => {
     time: <TimeSVG />,
     views: <ViewsSVG />,
     arrow: <ArrowSVG />,
+    location: <LocationSVG />,
   };
   return (
     <StyledIcon size={size} color={color}>

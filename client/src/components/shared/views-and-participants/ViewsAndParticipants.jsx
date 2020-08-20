@@ -16,11 +16,11 @@ const ViewsAndParticipants = ({
   return (
     <StyledViews views={views} participants={participants}>
       <div className="views">
-        <Icon type="views" size="sm" />
+        <Icon type="views" size="xs" />
         <p>{views}</p>
       </div>
       <div className="participants">
-        <Icon type="add" size="sm" />
+        <Icon type="add" size="xs" />
         <p>{participants}</p>
       </div>
     </StyledViews>

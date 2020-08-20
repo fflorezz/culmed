@@ -8,7 +8,7 @@ const CommentField = () => {
     <StyledCommentField>
       <Avatar size="sm" />
       <form action="">
-        <textarea name="comment" id="comment" cols="30" rows="3"></textarea>
+        <textarea name="comment" id="comment" cols="30" rows="2"></textarea>
         <Button color="gray" text="Comentar" outline />
       </form>
     </StyledCommentField>
