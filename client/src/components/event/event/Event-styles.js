@@ -3,6 +3,7 @@ import * as styles from "../../../global-styles";
 import StyledIcon from "./../../shared/icon/Icon-styles";
 import StyledAvatar from "./../../user/avatar/Avatar-styles";
 import StyledTags from "./../tags/Tags-styles";
+import StyledAddEventButton from "./../add-event-button/AddEventButton-styles";
 
 const StyledEvent = styled.div`
   width: 75rem;
@@ -14,6 +15,12 @@ const StyledEvent = styled.div`
   .event-body {
     width: 45rem;
     margin: 0 auto;
+    position: relative;
+  }
+  ${StyledAddEventButton} {
+    position: absolute;
+    top: 0;
+    right: 0;
   }
   h4 {
     margin-bottom: 1.5rem;

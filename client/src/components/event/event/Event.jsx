@@ -7,12 +7,14 @@ import ViewsAndParticipants from "./../../shared/views-and-participants/ViewsAnd
 import Tags from "../tags/Tags";
 import Comment from "../comment/Comment";
 import CommentField from "../comment-field/CommentField";
+import AddEventButton from "./../add-event-button/AddEventButton";
 
 const Event = () => {
   return (
     <StyledEvent>
       <div className="event-body">
         <h4>Nombre del Evento</h4>
+        <AddEventButton />
         <p className="date">Mar 7 - Abr 22</p>
         <p className="time">2:00PM - 3:00PM</p>
         <p className="location">CRA 23A 21A 15. Medellín - Colombia</p>
