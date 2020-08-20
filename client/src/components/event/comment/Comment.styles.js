@@ -4,6 +4,7 @@ import * as styles from "../../../global-styles";
 const StyledComment = styled.div`
   display: flex;
   align-items: flex-start;
+  margin-bottom: 2rem;
   .info {
     display: flex;
     align-items: flex-end;
