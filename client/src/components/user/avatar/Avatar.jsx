@@ -23,6 +23,7 @@ const Avatar = ({
   handleClick,
   handleMouseEnter,
   handleMouseLeave,
+  text,
 }) => {
   return (
     <StyledAvatar
@@ -34,19 +35,21 @@ const Avatar = ({
       onMouseLeave={handleMouseLeave}
     >
       <img src={src} alt="" />
-      <div className="text">
-        <p className="name">{name}</p>
-        <div className="follow">
-          <p className="followers">
-            Seguidores <span>{followers}</span>
-          </p>
-          <div className="spacer"></div>
-          <p className="following">
-            Siguiendo <span>{following}</span>
-          </p>
+      {text && (
+        <div className="text">
+          <p className="name">{name}</p>
+          <div className="follow">
+            <p className="followers">
+              Seguidores <span>{followers}</span>
+            </p>
+            <div className="spacer"></div>
+            <p className="following">
+              Siguiendo <span>{following}</span>
+            </p>
+          </div>
+          {followingBtn && <Button size="sm" outline text="Following" />}
         </div>
-        {followingBtn && <Button size="sm" outline text="Following" />}
-      </div>
+      )}
     </StyledAvatar>
   );
 };
