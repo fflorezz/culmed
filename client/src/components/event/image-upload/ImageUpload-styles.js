@@ -6,7 +6,7 @@ const StyledImageUpload = styled.div`
   cursor: pointer;
   width: 46rem;
   height: 32rem;
-  border: 0.1rem dashed ${styles.colors.gray};
+  border: 0.1rem dashed ${styles.colors.primary};
   border-radius: 1rem;
   background-color: ${styles.colorsLight.gray};
   color: ${styles.colorsDark.gray};
@@ -17,19 +17,25 @@ const StyledImageUpload = styled.div`
   margin-right: 6rem;
   margin-top: 2rem;
   padding-top: 6rem;
+   p{
+      color:${styles.colors.primary};
+    }
   ${StyledIcon} {
     svg {
       transform: scale(3) translateY(-50%);
       path {
-        fill: ${styles.colors.gray};
+        fill: ${styles.colors.primary};
       }
     }
   }
   &:hover{
-    border: 0.1rem dashed ${styles.colorsDark.gray};
+    border: 0.1rem dashed ${styles.colorsDark.primary};
+    p{
+      color:${styles.colorsDark.primary};
+    }
     svg {
      path {
-        fill: ${styles.colorsDark.gray};
+        fill: ${styles.colorsDark.primary};
       }
     }
   }

@@ -11,14 +11,14 @@ const CreateEventForm = () => {
         <div className="form-text">
           <label htmlFor="title">Evento</label>
           <input type="text" name="title" />
-          <div className="date">
+          <div className="group">
             <div className="field">
               <label htmlFor="startDate">Inicia</label>
-              <input type="datetime-local" name="start-date" />
+              <input className="date" type="datetime-local" name="start-date" />
             </div>
             <div className="field">
               <label htmlFor="end-date">Finaliza</label>
-              <input type="datetime-local" name="end-date" />
+              <input className="date" type="datetime-local" name="end-date" />
             </div>
           </div>
           <label htmlFor="location">Lugar</label>
@@ -28,15 +28,21 @@ const CreateEventForm = () => {
             name="description"
             id="description"
             cols="30"
-            rows="5"
+            rows="3"
           ></textarea>
-          <label htmlFor="tags">Etiquetas</label>
-          <select name="tags" id="tags">
-            <option value="cine">cine</option>
-            <option value="teatro">teatro</option>
-          </select>
-          <label htmlFor="price">Valor</label>
-          <input type="text" name="price" id="price" />
+          <div className="group">
+            <div className="field">
+              <label htmlFor="tags">Etiquetas</label>
+              <select name="tags" id="tags">
+                <option value="cine">cine</option>
+                <option value="teatro">teatro</option>
+              </select>
+            </div>
+            <div className="field">
+              <label htmlFor="price">Valor</label>
+              <input type="text" name="price" id="price" />
+            </div>
+          </div>
           <div className="buttons">
             <Button color="primary" outline text="Cancelar" />
             <Button color="primary" text="Crear" />

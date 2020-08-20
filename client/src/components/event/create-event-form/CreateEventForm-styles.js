@@ -12,7 +12,7 @@ const StyledCreateEventForm = styled.div`
     display: inline-flex;
     flex-direction: column;
     label {
-      font: ${styles.font.p1};
+      font: ${styles.font.psm};
       color: ${styles.colorsDark.gray};
       font-weight: 500;
       margin-bottom: 0.5rem;
@@ -21,7 +21,7 @@ const StyledCreateEventForm = styled.div`
       height: 4rem;
       border: 1px solid ${styles.colors.gray};
       border-radius: 0.9rem;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
       padding: 0 1rem;
       font: ${styles.font.p1};
       color: ${styles.colors.black};
@@ -29,13 +29,13 @@ const StyledCreateEventForm = styled.div`
     textarea {
       border: 1px solid ${styles.colors.gray};
       border-radius: 0.9rem;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
       resize: none;
       padding: 1rem 1rem;
       font: ${styles.font.p1};
       color: ${styles.colors.black};
     }
-    .date {
+    .group {
       width: 100%;
       display: flex;
       justify-content: space-between;
@@ -44,8 +44,11 @@ const StyledCreateEventForm = styled.div`
         display: flex;
         flex-direction: column;
       }
-      input {
+      .date {
         font: ${styles.font.psm};
+      }
+      input {
+        font: ${styles.font.p};
         color: ${styles.colors.black};
       }
     }
