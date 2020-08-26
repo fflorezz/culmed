@@ -77,10 +77,10 @@ const large = css`
       img {
         margin-right: 0;
       }
-      .following,
+      ${"" /* .following,
       .spacer {
         display: none;
-      }
+      } */}
     `}
 `;
 

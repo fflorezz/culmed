@@ -9,6 +9,7 @@ import LoginPage from "./components/auth/login-page/LoginPage";
 import RegistrationPage from "./components/auth/registration-page/RegistrationPage";
 import Nav from "./components/shared/nav/Nav";
 import ExplorePage from "./pages/explore-page/ExplorePage";
+import FollowingPage from "./pages/following-page/FollowingPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/signup" component={RegistrationPage} />
         <Route exact path="/explore" component={ExplorePage} />
+        <Route exact path="/following" component={FollowingPage} />
       </Switch>
     </div>
   );

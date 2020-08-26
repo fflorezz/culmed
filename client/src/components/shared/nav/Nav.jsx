@@ -36,7 +36,7 @@ const Nav = () => {
         </li>
         <li>
           <NavLink
-            to="/siguiendo"
+            to="/following"
             activeStyle={{
               backgroundColor: styles.colors.complementary,
               color: "white",
