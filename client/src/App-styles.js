@@ -1,7 +1,11 @@
 import { createGlobalStyle } from "styled-components";
+import { normalize } from "styled-normalize";
+
 import * as styles from "./global-styles";
 
 const AppStyles = createGlobalStyle`
+${normalize}
+
 * {
   margin: 0;
   padding: 0;

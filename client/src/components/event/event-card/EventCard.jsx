@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import CardImage from "./CardImage";
-import Avatar from "./../../shared/avatar/Avatar";
+import Avatar from "./../../user/avatar/Avatar";
 import ViewsAndParticipants from "./../../shared/views-and-participants/ViewsAndParticipants";
 
 import StyledCard from "./EventCard-styles";

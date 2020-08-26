@@ -1,12 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import Button from "./../../shared/button/Button";
+
 import StyledRegistrationForm from "./RegistrationForm-styles";
 
 const RegistrationForm = () => {
   return (
     <StyledRegistrationForm>
       <p className="login">
-        ¿Ya tienes una cuenta? <span>Inicia Sesión</span>
+        ¿Ya tienes una cuenta?
+        <span>
+          <Link to="/login">Inicia Sesión</Link>
+        </span>
       </p>
       <h2>Regístrate en la App</h2>
       <form action="">

@@ -3,13 +3,13 @@ import * as styles from "../../../global-styles.js";
 
 const StyledImage = styled.div`
   position: relative;
-  width: 30rem;
   display: inline-block;
+  width: 100%;
   img {
     width: 100%;
-    height: 21.5rem;
+    height: 60%;
     object-fit: cover;
-    border-radius: 0.5rem;
+    border-radius: 0.8rem;
   }
   .date-tag {
     position: absolute;
@@ -28,11 +28,12 @@ const StyledImage = styled.div`
     background-color: black;
     position: absolute;
     width: 100%;
-    top: 21.5rem;
+    top: 100%;
     left: 0;
-    transform: translateY(-100%);
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
+    z-index: 1;
+    transform: translateY(-104%);
+    border-bottom-left-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
     padding: 0.8rem 1rem;
     background: linear-gradient(
       0deg,

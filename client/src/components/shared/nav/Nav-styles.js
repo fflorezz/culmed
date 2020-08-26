@@ -2,8 +2,10 @@ import styled from "styled-components";
 import * as styles from "../../../global-styles";
 
 const StyledNav = styled.nav`
-  width: 120rem;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 140rem;
+  padding: 0 4rem;
+  margin: 2rem auto 0;
   display: flex;
   justify-content: space-between;
   padding-bottom: 0.5rem;
@@ -12,9 +14,9 @@ const StyledNav = styled.nav`
     display: flex;
   }
   a {
-    width: 9rem;
+    min-width: 9rem;
     height: 3.3rem;
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     margin-right: 0.5rem;
     display: flex;
     justify-content: center;

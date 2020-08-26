@@ -3,6 +3,7 @@ import * as styles from "../../../global-styles";
 
 const StyledFilter = styled.div`
   position: relative;
+  z-index: 100;
   display: flex;
   flex-direction: column;
   .select {

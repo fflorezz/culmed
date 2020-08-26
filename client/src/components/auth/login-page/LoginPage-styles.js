@@ -17,6 +17,9 @@ const StyledLoginPage = styled.div`
     display: flex;
     flex-direction: column;
     color: ${styles.colors.white};
+    h1 {
+      margin: 0;
+    }
   }
 `;
 

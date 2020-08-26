@@ -1,12 +1,18 @@
 import React from "react";
-import StyledLoginForm from "./LoginForm-styles";
+import { Link } from "react-router-dom";
+
 import Button from "./../../shared/button/Button";
+
+import StyledLoginForm from "./LoginForm-styles";
 
 const LoginForm = () => {
   return (
     <StyledLoginForm>
       <p className="login">
-        ¿No tienes una cuenta? <span>Regístrate</span>
+        ¿No tienes una cuenta?{" "}
+        <span>
+          <Link to="/signup">Regístrate</Link>
+        </span>
       </p>
       <h2>Inicia Sesión</h2>
       <form action="">

@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useRouteMatch } from "react-router-dom";
 
 import * as styles from "../../../global-styles";
 
@@ -18,12 +18,14 @@ const Nav = () => {
   return (
     <StyledNav>
       <ul>
-        <li>
-          <FilterDrop options={mockOptions} />
-        </li>
+        {useRouteMatch("/explore") ? (
+          <li>
+            <FilterDrop options={mockOptions} />
+          </li>
+        ) : null}
         <li>
           <NavLink
-            to="/explorar"
+            to="/explore"
             activeStyle={{
               backgroundColor: styles.colors.complementary,
               color: "white",
@@ -62,7 +64,7 @@ const Nav = () => {
           color: "white",
         }}
       >
-        Editar
+        Editar Perfil
       </NavLink>
     </StyledNav>
   );

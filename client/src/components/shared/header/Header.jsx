@@ -1,17 +1,27 @@
 import React, { useState } from "react";
-import StyledHeader from "./Header-styles";
+import { useRouteMatch } from "react-router-dom";
+
 import Logo from "./../logo/Logo";
 import Button from "./../button/Button";
 import Icon from "./../icon/Icon";
 import Avatar from "../../user/avatar/Avatar";
 import ProfileDrop from "./../../user/profile-drop/ProfileDrop";
 
+import StyledHeader from "./Header-styles";
+
 const Header = () => {
   const isLogin = false;
   const [isOpen, setIsOpen] = useState(false);
 
+  const matchLogin = useRouteMatch("/login");
+  const matchSignup = useRouteMatch("/signup");
+
   function toggleDrop() {
     setIsOpen(!isOpen);
+  }
+
+  if (matchLogin || matchSignup) {
+    return null;
   }
 
   if (!isLogin) {
@@ -20,8 +30,19 @@ const Header = () => {
         <div className="main">
           <Logo />
           <div className="user">
-            <Button size="sm" color="primary" text="Iniciar Sesión" outline />
-            <Button size="sm" color="primary" text="Registrarse" />
+            <Button
+              size="sm"
+              color="primary"
+              text="Iniciar Sesión"
+              outline
+              link="/login"
+            />
+            <Button
+              size="sm"
+              color="primary"
+              text="Registrarse"
+              link="/signup"
+            />
           </div>
         </div>
       </StyledHeader>
