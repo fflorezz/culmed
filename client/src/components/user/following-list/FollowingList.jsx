@@ -6,6 +6,8 @@ const FollowingList = () => {
   return (
     <StyledFollowingList>
       <ProfileRow />
+      <ProfileRow />
+      <ProfileRow />
     </StyledFollowingList>
   );
 };

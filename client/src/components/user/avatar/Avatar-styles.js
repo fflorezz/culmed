@@ -74,13 +74,14 @@ const large = css`
     column &&
     css`
       flex-direction: column;
+      text-align: center;
       img {
         margin-right: 0;
       }
-      ${"" /* .following,
+      .following,
       .spacer {
         display: none;
-      } */}
+      }
     `}
 `;
 

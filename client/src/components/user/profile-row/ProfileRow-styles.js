@@ -1,13 +1,29 @@
 import styled from "styled-components";
 
 const StyledProfileRow = styled.div`
-  & .following-events {
-    margin: 0 auto;
-    width: 100%;
-    display: grid;
-    align-items: center;
-    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-    grid-gap: 3rem;
+  display: inline-flex;
+  align-items: center;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+  .row-avatar {
+    display: inline-flex;
+    flex-direction: column;
+    margin-right: 6rem;
+  }
+  .row-events {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    overflow: hidden;
+    max-height: 21.5rem;
+    & > * {
+      margin-right: 2rem;
+      margin-bottom: 2rem;
+      width: 25rem;
+    }
+    & :last-child {
+      margin-right: 0;
+    }
   }
 `;
 
