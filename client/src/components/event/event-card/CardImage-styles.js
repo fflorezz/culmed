@@ -4,7 +4,14 @@ import * as styles from "../../../global-styles.js";
 const StyledImage = styled.div`
   position: relative;
   display: inline-block;
+  cursor: pointer;
   width: 100%;
+  &:hover {
+    .date-tag,
+    .title {
+      opacity: 1;
+    }
+  }
   img {
     width: 100%;
     height: 60%;
@@ -12,6 +19,8 @@ const StyledImage = styled.div`
     border-radius: 0.8rem;
   }
   .date-tag {
+    opacity: 0;
+
     position: absolute;
     top: 10%;
     right: 0;
@@ -25,6 +34,8 @@ const StyledImage = styled.div`
     }
   }
   .title {
+    opacity: 0;
+
     background-color: black;
     position: absolute;
     width: 100%;

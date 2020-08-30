@@ -8,17 +8,19 @@ const StyledProfileRow = styled.div`
   .row-avatar {
     display: inline-flex;
     flex-direction: column;
-    margin-right: 6rem;
+    margin-right: 4rem;
+    min-width: 14rem;
   }
   .row-events {
     display: flex;
     flex-wrap: wrap;
     margin-left: auto;
     overflow: hidden;
-    max-height: 21.5rem;
+    max-height: 16.6rem;
     & > * {
       margin-right: 2rem;
       margin-bottom: 2rem;
+      height: 100%;
       width: 25rem;
     }
     & :last-child {

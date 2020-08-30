@@ -34,7 +34,7 @@ const EventCard = ({
     <StyledCard>
       <CardImage src={eventImg} date={eventDate} title={eventTitle} />
       <div className="info">
-        <Avatar src={userImg} name={userName} size="sm" />
+        <Avatar src={userImg} name={userName} size="sm" text />
         <ViewsAndParticipants />
       </div>
     </StyledCard>

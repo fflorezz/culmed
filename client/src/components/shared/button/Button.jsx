@@ -1,15 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import StyledElement from "./Button-styles";
 
-const Button = ({ color, size, text, outline, handleClick, link }) => {
+const Button = ({
+  color,
+  size,
+  text,
+  outline,
+  handleClick,
+  link,
+  hoverText,
+}) => {
+  const [buttonText, setText] = useState(text);
+
+  function handleMoueseEnter() {
+    if (hoverText) {
+      setText(hoverText);
+    }
+  }
+
+  function handleMouseLeave() {
+    if (hoverText) {
+      setText(text);
+    }
+  }
+
   if (link) {
     return (
-      <Link to={link} style={{ textDecoration: "none" }}>
+      <Link
+        to={link}
+        style={{ textDecoration: "none" }}
+        onMouseEnter={handleMoueseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <StyledElement btnColor={color} size={size} outline={outline}>
-          {text}
+          {buttonText}
         </StyledElement>
       </Link>
     );
@@ -21,8 +48,10 @@ const Button = ({ color, size, text, outline, handleClick, link }) => {
       size={size}
       outline={outline}
       onClick={handleClick}
+      onMouseEnter={handleMoueseEnter}
+      onMouseLeave={handleMouseLeave}
     >
-      {text}
+      {buttonText}
     </StyledElement>
   );
 };

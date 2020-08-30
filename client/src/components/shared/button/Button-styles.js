@@ -8,8 +8,8 @@ const StyledElement = styled.div`
   border-radius: 50px;
   cursor: pointer;
   outline: none;
+  border: 1px solid transparent;
   /* margin-top: 5px; */
-  border: none;
   padding: 0 2rem;
   min-width: ${({ size }) => styles.button[size].width};
   height: ${({ size }) => styles.button[size].height};
@@ -30,8 +30,9 @@ const outlineButton = css`
     btnColor === "gray" ? styles.colors["black"] : styles.colors[btnColor]};
   border: 1px solid ${({ btnColor }) => styles.colors[btnColor]};
   &:hover {
-    border: none;
-    color: ${styles.colors["white"]};
+    border: 1px solid transparent;
+    color: ${({ btnColor }) =>
+      btnColor === "gray" ? styles.colors["black"] : styles.colors["white"]};
     background-color: ${({ btnColor }) => styles.colors[btnColor]};
   }
 `;

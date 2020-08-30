@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import "./App.css";
 
 import Header from "./components/shared/header/Header";
-import LandingPage from "./components/landing/landing-page/LandingPage";
+// import LandingPage from "./components/landing/landing-page/LandingPage";
 import LoginPage from "./components/auth/login-page/LoginPage";
 import RegistrationPage from "./components/auth/registration-page/RegistrationPage";
 import Nav from "./components/shared/nav/Nav";
