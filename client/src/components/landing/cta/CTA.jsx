@@ -11,7 +11,13 @@ const CTA = () => {
         exposiciones y festivales.
       </h5>
       <div className="buttons">
-        <Button size="lg" color="gray" text="Explorar" outline link="/home" />
+        <Button
+          size="lg"
+          color="gray"
+          text="Explorar"
+          outline
+          link="/explore"
+        />
         <Button
           size="lg"
           color="complementary"

@@ -7,7 +7,8 @@ const StyledDrop = styled.div`
   background-color: ${styles.colors.white};
   border-radius: 0.5rem;
   border: 1px solid ${styles.colors.gray};
-  p {
+  a {
+    display: block;
     padding: 0.5rem 0;
     font: 500 1.2rem roboto, sans-serif;
     color: ${styles.colorsDark.gray};

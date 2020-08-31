@@ -5,13 +5,19 @@ const StyledNav = styled.nav`
   width: 100%;
   max-width: 140rem;
   padding: 0 4rem;
-  margin: 2rem auto 0;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid ${styles.colorsLight.gray};
+  .profile-avatar {
+    margin-top: 2rem;
+  }
   ul {
     display: flex;
+    margin: 2rem 0 0;
+    padding-bottom: 1rem;
+    width: 100%;
+    border-bottom: 1px solid ${styles.colorsLight.gray};
   }
   a {
     min-width: 9rem;

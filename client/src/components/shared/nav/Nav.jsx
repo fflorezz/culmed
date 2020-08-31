@@ -5,6 +5,7 @@ import * as styles from "../../../global-styles";
 
 import StyledNav from "./Nav-styles";
 import FilterDrop from "./../filter-drop/FilterDrop";
+import Avatar from "./../../user/avatar/Avatar";
 
 const mockOptions = [
   { id: 0, name: "Todos" },
@@ -15,58 +16,83 @@ const mockOptions = [
 ];
 
 const Nav = () => {
-  return (
-    <StyledNav>
+  let globalNav = (
+    <ul>
+      <li>
+        <NavLink
+          to="/explore"
+          activeStyle={{
+            backgroundColor: styles.colors.complementary,
+            color: "white",
+          }}
+        >
+          Explorar
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/following"
+          activeStyle={{
+            backgroundColor: styles.colors.complementary,
+            color: "white",
+          }}
+        >
+          Siguiendo
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/my-calendar"
+          activeStyle={{
+            backgroundColor: styles.colors.complementary,
+            color: "white",
+          }}
+        >
+          Mi Agenda
+        </NavLink>
+      </li>
+      {useRouteMatch("/explore") ? (
+        <li>
+          <FilterDrop options={mockOptions} />
+        </li>
+      ) : null}
+    </ul>
+  );
+
+  let profileNav = (
+    <>
+      <div className="profile-avatar">
+        <Avatar size="lg" text />
+      </div>
       <ul>
-        {useRouteMatch("/explore") ? (
-          <li>
-            <FilterDrop options={mockOptions} />
-          </li>
-        ) : null}
         <li>
           <NavLink
-            to="/explore"
+            to="/profile/my-events"
             activeStyle={{
               backgroundColor: styles.colors.complementary,
               color: "white",
             }}
           >
-            Explorar
+            Mis Eventos
           </NavLink>
         </li>
         <li>
           <NavLink
-            to="/following"
+            to="/profile/edit"
             activeStyle={{
               backgroundColor: styles.colors.complementary,
               color: "white",
             }}
           >
-            Siguiendo
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/agenda"
-            activeStyle={{
-              backgroundColor: styles.colors.complementary,
-              color: "white",
-            }}
-          >
-            Mi Agenda
+            Editar Perfíl
           </NavLink>
         </li>
       </ul>
-      <NavLink
-        to="/editar"
-        activeStyle={{
-          backgroundColor: styles.colors.black,
-          color: "white",
-        }}
-      >
-        Editar Perfil
-      </NavLink>
-    </StyledNav>
+    </>
+  );
+
+  return (
+    <StyledNav>{useRouteMatch("/profile") ? profileNav : globalNav}</StyledNav>
   );
 };
 

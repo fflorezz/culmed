@@ -2,8 +2,10 @@ import styled from "styled-components";
 import StyledCTA from "./../cta/CTA-styles";
 
 const StyledLandingPage = styled.div`
-  position: relative;
+  position: absolute;
+  z-index: 100;
   width: 100%;
+  top: 6rem;
   height: calc(100vh - 6rem);
   overflow: hidden;
   img {

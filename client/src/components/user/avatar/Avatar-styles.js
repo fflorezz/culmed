@@ -4,15 +4,17 @@ import * as styles from "../../../global-styles";
 const StyledAvatar = styled.div`
   display: inline-flex;
   align-items: center;
+  cursor: pointer;
+  &:hover {
+    img {
+      opacity: 0.8;
+    }
+  }
   img {
     object-fit: cover;
     border-radius: 50%;
     width: ${({ size }) => styles.avatar[size].img};
     height: ${({ size }) => styles.avatar[size].img};
-    cursor: pointer;
-    &:hover {
-      opacity: 0.9;
-    }
   }
   .name {
     font: ${({ size }) => styles.avatar[size].name};

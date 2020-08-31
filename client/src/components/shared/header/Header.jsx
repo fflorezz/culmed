@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useRouteMatch } from "react-router-dom";
+import { useRouteMatch, Link } from "react-router-dom";
 
 import Logo from "./../logo/Logo";
 import Button from "./../button/Button";
@@ -10,7 +10,7 @@ import ProfileDrop from "./../../user/profile-drop/ProfileDrop";
 import StyledHeader from "./Header-styles";
 
 const Header = () => {
-  const isLogin = false;
+  const isLogin = true;
   const [isOpen, setIsOpen] = useState(false);
 
   const matchLogin = useRouteMatch("/login");
@@ -61,7 +61,9 @@ const Header = () => {
             onMouseEnter={toggleDrop}
             onMouseLeave={toggleDrop}
           >
-            <Avatar size="md" />
+            <Link to="/profile">
+              <Avatar size="md" />
+            </Link>
             {isOpen && <ProfileDrop />}
           </div>
         </div>

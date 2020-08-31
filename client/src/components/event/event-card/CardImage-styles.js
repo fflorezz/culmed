@@ -7,9 +7,13 @@ const StyledImage = styled.div`
   cursor: pointer;
   width: 100%;
   &:hover {
-    .date-tag,
-    .title {
-      opacity: 1;
+     {
+      .date-tag {
+        opacity: 1;
+      }
+      img {
+        filter: brightness(0.9);
+      }
     }
   }
   img {
@@ -20,7 +24,6 @@ const StyledImage = styled.div`
   }
   .date-tag {
     opacity: 0;
-
     position: absolute;
     top: 10%;
     right: 0;
@@ -34,8 +37,6 @@ const StyledImage = styled.div`
     }
   }
   .title {
-    opacity: 0;
-
     background-color: black;
     position: absolute;
     width: 100%;
