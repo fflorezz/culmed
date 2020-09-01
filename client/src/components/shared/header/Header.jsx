@@ -54,14 +54,19 @@ const Header = () => {
       <div className="main">
         <Logo />
         <div className="user">
-          <Button size="sm" color="primary" text="Crear Evento" />
+          <Button
+            size="sm"
+            color="primary"
+            text="Crear Evento"
+            link="/events/new"
+          />
           <Icon type="notification" size="sm" />
           <div
             className="avatar-hover"
             onMouseEnter={toggleDrop}
             onMouseLeave={toggleDrop}
           >
-            <Link to="/profile">
+            <Link to="/:userID/profile">
               <Avatar size="md" />
             </Link>
             {isOpen && <ProfileDrop />}

@@ -6,7 +6,7 @@ import StyledDrop from "./ProfileDrop-styles";
 const ProfileDrop = () => {
   return (
     <StyledDrop>
-      <Link to="/profile/my-events">Perfíl</Link>
+      <Link to="/:userId/profile">Perfíl</Link>
       <Link to="/logout">Salir</Link>
     </StyledDrop>
   );

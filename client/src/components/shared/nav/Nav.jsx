@@ -16,11 +16,14 @@ const mockOptions = [
 ];
 
 const Nav = () => {
+  const isUserEventPath = useRouteMatch("/:userId/events");
+  const isUserProfilePath = useRouteMatch("/:userId/profile");
+
   let globalNav = (
     <ul>
       <li>
         <NavLink
-          to="/explore"
+          to="/events"
           activeStyle={{
             backgroundColor: styles.colors.complementary,
             color: "white",
@@ -31,7 +34,7 @@ const Nav = () => {
       </li>
       <li>
         <NavLink
-          to="/following"
+          to="/:userId/following"
           activeStyle={{
             backgroundColor: styles.colors.complementary,
             color: "white",
@@ -42,7 +45,7 @@ const Nav = () => {
       </li>
       <li>
         <NavLink
-          to="/my-calendar"
+          to="/:userId/calendar"
           activeStyle={{
             backgroundColor: styles.colors.complementary,
             color: "white",
@@ -51,7 +54,7 @@ const Nav = () => {
           Mi Agenda
         </NavLink>
       </li>
-      {useRouteMatch("/explore") ? (
+      {useRouteMatch("/events") ? (
         <li>
           <FilterDrop options={mockOptions} />
         </li>
@@ -67,7 +70,7 @@ const Nav = () => {
       <ul>
         <li>
           <NavLink
-            to="/profile/my-events"
+            to="/:userId/events"
             activeStyle={{
               backgroundColor: styles.colors.complementary,
               color: "white",
@@ -78,7 +81,7 @@ const Nav = () => {
         </li>
         <li>
           <NavLink
-            to="/profile/edit"
+            to="/:userId/profile/edit"
             activeStyle={{
               backgroundColor: styles.colors.complementary,
               color: "white",
@@ -92,7 +95,9 @@ const Nav = () => {
   );
 
   return (
-    <StyledNav>{useRouteMatch("/profile") ? profileNav : globalNav}</StyledNav>
+    <StyledNav>
+      {isUserEventPath || isUserProfilePath ? profileNav : globalNav}
+    </StyledNav>
   );
 };
 
