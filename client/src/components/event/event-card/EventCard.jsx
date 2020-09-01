@@ -42,13 +42,13 @@ const EventCard = ({
 };
 
 EventCard.propTypes = {
-  eventImg: PropTypes.string.isRequired,
-  eventTitle: PropTypes.string.isRequired,
-  eventDate: PropTypes.string.isRequired,
+  eventImg: PropTypes.string,
+  eventTitle: PropTypes.string,
+  eventDate: PropTypes.string,
   eventViews: PropTypes.number,
   eventParticipants: PropTypes.number,
-  userImg: PropTypes.string.isRequired,
-  userName: PropTypes.string.isRequired,
+  userImg: PropTypes.string,
+  userName: PropTypes.string,
 };
 
 export default EventCard;

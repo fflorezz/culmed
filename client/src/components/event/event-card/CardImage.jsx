@@ -29,9 +29,9 @@ const CardImage = ({
 };
 
 CardImage.propTypes = {
-  img: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  img: PropTypes.string,
+  date: PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default CardImage;
