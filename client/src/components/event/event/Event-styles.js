@@ -10,7 +10,7 @@ const StyledEvent = styled.div`
   margin: 6rem auto;
   padding-top: 6rem;
   padding-bottom: 6rem;
-  border: 1px solid black;
+  background-color: ${styles.colors.white};
   border-radius: 0.5rem;
   .event-body {
     width: 45rem;

@@ -13,7 +13,7 @@ const CreateEventForm = () => {
           <input type="text" name="title" />
           <div className="group">
             <div className="field">
-              <label htmlFor="startDate">Inicia</label>
+              <label htmlFor="start-date">Inicia</label>
               <input className="date" type="datetime-local" name="start-date" />
             </div>
             <div className="field">

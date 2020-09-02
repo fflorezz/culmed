@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link, useLocation } from "react-router-dom";
 
 import CardImage from "./CardImage";
 import Avatar from "./../../user/avatar/Avatar";
@@ -8,6 +9,7 @@ import ViewsAndParticipants from "./../../shared/views-and-participants/ViewsAnd
 import StyledCard from "./EventCard-styles";
 
 const mockData = {
+  eventId: 1,
   eventImg:
     "https://images.pexels.com/photos/976866/pexels-photo-976866.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
   date: "Mar 17 - Abr 5",
@@ -22,6 +24,7 @@ const mockData = {
 };
 
 const EventCard = ({
+  eventId = mockData.eventId,
   eventImg = mockData.eventImg,
   eventDate = mockData.date,
   eventTitle = mockData.title,
@@ -30,14 +33,25 @@ const EventCard = ({
   eventViews = mockData.views,
   eventParticipants = mockData.participants,
 }) => {
+  let location = useLocation();
+
   return (
-    <StyledCard>
-      <CardImage src={eventImg} date={eventDate} title={eventTitle} />
-      <div className="info">
-        <Avatar src={userImg} name={userName} size="sm" text />
-        <ViewsAndParticipants />
-      </div>
-    </StyledCard>
+    <>
+      <StyledCard>
+        <Link
+          to={{
+            pathname: `/events/${eventId}`,
+            state: { background: location },
+          }}
+        >
+          <CardImage src={eventImg} date={eventDate} title={eventTitle} />
+        </Link>
+        <div className="info">
+          <Avatar src={userImg} name={userName} size="sm" text />
+          <ViewsAndParticipants />
+        </div>
+      </StyledCard>
+    </>
   );
 };
 
