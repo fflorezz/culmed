@@ -19,14 +19,13 @@ let AppRoutes = () => {
   return (
     <>
       <Switch location={background || location}>
+        {console.log({ background }, location.state)}
         <Route exact path="/">
           <Redirect to={"/events"} />
         </Route>
         <Route exact path="/landing" component={LandingPage} />
         <Route exact path="/events" component={ExplorePage} />
         <PrivateRoute exact path="/events/new" component={CreateEventPage} />
-        {background && console.log("background")}
-
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/signup" component={RegistrationPage} />
         <PrivateRoute
@@ -44,7 +43,7 @@ let AppRoutes = () => {
         </Route>
         <PrivateRoute exact path="/:userId/events" component={MyEventsPage} />
       </Switch>
-      {background && <Route exact path="/events/:eventId" component={Event} />}
+      <Route exact path="/events/:eventId" component={Event} />
     </>
   );
 };

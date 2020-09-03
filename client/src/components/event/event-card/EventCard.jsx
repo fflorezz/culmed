@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link, useLocation } from "react-router-dom";
 
 import CardImage from "./CardImage";
 import Avatar from "./../../user/avatar/Avatar";
@@ -33,19 +32,10 @@ const EventCard = ({
   eventViews = mockData.views,
   eventParticipants = mockData.participants,
 }) => {
-  let location = useLocation();
-
   return (
     <>
       <StyledCard>
-        <Link
-          to={{
-            pathname: `/events/${eventId}`,
-            state: { background: location },
-          }}
-        >
-          <CardImage src={eventImg} date={eventDate} title={eventTitle} />
-        </Link>
+        <CardImage src={eventImg} date={eventDate} title={eventTitle} />
         <div className="info">
           <Avatar src={userImg} name={userName} size="sm" text />
           <ViewsAndParticipants />
