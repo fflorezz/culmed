@@ -2,7 +2,7 @@ import styled from "styled-components";
 import * as styles from "../../../global-styles";
 
 const StyledDrop = styled.div`
-  width: 8rem;
+  width: 12rem;
   padding: 1rem 2rem;
   background-color: ${styles.colors.white};
   border-radius: 0.5rem;
@@ -16,8 +16,8 @@ const StyledDrop = styled.div`
     border-top: 1px solid transparent;
     cursor: pointer;
     &:hover {
-      border-bottom: 1px solid ${styles.colors.gray};
-      border-top: 1px solid ${styles.colors.gray};
+      border-bottom: 1px solid ${styles.colors.complementary};
+      border-top: 1px solid ${styles.colors.complementary};
     }
   }
 `;

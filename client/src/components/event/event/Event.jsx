@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 
 import StyledEvent from "./Event-styles";
 import testImg from "../../../assets/img/people-at-concert-1105666.jpg";
@@ -14,9 +14,11 @@ import Modal from "./../../shared/modal/Modal";
 
 const Event = () => {
   let history = useHistory();
+  let params = useParams();
 
   return (
     <Modal handleClick={history.goBack}>
+      {console.log("event", params)}
       <StyledEvent onClick={e => e.stopPropagation()}>
         <div className="event-body">
           <h4>Nombre del Evento</h4>

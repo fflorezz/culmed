@@ -5,7 +5,15 @@ import StyledFilter from "./FilterDrop-styles";
 import Icon from "./../icon/Icon";
 import { useState } from "react";
 
-const FilterDrop = ({ options }) => {
+const mockOptions = [
+  { id: 0, name: "Todos" },
+  { id: 1, name: "Cine" },
+  { id: 2, name: "Teatro" },
+  { id: 3, name: "Danza" },
+  { id: 4, name: "Música" },
+];
+
+const FilterDrop = ({ options = mockOptions }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [optionSelected, setOption] = useState("Todos");
 
@@ -37,7 +45,7 @@ const FilterDrop = ({ options }) => {
 };
 
 FilterDrop.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.object).isRequired,
+  options: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default FilterDrop;

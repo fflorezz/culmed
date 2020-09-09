@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useRouteMatch, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Logo from "./../logo/Logo";
 import Button from "./../button/Button";
@@ -12,6 +13,7 @@ import StyledHeader from "./Header-styles";
 const Header = () => {
   const isLogin = true;
   const [isOpen, setIsOpen] = useState(false);
+  const { id: userId, avatarImg } = useSelector(state => state.user);
 
   const matchLogin = useRouteMatch("/login");
   const matchSignup = useRouteMatch("/signup");
@@ -66,8 +68,8 @@ const Header = () => {
             onMouseEnter={toggleDrop}
             onMouseLeave={toggleDrop}
           >
-            <Link to="/:userID/profile">
-              <Avatar size="md" />
+            <Link to={`/${userId}`}>
+              <Avatar src={avatarImg} size="md" />
             </Link>
             {isOpen && <ProfileDrop />}
           </div>

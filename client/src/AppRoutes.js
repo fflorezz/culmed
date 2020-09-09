@@ -6,10 +6,11 @@ import LoginPage from "./components/auth/login-page/LoginPage";
 import RegistrationPage from "./components/auth/registration-page/RegistrationPage";
 import ExplorePage from "./pages/explore-page/ExplorePage";
 import FollowingPage from "./pages/following-page/FollowingPage";
-import MyCalendarPage from "./pages/my-calendar/MyCalendarPage";
-import MyEventsPage from "./pages/my-events/MyEventsPage";
+import CalendarPage from "./pages/calendar/CalendarPage";
 import Event from "./components/event/event/Event";
 import CreateEventPage from "./pages/create-event-page/CreateEventPage";
+import EditProfilePage from "./pages/edit-profile/EditProfilePage";
+import ProfilePage from "./pages/profile/ProfilePage";
 
 let AppRoutes = () => {
   let location = useLocation();
@@ -23,10 +24,12 @@ let AppRoutes = () => {
           <Redirect to={"/events"} />
         </Route>
         <Route exact path="/landing" component={LandingPage} />
-        <Route exact path="/events" component={ExplorePage} />
-        <PrivateRoute exact path="/events/new" component={CreateEventPage} />
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/signup" component={RegistrationPage} />
+        <Route exact path="/events" component={ExplorePage} />
+        <PrivateRoute exact path="/events/new" component={CreateEventPage} />
+        <PrivateRoute path="/:userId" component={ProfilePage} />
+        <PrivateRoute exact path="/:userId/calendar" component={CalendarPage} />
         <PrivateRoute
           exact
           path="/:userId/following"
@@ -34,13 +37,9 @@ let AppRoutes = () => {
         />
         <PrivateRoute
           exact
-          path="/:userId/calendar"
-          component={MyCalendarPage}
+          path="/:userId/profile/edit"
+          component={EditProfilePage}
         />
-        <Route exact path="/:userId/profile" component={MyEventsPage}>
-          <Redirect to="/:userId/events" />
-        </Route>
-        <PrivateRoute exact path="/:userId/events" component={MyEventsPage} />
       </Switch>
       <Route exact path="/events/:eventId" component={Event} />
     </>

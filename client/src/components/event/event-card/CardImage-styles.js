@@ -8,9 +8,6 @@ const StyledImage = styled.div`
   width: 100%;
   &:hover {
      {
-      .date-tag {
-        opacity: 1;
-      }
       img {
         filter: brightness(0.9);
       }
@@ -23,7 +20,7 @@ const StyledImage = styled.div`
     border-radius: 0.8rem;
   }
   .date-tag {
-    opacity: 0;
+    opacity: 1;
     position: absolute;
     top: 10%;
     right: 0;

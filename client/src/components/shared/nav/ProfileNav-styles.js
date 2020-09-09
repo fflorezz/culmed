@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import * as styles from "../../../global-styles";
 
-const StyledNav = styled.nav`
+const StyledProfileNav = styled.nav`
   width: 100%;
   max-width: 140rem;
   padding: 0 4rem;
-  margin: 0 auto;
+  margin: 1rem auto 0;
   display: flex;
   flex-direction: column;
   padding-bottom: 0.5rem;
@@ -38,4 +38,4 @@ const StyledNav = styled.nav`
   }
 `;
 
-export default StyledNav;
+export default StyledProfileNav;
