@@ -1,13 +1,13 @@
 import React from "react";
 import ProfileNav from "../../components/shared/nav/ProfileNav";
 import ProfileRoutes from "./ProfileRoutes";
-import { useRouteMatch } from "react-router-dom";
+import { useRouteMatch, useParams } from "react-router-dom";
 
 const ProfilePage = () => {
-  let { url } = useRouteMatch();
+  const { userId } = useParams();
   return (
     <>
-      <ProfileNav url={url} />
+      <ProfileNav userId={userId} />
       <ProfileRoutes />
     </>
   );

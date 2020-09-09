@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getUserData } from "../../API/user";
 
 export const fetchUserData = createAsyncThunk(
   "user/fetchUserStatus",
   async userId => {
-    const response = await fetch(`http://localhost:5000/users/${userId}`);
-    const userData = await response.json();
+    const userData = await getUserData(userId);
     return userData;
   }
 );
@@ -33,5 +33,4 @@ const userSlice = createSlice({
   },
 });
 
-export const { getUserData } = userSlice.actions;
 export const userReducer = userSlice.reducer;

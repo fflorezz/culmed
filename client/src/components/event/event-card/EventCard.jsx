@@ -7,7 +7,7 @@ import ViewsAndParticipants from "./../../shared/views-and-participants/ViewsAnd
 
 import StyledCard from "./EventCard-styles";
 
-const mockData = {
+const mockEvent = {
   eventId: 1,
   eventImg:
     "https://images.pexels.com/photos/976866/pexels-photo-976866.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -22,22 +22,24 @@ const mockData = {
   participants: 42,
 };
 
-const EventCard = ({
-  eventId = mockData.eventId,
-  eventImg = mockData.eventImg,
-  eventDate = mockData.date,
-  eventTitle = mockData.title,
-  userImg = mockData.userImg,
-  userName = mockData.userName,
-  eventViews = mockData.views,
-  eventParticipants = mockData.participants,
-}) => {
+const EventCard = ({ event }) => {
+  const {
+    id,
+    img,
+    title,
+    date,
+    authorImg,
+    authorName,
+    views,
+    participants,
+  } = event;
+
   return (
     <>
       <StyledCard>
-        <CardImage src={eventImg} date={eventDate} title={eventTitle} />
+        <CardImage img={img} date={date} title={title} />
         <div className="info">
-          <Avatar src={userImg} name={userName} size="sm" text />
+          <Avatar src={authorImg} name={authorName} size="sm" text />
           <ViewsAndParticipants />
         </div>
       </StyledCard>

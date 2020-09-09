@@ -17,7 +17,6 @@ let AppRoutes = () => {
   return (
     <>
       <Switch location={background || location}>
-        {console.log(location)}
         <Route exact path="/">
           <Redirect to={"/events"} />
         </Route>

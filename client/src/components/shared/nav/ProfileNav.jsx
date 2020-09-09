@@ -6,7 +6,7 @@ import * as styles from "../../../global-styles";
 import StyledProfileNav from "./ProfileNav-styles";
 import Avatar from "../../user/avatar/Avatar";
 
-const ProfileNav = ({ url }) => {
+const ProfileNav = ({ userId }) => {
   return (
     <StyledProfileNav>
       <div className="profile-avatar">
@@ -15,7 +15,7 @@ const ProfileNav = ({ url }) => {
       <ul>
         <li>
           <NavLink
-            to={`${url}/events`}
+            to={`/${userId}/events`}
             activeStyle={{
               backgroundColor: styles.colors.complementary,
               color: "white",
@@ -26,7 +26,7 @@ const ProfileNav = ({ url }) => {
         </li>
         <li>
           <NavLink
-            to={`${url}/calendar`}
+            to={`/${userId}/calendar`}
             activeStyle={{
               backgroundColor: styles.colors.complementary,
               color: "white",
@@ -37,7 +37,7 @@ const ProfileNav = ({ url }) => {
         </li>
         <li>
           <NavLink
-            to={`${url}/following`}
+            to={`/${userId}/following`}
             activeStyle={{
               backgroundColor: styles.colors.complementary,
               color: "white",
@@ -48,7 +48,7 @@ const ProfileNav = ({ url }) => {
         </li>
         <li>
           <NavLink
-            to={`${url}/account/edit`}
+            to={`/${userId}/account/edit`}
             activeStyle={{
               backgroundColor: styles.colors.complementary,
               color: "white",

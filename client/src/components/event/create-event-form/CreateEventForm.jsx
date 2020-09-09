@@ -2,8 +2,14 @@ import React from "react";
 import StyledCreateEventForm from "./CreateEventForm-styles";
 import Button from "./../../shared/button/Button";
 import ImageUpload from "./../image-upload/ImageUpload.jsx";
+import { useHistory } from "react-router";
 
 const CreateEventForm = () => {
+  function goBack(e) {
+    e.preventDefault();
+    history.goBack();
+  }
+  const history = useHistory();
   return (
     <StyledCreateEventForm>
       <form action="">
@@ -44,7 +50,12 @@ const CreateEventForm = () => {
             </div>
           </div>
           <div className="buttons">
-            <Button color="primary" outline text="Cancelar" />
+            <Button
+              color="primary"
+              outline
+              text="Cancelar"
+              handleClick={goBack}
+            />
             <Button color="primary" text="Crear" />
           </div>
         </div>

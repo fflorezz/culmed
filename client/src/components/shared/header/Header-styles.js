@@ -23,6 +23,7 @@ const StyledHeader = styled.header`
       }
       .avatar-hover {
         position: relative;
+        z-index: 999;
         height: 100%;
         display: flex;
         align-items: center;

@@ -17,13 +17,12 @@ const Header = () => {
 
   const matchLogin = useRouteMatch("/login");
   const matchSignup = useRouteMatch("/signup");
-  const matchEventsNew = useRouteMatch("/events/new");
 
   function toggleDrop() {
     setIsOpen(!isOpen);
   }
 
-  if (matchLogin || matchSignup || matchEventsNew) {
+  if (matchLogin || matchSignup) {
     return null;
   }
 

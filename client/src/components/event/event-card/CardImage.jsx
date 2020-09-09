@@ -11,11 +11,7 @@ const mockData = {
   title: "Concierto al Aire Libre",
 };
 
-const CardImage = ({
-  img = mockData.img,
-  date = mockData.date,
-  title = mockData.title,
-}) => {
+const CardImage = ({ img, date, title }) => {
   let location = useLocation();
   return (
     <Link

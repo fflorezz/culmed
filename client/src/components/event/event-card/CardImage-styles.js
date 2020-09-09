@@ -6,6 +6,25 @@ const StyledImage = styled.div`
   display: inline-block;
   cursor: pointer;
   width: 100%;
+  overflow: hidden;
+  @media only screen and (min-width: 320px) {
+    height: 60vw;
+  }
+  @media only screen and (min-width: 650px) {
+    height: 30vw;
+  }
+  @media only screen and (min-width: 950px) {
+    height: 20vw;
+  }
+  @media only screen and (min-width: 1200px) {
+    height: 15vw;
+  }
+  @media only screen and (min-width: 1550px) {
+    height: 12vw;
+  }
+  @media only screen and (min-width: 1850px) {
+    height: 10vw;
+  }
   &:hover {
      {
       img {
@@ -15,7 +34,7 @@ const StyledImage = styled.div`
   }
   img {
     width: 100%;
-    height: 60%;
+    height: 100%;
     object-fit: cover;
     border-radius: 0.8rem;
   }
