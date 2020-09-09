@@ -12,22 +12,22 @@ export const fetchUserData = createAsyncThunk(
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    userData: { userId: null, events: [] },
     loading: false,
     error: null,
   },
   reducers: {},
   extraReducers: {
-    [fetchUserData.fulfilled]: (state, action) => {
-      state.userData = action.payload;
+    [fetchUserData.fulfilled]: (state, { payload }) => {
+      state = { ...state, ...payload };
       state.error = null;
       state.loading = false;
+      return state;
     },
     [fetchUserData.rejected]: (state, action) => {
       state.error = action.error;
       state.loading = false;
     },
-    [fetchUserData.pending]: (state, action) => {
+    [fetchUserData.pending]: state => {
       state.loading = true;
     },
   },
