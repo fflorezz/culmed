@@ -7,6 +7,7 @@ const StyledImage = styled.div`
   cursor: pointer;
   width: 100%;
   overflow: hidden;
+
   @media only screen and (min-width: 320px) {
     height: 60vw;
   }
@@ -25,10 +26,17 @@ const StyledImage = styled.div`
   @media only screen and (min-width: 1850px) {
     height: 10vw;
   }
+
   &:hover {
      {
       img {
-        filter: brightness(0.9);
+        filter: brightness(0.85);
+      }
+      .date-tag {
+        p {
+          font-size: 1.7rem;
+          transition: all 150ms ease-in;
+        }
       }
     }
   }
@@ -45,7 +53,7 @@ const StyledImage = styled.div`
     right: 0;
     display: inline-block;
     padding: 0.2rem 1rem;
-    background-color: ${styles.colors.secondary};
+    background-color: ${styles.colorsDark.secondary};
     p {
       font-size: 1.5rem;
       font-weight: 600;

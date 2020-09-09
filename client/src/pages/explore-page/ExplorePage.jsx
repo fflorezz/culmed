@@ -22,7 +22,7 @@ const ExplorePage = () => {
       <ExploreNav />
       <StyledExplorePage>
         {events.map(event => (
-          <EventCard event={event} />
+          <EventCard key={event.id} {...event} />
         ))}
       </StyledExplorePage>
     </>

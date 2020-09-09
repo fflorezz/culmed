@@ -7,7 +7,7 @@ import StyledAddEventButton from "./../add-event-button/AddEventButton-styles";
 
 const StyledEvent = styled.div`
   width: 75rem;
-  margin: 6rem auto;
+  margin: 4rem auto;
   padding-top: 6rem;
   padding-bottom: 6rem;
   background-color: ${styles.colors.white};

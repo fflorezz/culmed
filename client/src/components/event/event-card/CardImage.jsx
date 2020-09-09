@@ -4,19 +4,12 @@ import { Link, useLocation } from "react-router-dom";
 
 import StyledImage from "./CardImage-styles";
 
-const mockData = {
-  img:
-    "https://images.pexels.com/photos/976866/pexels-photo-976866.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-  date: "Mar 17 - Abr 5",
-  title: "Concierto al Aire Libre",
-};
-
-const CardImage = ({ img, date, title }) => {
+const CardImage = ({ img, date, title, eventId }) => {
   let location = useLocation();
   return (
     <Link
       to={{
-        pathname: `/events/:eventId`,
+        pathname: `/events/${eventId}`,
         state: { background: location },
       }}
     >

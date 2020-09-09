@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 
 import StyledEvent from "./Event-styles";
-import testImg from "../../../assets/img/people-at-concert-1105666.jpg";
 import Icon from "./../../shared/icon/Icon";
 import Avatar from "./../../user/avatar/Avatar";
 import ViewsAndParticipants from "./../../shared/views-and-participants/ViewsAndParticipants";
@@ -11,37 +10,41 @@ import Comment from "../comment/Comment";
 import CommentField from "../comment-field/CommentField";
 import AddEventButton from "./../add-event-button/AddEventButton";
 import Modal from "./../../shared/modal/Modal";
+import { getEventById } from "../../../API/events";
 
 const Event = () => {
-  let history = useHistory();
-  let params = useParams();
+  const history = useHistory();
+  const { eventId } = useParams();
+  const [event, setEvent] = useState({});
+
+  useEffect(() => {
+    async function getEventAsync() {
+      const data = await getEventById(eventId);
+      setEvent(data);
+    }
+    getEventAsync();
+  }, [eventId]);
 
   return (
     <Modal handleClick={history.goBack}>
-      {console.log("event", params)}
       <StyledEvent onClick={e => e.stopPropagation()}>
         <div className="event-body">
-          <h4>Nombre del Evento</h4>
+          <h4>{event.title}</h4>
           <AddEventButton />
-          <p className="date">Mar 7 - Abr 22</p>
-          <p className="time">2:00PM - 3:00PM</p>
-          <p className="location">CRA 23A 21A 15. Medellín - Colombia</p>
+          <p className="date">{event.date}</p>
+          <p className="time">{event.time}</p>
+          <p className="location">{event.location}</p>
           <div className="image">
-            <img src={testImg} alt="event-name" />
-            <h6 className="price">$ Entrada Libre</h6>
+            <img src={event.img} alt={event.title} />
+            <h6 className="price">{event.price}</h6>
             <Icon size="md" type="location" color="white" />
           </div>
           <div className="user-info">
-            <Avatar size="sm" text />
+            <Avatar src={event.authorImg} size="sm" text />
             <ViewsAndParticipants />
           </div>
-          <p className="description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.{" "}
-          </p>
-          <Tags />
+          <p className="description">{event.description}</p>
+          <Tags tags={event.tags} />
           <Comment />
           <CommentField />
         </div>

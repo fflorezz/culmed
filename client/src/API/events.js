@@ -8,3 +8,12 @@ export async function getAllEvents() {
     throw new Error(error.message);
   }
 }
+
+export async function getEventById(eventId) {
+  try {
+    const response = await axios(`http://localhost:5000/events/${eventId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
