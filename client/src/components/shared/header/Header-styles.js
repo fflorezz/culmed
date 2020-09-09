@@ -29,7 +29,7 @@ const StyledHeader = styled.header`
       }
       ${StyledDrop} {
         position: absolute;
-        top: 6rem;
+        top: 5.5rem;
         right: 0;
       }
     }

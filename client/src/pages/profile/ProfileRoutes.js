@@ -14,32 +14,28 @@ import EditProfilePage from "../edit-profile/EditProfilePage";
 
 let ProfileRoutes = () => {
   let location = useLocation();
-  let { path } = useRouteMatch();
+  let { path, url } = useRouteMatch();
 
   let background = location.state && location.state.background;
 
   return (
-    <>
-      <Switch location={background || location}>
-        {console.log(path)}
-        <PrivateRoute exact path={`${path}/events`} component={EventsPage} />
-        <PrivateRoute
-          exact
-          path={`${path}/calendar`}
-          component={CalendarPage}
-        />
-        <PrivateRoute
-          exact
-          path={`${path}/following`}
-          component={FollowingPage}
-        />
-        <PrivateRoute
-          exact
-          path={`${path}/account/edit`}
-          component={EditProfilePage}
-        />
-      </Switch>
-    </>
+    <Switch location={background || location}>
+      <Route exact path={`${path}`}>
+        <Redirect to={`${url}/events`} />
+      </Route>
+      <PrivateRoute exact path={`${path}/events`} component={EventsPage} />
+      <PrivateRoute exact path={`${path}/calendar`} component={CalendarPage} />
+      <PrivateRoute
+        exact
+        path={`${path}/following`}
+        component={FollowingPage}
+      />
+      <PrivateRoute
+        exact
+        path={`${path}/account/edit`}
+        component={EditProfilePage}
+      />
+    </Switch>
   );
 };
 

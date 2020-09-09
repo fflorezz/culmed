@@ -14,7 +14,7 @@ const StyledProfileNav = styled.nav`
   }
   ul {
     display: flex;
-    margin: 2rem 0 0;
+    margin: 4rem 0 0;
     padding-bottom: 1rem;
     width: 100%;
     border-bottom: 1px solid ${styles.colorsLight.gray};

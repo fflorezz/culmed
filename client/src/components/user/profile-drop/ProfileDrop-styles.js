@@ -2,7 +2,7 @@ import styled from "styled-components";
 import * as styles from "../../../global-styles";
 
 const StyledDrop = styled.div`
-  width: 12rem;
+  width: 8rem;
   padding: 1rem 2rem;
   background-color: ${styles.colors.white};
   border-radius: 0.5rem;

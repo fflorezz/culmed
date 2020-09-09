@@ -26,6 +26,28 @@ const ProfileNav = ({ url }) => {
         </li>
         <li>
           <NavLink
+            to={`${url}/calendar`}
+            activeStyle={{
+              backgroundColor: styles.colors.complementary,
+              color: "white",
+            }}
+          >
+            Mi Agenda
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to={`${url}/following`}
+            activeStyle={{
+              backgroundColor: styles.colors.complementary,
+              color: "white",
+            }}
+          >
+            Siguiendo
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
             to={`${url}/account/edit`}
             activeStyle={{
               backgroundColor: styles.colors.complementary,
