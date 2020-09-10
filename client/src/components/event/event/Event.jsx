@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useHistory, useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 
-import StyledEvent from "./Event-styles";
+import { fetchEventById } from "../../../redux/slices/events.js";
+
 import Icon from "./../../shared/icon/Icon";
 import Avatar from "./../../user/avatar/Avatar";
 import ViewsAndParticipants from "./../../shared/views-and-participants/ViewsAndParticipants";
@@ -10,44 +12,66 @@ import Comment from "../comment/Comment";
 import CommentField from "../comment-field/CommentField";
 import AddEventButton from "./../add-event-button/AddEventButton";
 import Modal from "./../../shared/modal/Modal";
-import { getEventById } from "../../../API/events";
+
+import StyledEvent from "./Event-styles";
 
 const Event = () => {
   const history = useHistory();
   const { eventId } = useParams();
-  const [event, setEvent] = useState({});
+  const dispatch = useDispatch();
+  const { event, error, loading } = useSelector(state => state.events);
 
   useEffect(() => {
-    async function getEventAsync() {
-      const data = await getEventById(eventId);
-      setEvent(data);
+    dispatch(fetchEventById(eventId));
+  }, [eventId, dispatch]);
+
+  function renderEvent() {
+    if (loading) {
+      return <h4>Loading...</h4>;
+    } else if (error) {
+      return <h4>{error.message}</h4>;
+    } else if (event) {
+      const {
+        img,
+        date,
+        time,
+        location,
+        title,
+        price,
+        authorImg,
+        authorName,
+        description,
+        tags,
+      } = event;
+      return (
+        <div className="event-body">
+          <h4>{title}</h4>
+          <AddEventButton />
+          <p className="date">{date}</p>
+          <p className="time">{time}</p>
+          <p className="location">{location}</p>
+          <div className="image">
+            <img src={img} alt={title} />
+            <h6 className="price">${price}</h6>
+            <Icon size="md" type="location" color="white" />
+          </div>
+          <div className="user-info">
+            <Avatar src={authorImg} name={authorName} size="sm" text />
+            <ViewsAndParticipants />
+          </div>
+          <p className="description">{description}</p>
+          <Tags tags={tags} />
+          <Comment />
+          <CommentField />
+        </div>
+      );
     }
-    getEventAsync();
-  }, [eventId]);
+  }
 
   return (
     <Modal handleClick={history.goBack}>
       <StyledEvent onClick={e => e.stopPropagation()}>
-        <div className="event-body">
-          <h4>{event.title}</h4>
-          <AddEventButton />
-          <p className="date">{event.date}</p>
-          <p className="time">{event.time}</p>
-          <p className="location">{event.location}</p>
-          <div className="image">
-            <img src={event.img} alt={event.title} />
-            <h6 className="price">{event.price}</h6>
-            <Icon size="md" type="location" color="white" />
-          </div>
-          <div className="user-info">
-            <Avatar src={event.authorImg} size="sm" text />
-            <ViewsAndParticipants />
-          </div>
-          <p className="description">{event.description}</p>
-          <Tags tags={event.tags} />
-          <Comment />
-          <CommentField />
-        </div>
+        {renderEvent()}
       </StyledEvent>
     </Modal>
   );

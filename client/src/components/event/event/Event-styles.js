@@ -12,6 +12,8 @@ const StyledEvent = styled.div`
   padding-bottom: 6rem;
   background-color: ${styles.colors.white};
   border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
   .event-body {
     width: 45rem;
     margin: 0 auto;

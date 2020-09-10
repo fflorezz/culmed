@@ -22,6 +22,8 @@ const eventsSlice = createSlice({
   initialState: {
     events: [],
     event: null,
+    error: null,
+    loading: false,
   },
   reducers: {},
   extraReducers: {
