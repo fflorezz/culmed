@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllEvents } from "../../API/events";
+import { getAllEvents, getEventById } from "../../API/events";
 
 export const fetchAllEvents = createAsyncThunk(
   "user/fetchAllEventsStatus",
@@ -9,15 +9,25 @@ export const fetchAllEvents = createAsyncThunk(
   }
 );
 
+export const fetchEventById = createAsyncThunk(
+  "user/fetchEventByIdStatus",
+  async eventId => {
+    const eventData = await getEventById(eventId);
+    return eventData;
+  }
+);
+
 const eventsSlice = createSlice({
   name: "events",
   initialState: {
-    all: [],
+    events: [],
+    event: null,
   },
   reducers: {},
   extraReducers: {
+    // FETCH ALL
     [fetchAllEvents.fulfilled]: (state, { payload }) => {
-      state.all = payload;
+      state.events = payload;
       state.error = null;
       state.loading = false;
     },
@@ -26,6 +36,20 @@ const eventsSlice = createSlice({
       state.loading = false;
     },
     [fetchAllEvents.pending]: state => {
+      state.loading = true;
+    },
+
+    // FETCH EVEN BY ID
+    [fetchEventById.fulfilled]: (state, { payload }) => {
+      state.event = payload;
+      state.error = null;
+      state.loading = false;
+    },
+    [fetchEventById.rejected]: (state, action) => {
+      state.error = action.error;
+      state.loading = false;
+    },
+    [fetchEventById.pending]: state => {
       state.loading = true;
     },
   },

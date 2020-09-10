@@ -29,12 +29,12 @@ const StyledImage = styled.div`
 
   &:hover {
      {
-      img {
+      /* img {
         filter: brightness(0.85);
-      }
+      } */
       .date-tag {
         p {
-          font-size: 1.7rem;
+          font-size: 1.8rem;
           transition: all 150ms ease-in;
         }
       }
@@ -58,6 +58,7 @@ const StyledImage = styled.div`
       font-size: 1.5rem;
       font-weight: 600;
       color: ${styles.colors.white};
+      transition: all 150ms ease-in;
     }
   }
   .title {
