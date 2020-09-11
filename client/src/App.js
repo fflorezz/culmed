@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import { fetchUserData } from "./redux/slices/user.slice";
+import { fetchUserData } from "./redux/slices/session";
 
 import AppRoutes from "./AppRoutes";
 import Header from "./components/shared/header/Header";

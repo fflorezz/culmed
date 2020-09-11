@@ -8,6 +8,7 @@ import ExplorePage from "./pages/explore-page/ExplorePage";
 import Event from "./components/event/event/Event";
 import CreateEventPage from "./pages/create-event/CreateEventPage";
 import ProfilePage from "./pages/profile/ProfilePage";
+import NotFoundPage from "./pages/not-found/NotFoundPage";
 
 let AppRoutes = () => {
   let location = useLocation();
@@ -26,12 +27,9 @@ let AppRoutes = () => {
         <Route exact path="/events" component={ExplorePage} />
         <PrivateRoute exact path="/events/new" component={CreateEventPage} />
         <PrivateRoute path="/:userId" component={ProfilePage} />
+        <Route path="*" component={NotFoundPage} />
       </Switch>
-      <Switch>
-        {background && (
-          <Route exact path="/events/:eventId" component={Event} />
-        )}
-      </Switch>
+      {background && <Route exact path="/events/:eventId" component={Event} />}
     </>
   );
 };
