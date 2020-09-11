@@ -8,7 +8,9 @@ const EventsList = ({ events }) => {
     <StyledEventsList>
       <GridContainer>
         {events.map(event => (
-          <EventCard key={event.id} {...event} />
+          <li key={event.id}>
+            <EventCard {...event} />
+          </li>
         ))}
       </GridContainer>
     </StyledEventsList>
