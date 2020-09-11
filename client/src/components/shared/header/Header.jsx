@@ -13,7 +13,7 @@ import StyledHeader from "./Header-styles";
 const Header = () => {
   const isLogin = true;
   const [isOpen, setIsOpen] = useState(false);
-  const { id: userId, avatarImg } = useSelector(state => state.user);
+  const { id, avatarImg } = useSelector(state => state.session);
 
   const matchLogin = useRouteMatch("/login");
   const matchSignup = useRouteMatch("/signup");
@@ -68,7 +68,7 @@ const Header = () => {
             onMouseEnter={toggleDrop}
             onMouseLeave={toggleDrop}
           >
-            <Link to={`/${userId}`}>
+            <Link to={`/${id}`}>
               <Avatar src={avatarImg} size="md" />
             </Link>
             {isOpen && <ProfileDrop />}

@@ -13,8 +13,8 @@ const user = {
 };
 
 const Avatar = ({
-  src = user.img,
-  name = user.name,
+  src,
+  name,
   following = user.following,
   followers = user.followers,
   size,
