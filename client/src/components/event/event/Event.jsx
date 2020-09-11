@@ -22,15 +22,19 @@ const Event = () => {
   const { event, error, loading } = useSelector(state => state.events);
 
   useEffect(() => {
-    dispatch(fetchEventById(eventId));
+    dispatch(fetchEventById(eventId === undefined ? "notfound" : eventId));
   }, [eventId, dispatch]);
 
   function renderEvent() {
     if (loading) {
       return <h4>Loading...</h4>;
-    } else if (error) {
-      return <h4>{error.message}</h4>;
-    } else if (event) {
+    }
+
+    if (error) {
+      history.replace("notfound");
+    }
+
+    if (event) {
       const {
         img,
         date,

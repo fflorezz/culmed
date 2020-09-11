@@ -1,35 +1,26 @@
 import React from "react";
 
-import EventCard from "./../../components/event/event-card/EventCard";
-import ExploreNav from "../../components/shared/nav/ExploreNav";
-
-import StyledExplorePage from "./ExplorePage-styles";
 import { useFetchEvents } from "./../../hooks/useFetchEvents";
+
+import ExploreNav from "../../components/shared/nav/ExploreNav";
+import StyledExplorePage from "./ExplorePage-styles";
+import EventsList from "../../components/event/event-list/EventsList";
+import PageContainer from "./../../components/shared/page-container/PageContainer";
 
 const ExplorePage = () => {
   const { events, loading, error } = useFetchEvents();
 
-  function renderEvents() {
-    if (loading) {
-      return <h4>Loading...</h4>;
-    }
-
-    if (error) {
-      return <h4>{error.message}</h4>;
-    }
-
-    if (!events || events.length === 0) {
-      return <h4>No Hay Eventos</h4>;
-    }
-
-    return events.map(event => <EventCard key={event.id} {...event} />);
+  if (error) {
+    return <h4>{error.message}</h4>;
   }
 
   return (
-    <>
+    <StyledExplorePage>
       <ExploreNav />
-      <StyledExplorePage>{renderEvents()}</StyledExplorePage>
-    </>
+      <PageContainer>
+        {loading ? <h4>Loading...</h4> : <EventsList events={events} />}
+      </PageContainer>
+    </StyledExplorePage>
   );
 };
 

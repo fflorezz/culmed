@@ -22,7 +22,7 @@ const ProfileNav = ({ user }) => {
               color: "white",
             }}
           >
-            Mis Eventos
+            Eventos
           </NavLink>
         </li>
         <li>
@@ -33,7 +33,7 @@ const ProfileNav = ({ user }) => {
               color: "white",
             }}
           >
-            Mi Agenda
+            Agenda
           </NavLink>
         </li>
         <li>

@@ -7,10 +7,11 @@ import { fetchUserById } from "./../../redux/slices/user.slice";
 import NotFoundPage from "./../not-found/NotFoundPage";
 
 const ProfilePage = () => {
-  const { userId } = useParams();
   const dispatch = useDispatch();
+  const { userId } = useParams();
   const user = useSelector(state => state.user);
   const { loading, error } = user;
+
   useEffect(() => {
     console.log("profile", userId);
     dispatch(fetchUserById(userId));
