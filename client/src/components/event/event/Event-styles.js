@@ -5,7 +5,7 @@ import StyledAvatar from "./../../user/avatar/Avatar-styles";
 import StyledTags from "./../tags/Tags-styles";
 import StyledAddEventButton from "./../add-event-button/AddEventButton-styles";
 
-const StyledEvent = styled.div`
+const StyledEvent = styled.main`
   width: 75rem;
   margin: 4rem auto;
   padding-top: 6rem;

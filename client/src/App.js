@@ -12,7 +12,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUserData(1));
+    dispatch(fetchUserData(2));
     // eslint-disable-next-line
   }, []);
 
