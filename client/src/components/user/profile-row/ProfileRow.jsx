@@ -8,14 +8,7 @@ const ProfileRow = () => {
   return (
     <StyledProfileRow>
       <div className="row-avatar">
-        <Avatar size="lg" column text />
-        <Button
-          color="gray"
-          text="Siguiendo"
-          hoverText="Dejar de Seguir"
-          size="sm"
-          outline
-        />
+        <Avatar size="lg" column text followingBtn />
       </div>
       <div className="row-events">
         <CardImage />

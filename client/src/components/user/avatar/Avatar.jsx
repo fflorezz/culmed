@@ -9,17 +9,18 @@ const user = {
     "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   name: "Jhon Doe",
   following: 120,
-  followers: 68,
+  followers: [1, 2, 3, 4],
 };
 
 const Avatar = ({
-  src,
-  name,
-  following,
-  followers,
+  src = user.img,
+  name = user.name,
+  following = user.following,
+  followers = user.followers,
   size,
   column,
   followingBtn,
+  isFollowing,
   handleClick,
   handleMouseEnter,
   handleMouseLeave,
@@ -47,7 +48,15 @@ const Avatar = ({
               Siguiendo <span>{following && following.length}</span>
             </p>
           </div>
-          {followingBtn && <Button size="sm" outline text="Following" />}
+          {followingBtn && (
+            <Button
+              color="gray"
+              text="Siguiendo"
+              hoverText="Dejar de Seguir"
+              size="sm"
+              outline
+            />
+          )}
         </div>
       )}
     </StyledAvatar>

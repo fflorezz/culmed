@@ -23,6 +23,7 @@ const ProfileNav = ({ user }) => {
           followers={followers}
           size="lg"
           text
+          followingBtn
         />
       </div>
       <ul>
