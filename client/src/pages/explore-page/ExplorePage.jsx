@@ -31,7 +31,11 @@ const ExplorePage = () => {
     <StyledExplorePage>
       <ExploreNav />
       <PageContainer>
-        {loading ? <h4>Loading...</h4> : <EventsList events={exploreEvents} />}
+        {loading ? (
+          <h4>Loading...</h4>
+        ) : (
+          <EventsList events={exploreEvents} avatar />
+        )}
       </PageContainer>
     </StyledExplorePage>
   );

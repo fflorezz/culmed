@@ -15,8 +15,8 @@ const user = {
 const Avatar = ({
   src,
   name,
-  following = user.following,
-  followers = user.followers,
+  following,
+  followers,
   size,
   column,
   followingBtn,
@@ -40,11 +40,11 @@ const Avatar = ({
           <p className="name">{name}</p>
           <div className="follow">
             <p className="followers">
-              Seguidores <span>{followers}</span>
+              Seguidores <span>{followers && followers.length}</span>
             </p>
             <div className="spacer"></div>
             <p className="following">
-              Siguiendo <span>{following}</span>
+              Siguiendo <span>{following && following.length}</span>
             </p>
           </div>
           {followingBtn && <Button size="sm" outline text="Following" />}

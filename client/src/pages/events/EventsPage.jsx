@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import StyledEventsPage from "./EventPage-styles";
-import CardImage from "../../components/event/event-card/CardImage";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { fetchEventsByAuthor } from "../../redux/slices/events";
@@ -14,13 +13,14 @@ const EventsPage = () => {
 
   useEffect(function () {
     dispatch(fetchEventsByAuthor(userId));
+    // eslint-disable-next-line
   }, []);
+
   return (
     <StyledEventsPage>
       <PageContainer>
         <EventsList events={events} />
       </PageContainer>
-      {console.log(events)}
     </StyledEventsPage>
   );
 };

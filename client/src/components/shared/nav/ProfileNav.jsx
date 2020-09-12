@@ -7,11 +7,23 @@ import StyledProfileNav from "./ProfileNav-styles";
 import Avatar from "../../user/avatar/Avatar";
 
 const ProfileNav = ({ user }) => {
-  const { id, userName, avatarImg } = user;
+  const { id, userName, avatarImg, following, followers } = user;
+
+  if (!user) {
+    return null;
+  }
+
   return (
     <StyledProfileNav>
       <div className="profile-avatar">
-        <Avatar src={avatarImg} name={userName} size="lg" text />
+        <Avatar
+          src={avatarImg}
+          name={userName}
+          following={following}
+          followers={followers}
+          size="lg"
+          text
+        />
       </div>
       <ul>
         <li>
