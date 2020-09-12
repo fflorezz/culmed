@@ -5,9 +5,12 @@ import * as styles from "../../../global-styles";
 
 import StyledProfileNav from "./ProfileNav-styles";
 import Avatar from "../../user/avatar/Avatar";
+import { useSelector } from "react-redux";
 
 const ProfileNav = ({ user }) => {
   const { id, userName, avatarImg, following, followers } = user;
+  const actualUserId = useSelector(state => state.session.id);
+  const isOwnProfile = actualUserId === id;
 
   if (!user) {
     return null;
@@ -23,7 +26,7 @@ const ProfileNav = ({ user }) => {
           followers={followers}
           size="lg"
           text
-          followingBtn
+          followingBtn={!isOwnProfile}
         />
       </div>
       <ul>
@@ -60,17 +63,19 @@ const ProfileNav = ({ user }) => {
             Siguiendo
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to={`/${id}/account/edit`}
-            activeStyle={{
-              backgroundColor: styles.colors.complementary,
-              color: "white",
-            }}
-          >
-            Editar Perfíl
-          </NavLink>
-        </li>
+        {isOwnProfile && (
+          <li>
+            <NavLink
+              to={`/${id}/account/edit`}
+              activeStyle={{
+                backgroundColor: styles.colors.complementary,
+                color: "white",
+              }}
+            >
+              Editar Perfíl
+            </NavLink>
+          </li>
+        )}
       </ul>
     </StyledProfileNav>
   );
