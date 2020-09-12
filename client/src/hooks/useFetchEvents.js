@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllEvents } from "./../redux/slices/events";
 
-export function useFetchEvents({ path, userId } = {}) {
-  const { events, error, loading } = useSelector(state => state.events);
+export function useFetchEvents({ property, value } = {}) {
+  const { all: events, error, loading } = useSelector(state => state.events);
   const dispatch = useDispatch();
 
   useEffect(() => {

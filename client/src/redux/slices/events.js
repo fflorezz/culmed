@@ -1,11 +1,23 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllEvents, getEventById } from "../../API/events";
+import {
+  getAllEvents,
+  getEventById,
+  getEventsByAuthor,
+} from "../../API/events";
 
 export const fetchAllEvents = createAsyncThunk(
   "user/fetchAllEventsStatus",
+  async () => {
+    const events = await getAllEvents();
+    return events;
+  }
+);
+
+export const fetchEventsByAuthor = createAsyncThunk(
+  "user/fetchEventsByAuthorStatus",
   async userId => {
-    const userData = await getAllEvents();
-    return userData;
+    const events = await getEventsByAuthor(userId);
+    return events;
   }
 );
 
@@ -20,7 +32,8 @@ export const fetchEventById = createAsyncThunk(
 const eventsSlice = createSlice({
   name: "events",
   initialState: {
-    events: [],
+    all: [],
+    userEvents: [],
     event: null,
     error: null,
     loading: false,
@@ -29,7 +42,7 @@ const eventsSlice = createSlice({
   extraReducers: {
     // FETCH ALL
     [fetchAllEvents.fulfilled]: (state, { payload }) => {
-      state.events = payload;
+      state.all = payload;
       state.error = null;
       state.loading = false;
     },
@@ -41,7 +54,21 @@ const eventsSlice = createSlice({
       state.loading = true;
     },
 
-    // FETCH EVEN BY ID
+    // FETCH EVENTS BY AUTHOR
+    [fetchEventsByAuthor.fulfilled]: (state, { payload }) => {
+      state.userEvents = payload;
+      state.error = null;
+      state.loading = false;
+    },
+    [fetchEventsByAuthor.rejected]: (state, action) => {
+      state.error = action.error;
+      state.loading = false;
+    },
+    [fetchEventsByAuthor.pending]: state => {
+      state.loading = true;
+    },
+
+    // FETCH EVENT BY ID
     [fetchEventById.fulfilled]: (state, { payload }) => {
       state.event = payload;
       state.error = null;
