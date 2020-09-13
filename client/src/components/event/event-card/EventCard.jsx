@@ -20,7 +20,7 @@ const EventCard = ({
   return (
     <>
       <StyledCard>
-        <CardImage img={img} date={date} title={title} eventId={id} />
+        <CardImage img={img} date={date} title={title} id={id} />
         <div className="info">
           <Avatar
             src={authorImg}

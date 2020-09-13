@@ -4,12 +4,12 @@ import { Link, useLocation } from "react-router-dom";
 
 import StyledImage from "./CardImage-styles";
 
-const CardImage = ({ img, date, title, eventId }) => {
+const CardImage = ({ img, date, title, id }) => {
   let location = useLocation();
   return (
     <Link
       to={{
-        pathname: `/events/${eventId}`,
+        pathname: `/events/${id}`,
         state: { background: location },
       }}
     >
