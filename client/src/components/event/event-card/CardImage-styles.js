@@ -11,7 +11,7 @@ const StyledImage = styled.div`
   @media only screen and (min-width: 320px) {
     height: 60vw;
   }
-  @media only screen and (min-width: 650px) {
+  @media only screen and (min-width: 640px) {
     height: 30vw;
   }
   @media only screen and (min-width: 950px) {

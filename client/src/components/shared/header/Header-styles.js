@@ -11,9 +11,9 @@ const StyledHeader = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 95%;
     height: 100%;
     margin: 0 auto;
+    padding: 0 4rem;
     .user {
       height: 100%;
       display: flex;

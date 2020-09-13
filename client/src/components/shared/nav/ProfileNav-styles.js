@@ -3,7 +3,6 @@ import * as styles from "../../../global-styles";
 
 const StyledProfileNav = styled.nav`
   width: 100%;
-  max-width: 140rem;
   padding: 0 4rem;
   margin: 1rem auto 0;
   display: flex;
