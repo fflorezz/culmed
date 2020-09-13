@@ -7,6 +7,11 @@ import StyledProfileNav from "./ProfileNav-styles";
 import Avatar from "../../user/avatar/Avatar";
 import { useSelector } from "react-redux";
 
+const linkActiveStyle = {
+  backgroundColor: styles.colors.complementary,
+  color: "white",
+};
+
 const ProfileNav = ({ user }) => {
   const { id, userName, avatarImg, following, followers } = user;
   const actualUserId = useSelector(state => state.session.id);
@@ -31,47 +36,23 @@ const ProfileNav = ({ user }) => {
       </div>
       <ul>
         <li>
-          <NavLink
-            to={`/${id}/events`}
-            activeStyle={{
-              backgroundColor: styles.colors.complementary,
-              color: "white",
-            }}
-          >
+          <NavLink to={`/${id}/events`} activeStyle={linkActiveStyle}>
             Eventos
           </NavLink>
         </li>
         <li>
-          <NavLink
-            to={`/${id}/calendar`}
-            activeStyle={{
-              backgroundColor: styles.colors.complementary,
-              color: "white",
-            }}
-          >
+          <NavLink to={`/${id}/calendar`} activeStyle={linkActiveStyle}>
             Agenda
           </NavLink>
         </li>
         <li>
-          <NavLink
-            to={`/${id}/following`}
-            activeStyle={{
-              backgroundColor: styles.colors.complementary,
-              color: "white",
-            }}
-          >
+          <NavLink to={`/${id}/following`} activeStyle={linkActiveStyle}>
             Siguiendo
           </NavLink>
         </li>
         {isOwnProfile && (
           <li>
-            <NavLink
-              to={`/${id}/account/edit`}
-              activeStyle={{
-                backgroundColor: styles.colors.complementary,
-                color: "white",
-              }}
-            >
+            <NavLink to={`/${id}/account/edit`} activeStyle={linkActiveStyle}>
               Editar Perfíl
             </NavLink>
           </li>

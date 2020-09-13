@@ -1,7 +1,6 @@
 import React from "react";
 import StyledProfileRow from "./ProfileRow-styles";
 import Avatar from "../avatar/Avatar";
-import Button from "./../../shared/button/Button";
 import CardImage from "./../../event/event-card/CardImage";
 
 const ProfileRow = () => {
