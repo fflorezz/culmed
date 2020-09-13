@@ -16,26 +16,22 @@ const ProfilePage = () => {
     dispatch(fetchUserById(userId));
   }, [userId, dispatch]);
 
-  function renderProfile() {
-    if (loading) {
-      return <h4>Loading...</h4>;
-    }
+  if (error) {
+    return <NotFoundPage />;
+  }
 
-    if (error) {
-      return <NotFoundPage />;
-    }
-
-    if (user) {
-      return (
+  return (
+    <div>
+      {loading ? (
+        <h4>Loading...</h4>
+      ) : (
         <>
           <ProfileNav user={user} />
           <ProfileRoutes />
         </>
-      );
-    }
-  }
-
-  return <div>{renderProfile()}</div>;
+      )}
+    </div>
+  );
 };
 
 export default ProfilePage;
