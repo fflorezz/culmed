@@ -51,8 +51,8 @@ const Avatar = ({
           {followingBtn && (
             <Button
               color="gray"
-              text="Siguiendo"
-              hoverText="Dejar de Seguir"
+              text={isFollowing ? "Siguiendo" : "Seguir"}
+              hoverText={isFollowing ? "Dejar de Seguir" : "Seguir"}
               size="sm"
               outline
             />

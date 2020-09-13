@@ -13,7 +13,6 @@ const ProfilePage = () => {
   const { loading, error } = user;
 
   useEffect(() => {
-    console.log("profile", userId);
     dispatch(fetchUserById(userId));
   }, [userId, dispatch]);
 

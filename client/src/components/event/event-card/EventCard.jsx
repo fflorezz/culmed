@@ -5,6 +5,7 @@ import CardImage from "./CardImage";
 import Avatar from "./../../user/avatar/Avatar";
 import ViewsAndParticipants from "./../../shared/views-and-participants/ViewsAndParticipants";
 import StyledCard from "./EventCard-styles";
+import { Link } from "react-router-dom";
 
 const EventCard = ({
   id,
@@ -22,13 +23,15 @@ const EventCard = ({
       <StyledCard>
         <CardImage img={img} date={date} title={title} id={id} />
         <div className="info">
-          <Avatar
-            src={authorImg}
-            userId={authorId}
-            name={authorName}
-            size="sm"
-            text
-          />
+          <Link to={`/${authorId}`}>
+            <Avatar
+              src={authorImg}
+              userId={authorId}
+              name={authorName}
+              size="sm"
+              text
+            />
+          </Link>
           <ViewsAndParticipants views={views} participants={participants} />
         </div>
       </StyledCard>

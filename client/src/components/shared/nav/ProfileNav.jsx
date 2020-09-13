@@ -14,8 +14,15 @@ const linkActiveStyle = {
 
 const ProfileNav = ({ user }) => {
   const { id, userName, avatarImg, following, followers } = user;
-  const actualUserId = useSelector(state => state.session.id);
-  const isOwnProfile = actualUserId === id;
+  const session = useSelector(state => state.session);
+  let isOwnProfile = false;
+  let isFollowing = false;
+
+  if (session.id) {
+    isOwnProfile = session.id === id;
+    isFollowing =
+      session.following.filter(followingId => followingId === id).length > 0;
+  }
 
   if (!user) {
     return null;
@@ -32,6 +39,7 @@ const ProfileNav = ({ user }) => {
           size="lg"
           text
           followingBtn={!isOwnProfile}
+          isFollowing={isFollowing}
         />
       </div>
       <ul>
