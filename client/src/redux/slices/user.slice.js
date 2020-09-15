@@ -14,6 +14,10 @@ const userSlice = createSlice({
   initialState: {
     loading: false,
     error: null,
+    id: null,
+    calendar: [],
+    following: [],
+    followers: [],
   },
   reducers: {},
   extraReducers: {

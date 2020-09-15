@@ -1,18 +1,29 @@
 import React from "react";
-
-import StyledCalendarPage from "./CalendarPage-styles";
-import EventCard from "../../components/event/event-card/EventCard";
+import PageContainer from "../../components/shared/page-container/PageContainer";
+import EventsList from "./../../components/event/event-list/EventsList";
+import { useFetchEvents } from "./../../hooks/useFetchEvents";
+import { useSelector } from "react-redux";
+import NotFoundPage from "./../not-found/NotFoundPage";
 
 const CalendarPage = () => {
+  const { events, loading, error } = useFetchEvents();
+  const calendarIds = useSelector(state => state.user.calendar);
+  const calendarEvents = events.filter(event => calendarIds.includes(event.id));
+
+  if (error) {
+    return <NotFoundPage />;
+  }
+
   return (
-    <StyledCalendarPage>
-      <EventCard />
-      <EventCard />
-      <EventCard />
-      <EventCard />
-      <EventCard />
-      <EventCard />
-    </StyledCalendarPage>
+    <>
+      <PageContainer>
+        {loading ? (
+          <h4>Loading</h4>
+        ) : (
+          <EventsList events={calendarEvents} avatar />
+        )}
+      </PageContainer>
+    </>
   );
 };
 
