@@ -16,6 +16,14 @@ const EventsPage = () => {
     // eslint-disable-next-line
   }, []);
 
+  if (events.length === 0) {
+    return (
+      <PageContainer>
+        <h4>No hay eventos</h4>
+      </PageContainer>
+    );
+  }
+
   return (
     <StyledEventsPage>
       <PageContainer>

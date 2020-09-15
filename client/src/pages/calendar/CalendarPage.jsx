@@ -11,7 +11,19 @@ const CalendarPage = () => {
   const calendarEvents = events.filter(event => calendarIds.includes(event.id));
 
   if (error) {
-    return <NotFoundPage />;
+    return (
+      <PageContainer>
+        <NotFoundPage />
+      </PageContainer>
+    );
+  }
+
+  if (!loading && calendarEvents.length === 0) {
+    return (
+      <PageContainer>
+        <h4>No hay eventos</h4>
+      </PageContainer>
+    );
   }
 
   return (
