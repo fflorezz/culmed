@@ -15,15 +15,8 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { id, avatarImg } = useSelector(state => state.session);
 
-  const matchLogin = useRouteMatch("/login");
-  const matchSignup = useRouteMatch("/signup");
-
   function toggleDrop() {
     setIsOpen(!isOpen);
-  }
-
-  if (matchLogin || matchSignup) {
-    return null;
   }
 
   if (!isLogin) {

@@ -15,6 +15,7 @@ const sessionSlice = createSlice({
     isLogin: true,
     loading: false,
     error: null,
+    events: [],
   },
   reducers: {},
   extraReducers: {

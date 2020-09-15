@@ -14,6 +14,7 @@ import AddEventButton from "./../add-event-button/AddEventButton";
 import Modal from "./../../shared/modal/Modal";
 
 import StyledEvent from "./Event-styles";
+import NotFoundPage from "./../../../pages/not-found/NotFoundPage";
 
 const Event = () => {
   const history = useHistory();
@@ -22,60 +23,49 @@ const Event = () => {
   const { event, error, loading } = useSelector(state => state.events);
 
   useEffect(() => {
-    dispatch(fetchEventById(eventId === undefined ? "notfound" : eventId));
+    dispatch(fetchEventById(eventId));
   }, [eventId, dispatch]);
 
-  function renderEvent() {
-    if (loading) {
-      return <h4>Loading...</h4>;
-    }
+  if (error) {
+    return <NotFoundPage />;
+  }
 
-    if (error) {
-      history.replace("notfound");
-    }
-
-    if (event) {
-      const {
-        img,
-        date,
-        time,
-        location,
-        title,
-        price,
-        authorImg,
-        authorName,
-        description,
-        tags,
-      } = event;
-      return (
-        <div className="event-body">
-          <h4>{title}</h4>
-          <AddEventButton />
-          <p className="date">{date}</p>
-          <p className="time">{time}</p>
-          <p className="location">{location}</p>
-          <div className="image">
-            <img src={img} alt={title} />
-            <h6 className="price">${price}</h6>
-            <Icon size="md" type="location" color="white" />
-          </div>
-          <div className="user-info">
-            <Avatar src={authorImg} name={authorName} size="sm" text />
-            <ViewsAndParticipants />
-          </div>
-          <p className="description">{description}</p>
-          <Tags tags={tags} />
-          <Comment />
-          <CommentField />
-        </div>
-      );
-    }
+  if (!event) {
+    return null;
   }
 
   return (
     <Modal handleClick={history.goBack}>
       <StyledEvent onClick={e => e.stopPropagation()}>
-        {renderEvent()}
+        {loading ? (
+          <h4>Loading...</h4>
+        ) : (
+          <div className="event-body">
+            <h4>{event.title}</h4>
+            <AddEventButton />
+            <p className="date">{event.date}</p>
+            <p className="time">{event.time}</p>
+            <p className="location">{event.location}</p>
+            <div className="image">
+              <img src={event.img} alt={event.title} />
+              <h6 className="price">${event.price}</h6>
+              <Icon size="md" type="location" color="white" />
+            </div>
+            <div className="user-info">
+              <Avatar
+                src={event.authorImg}
+                name={event.authorName}
+                size="sm"
+                text
+              />
+              <ViewsAndParticipants />
+            </div>
+            <p className="description">{event.description}</p>
+            <Tags tags={event.tags} />
+            <Comment />
+            <CommentField />
+          </div>
+        )}
       </StyledEvent>
     </Modal>
   );

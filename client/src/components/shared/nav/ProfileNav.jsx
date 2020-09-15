@@ -70,4 +70,4 @@ const ProfileNav = ({ user }) => {
   );
 };
 
-export default ProfileNav;
+export default React.memo(ProfileNav);
