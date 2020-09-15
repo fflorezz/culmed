@@ -5,28 +5,14 @@ import * as styles from "../../../global-styles";
 
 import StyledProfileNav from "./ProfileNav-styles";
 import Avatar from "../../user/avatar/Avatar";
-import { useSelector } from "react-redux";
 
 const linkActiveStyle = {
   backgroundColor: styles.colors.complementary,
   color: "white",
 };
 
-const ProfileNav = ({ user }) => {
+const ProfileNav = ({ user, isOwnProfile, isFollowing }) => {
   const { id, userName, avatarImg, following, followers } = user;
-  const session = useSelector(state => state.session);
-  let isOwnProfile = false;
-  let isFollowing = false;
-
-  if (session.id) {
-    isOwnProfile = session.id === id;
-    isFollowing =
-      session.following.filter(followingId => followingId === id).length > 0;
-  }
-
-  if (!user) {
-    return null;
-  }
 
   return (
     <StyledProfileNav>
@@ -70,4 +56,4 @@ const ProfileNav = ({ user }) => {
   );
 };
 
-export default React.memo(ProfileNav);
+export default ProfileNav;

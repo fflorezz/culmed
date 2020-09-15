@@ -11,6 +11,14 @@ const ProfilePage = () => {
   const { userId } = useParams();
   const user = useSelector(state => state.user);
   const { loading, error } = user;
+  const session = useSelector(state => state.session);
+  let isOwnProfile = false;
+  let isFollowing = false;
+
+  if (session.id) {
+    isOwnProfile = session.id === user.id;
+    isFollowing = session.following.includes(user.id);
+  }
 
   useEffect(() => {
     dispatch(fetchUserById(userId));
@@ -26,7 +34,11 @@ const ProfilePage = () => {
         <h4>Loading...</h4>
       ) : (
         <>
-          <ProfileNav user={user} />
+          <ProfileNav
+            user={user}
+            isOwnProfile={isOwnProfile}
+            isFollowing={isFollowing}
+          />
           <ProfileRoutes />
         </>
       )}
