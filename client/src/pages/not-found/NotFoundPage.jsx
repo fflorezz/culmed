@@ -1,10 +1,11 @@
 import React from "react";
+import PageContainer from "./../../components/shared/page-container/PageContainer";
 
 const NotFoundPage = () => {
   return (
-    <div>
+    <PageContainer>
       <h4>NOT FOUND</h4>
-    </div>
+    </PageContainer>
   );
 };
 

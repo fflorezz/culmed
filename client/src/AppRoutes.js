@@ -5,10 +5,10 @@ import LandingPage from "./components/landing/landing-page/LandingPage";
 import LoginPage from "./components/auth/login-page/LoginPage";
 import RegistrationPage from "./components/auth/registration-page/RegistrationPage";
 import ExplorePage from "./pages/explore-page/ExplorePage";
-import Event from "./components/event/event/Event";
 import CreateEventPage from "./pages/create-event/CreateEventPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import NotFoundPage from "./pages/not-found/NotFoundPage";
+import EventPage from "./pages/event/EventPage";
 
 let AppRoutes = () => {
   let location = useLocation();
@@ -29,7 +29,9 @@ let AppRoutes = () => {
         <PrivateRoute path="/:userId" component={ProfilePage} />
         <Route path="*" component={NotFoundPage} />
       </Switch>
-      {background && <Route exact path="/events/:eventId" component={Event} />}
+      {background && (
+        <Route exact path="/events/:eventId" component={EventPage} />
+      )}
     </>
   );
 };

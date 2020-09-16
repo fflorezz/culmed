@@ -2,9 +2,9 @@ import React from "react";
 import StyledAddEventButton from "./AddEventButton-styles";
 import Icon from "./../../shared/icon/Icon";
 
-const AddEventButton = () => {
+const AddEventButton = ({ handleClick }) => {
   return (
-    <StyledAddEventButton>
+    <StyledAddEventButton onClick={handleClick}>
       <Icon type="add" color="primary" />
     </StyledAddEventButton>
   );
