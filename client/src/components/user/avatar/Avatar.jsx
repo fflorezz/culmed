@@ -1,7 +1,6 @@
 import React from "react";
 
 import StyledAvatar from "./Avatar-styles";
-import Button from "./../../shared/button/Button";
 
 const user = {
   id: 1,
@@ -19,8 +18,6 @@ const Avatar = ({
   followers = user.followers,
   size,
   column,
-  followingBtn,
-  isFollowing,
   handleClick,
   handleMouseEnter,
   handleMouseLeave,
@@ -48,15 +45,6 @@ const Avatar = ({
               Siguiendo <span>{following && following.length}</span>
             </p>
           </div>
-          {followingBtn && (
-            <Button
-              color="gray"
-              text={isFollowing ? "Siguiendo" : "Seguir"}
-              hoverText={isFollowing ? "Dejar de Seguir" : "Seguir"}
-              size="sm"
-              outline
-            />
-          )}
         </div>
       )}
     </StyledAvatar>
