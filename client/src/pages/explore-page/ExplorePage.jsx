@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { setExploreFilter } from "../../redux/slices/events";
 import { useFetchEvents } from "./../../hooks/useFetchEvents";
-import { filterEventsByTag } from "./../../utilities/filterEventsByTag";
+import { filterEventsById, filterEventsByTag } from "../../utilities/filters";
 
 import ExploreNav from "../../components/shared/nav/ExploreNav";
 import EventsList from "../../components/event/event-list/EventsList";
 import PageContainer from "./../../components/shared/page-container/PageContainer";
-import filterEventsById from "./../../utilities/filterEventsById";
 import NotFoundPage from "./../not-found/NotFoundPage";
 
 import StyledExplorePage from "./ExplorePage-styles";
@@ -28,8 +27,7 @@ const ExplorePage = () => {
     return () => {
       dispatch(setExploreFilter("Todos"));
     };
-    // eslint-disable-next-line
-  }, []);
+  }, [dispatch]);
 
   if (error) {
     return <NotFoundPage />;

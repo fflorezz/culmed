@@ -12,7 +12,7 @@ const StyledModal = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   .closeBtn {
     position: absolute;
-    right: 26rem;
+    right: 2rem;
     top: 1rem;
     opacity: 0.7;
     cursor: pointer;
