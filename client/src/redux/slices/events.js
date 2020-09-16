@@ -37,8 +37,14 @@ const eventsSlice = createSlice({
     event: null,
     error: null,
     loading: false,
+    exploreFilter: "Todos",
   },
-  reducers: {},
+  reducers: {
+    setExploreFilter: (state, { payload }) => {
+      state.exploreFilter = payload;
+      return state;
+    },
+  },
   extraReducers: {
     // FETCH ALL
     [fetchAllEvents.fulfilled]: (state, { payload }) => {
@@ -83,5 +89,7 @@ const eventsSlice = createSlice({
     },
   },
 });
+
+export const setExploreFilter = eventsSlice.actions.setExploreFilter;
 
 export const eventsReducer = eventsSlice.reducer;

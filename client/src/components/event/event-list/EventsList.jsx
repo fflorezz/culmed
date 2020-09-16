@@ -4,6 +4,10 @@ import EventCard from "../event-card/EventCard";
 import CardImage from "./../event-card/CardImage";
 
 const EventsList = ({ events, avatar }) => {
+  if (events.length === 0) {
+    return <h4>No hay eventos</h4>;
+  }
+
   return (
     <GridContainer>
       {events.map(event => (

@@ -1,30 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
+import { setExploreFilter } from "../../redux/slices/events";
 import { useFetchEvents } from "./../../hooks/useFetchEvents";
+import { filterEventsByTag } from "./../../utilities/filterEventsByTag";
 
 import ExploreNav from "../../components/shared/nav/ExploreNav";
-import StyledExplorePage from "./ExplorePage-styles";
 import EventsList from "../../components/event/event-list/EventsList";
 import PageContainer from "./../../components/shared/page-container/PageContainer";
-import filterEvents from "./../../utilities/filterEvents";
-import { useSelector } from "react-redux";
+import filterEventsById from "./../../utilities/filterEventsById";
+import NotFoundPage from "./../not-found/NotFoundPage";
+
+import StyledExplorePage from "./ExplorePage-styles";
 
 const ExplorePage = () => {
   const { events, loading, error } = useFetchEvents();
-  const userId = useSelector(state => state.session.id);
-  let exploreEvents = events;
 
-  if (userId) {
-    exploreEvents = filterEvents({
-      events,
-      property: "authorId",
-      value: userId,
-      equal: false,
-    });
-  }
+  const filterOption = useSelector(state => state.events.exploreFilter);
+  const userId = useSelector(state => state.session.id);
+  const dispatch = useDispatch();
+
+  const exploreEvents = userId ? filterEventsById(events, userId) : events;
+  const filteredEvents = filterEventsByTag(exploreEvents, filterOption);
+
+  // RESET FILTER
+  useEffect(() => {
+    return () => {
+      dispatch(setExploreFilter("Todos"));
+    };
+    // eslint-disable-next-line
+  }, []);
 
   if (error) {
-    return <h4>{error.message}</h4>;
+    return <NotFoundPage />;
   }
 
   return (
@@ -34,7 +42,7 @@ const ExplorePage = () => {
         {loading ? (
           <h4>Loading...</h4>
         ) : (
-          <EventsList events={exploreEvents} avatar />
+          <EventsList events={filteredEvents} avatar />
         )}
       </PageContainer>
     </StyledExplorePage>

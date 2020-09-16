@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import StyledFilter from "./FilterDrop-styles";
 import Icon from "./../icon/Icon";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setExploreFilter } from "../../../redux/slices/events";
 
 const mockOptions = [
   { id: 0, name: "Todos" },
@@ -16,6 +18,7 @@ const mockOptions = [
 const FilterDrop = ({ options = mockOptions }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [optionSelected, setOption] = useState("Todos");
+  const dispatch = useDispatch();
 
   function toggleFilter() {
     setIsOpen(!isOpen);
@@ -23,6 +26,7 @@ const FilterDrop = ({ options = mockOptions }) => {
 
   function selectOption(option) {
     setOption(option);
+    dispatch(setExploreFilter(option));
     toggleFilter();
   }
   return (
