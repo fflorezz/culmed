@@ -5,6 +5,7 @@ import CardImage from "./../../event/event-card/CardImage";
 import { getUserData } from "../../../API/user";
 import { getEventsByAuthor } from "../../../API/events";
 import { Link } from "react-router-dom";
+import FollowingButton from "../../shared/button/FollowingButton";
 
 const ProfileRow = ({ id, isFollowing, isOwnProfile }) => {
   const [user, setUser] = useState({});
@@ -31,10 +32,9 @@ const ProfileRow = ({ id, isFollowing, isOwnProfile }) => {
             size="lg"
             column
             text
-            followingBtn={!isOwnProfile}
-            isFollowing={isFollowing}
           />
         </Link>
+        {isOwnProfile ? null : <FollowingButton isFollowing={isFollowing} />}
       </div>
       <div className="row-events">
         {events.map(({ img, date, title, id }, idx) =>

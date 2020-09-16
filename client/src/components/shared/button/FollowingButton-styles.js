@@ -2,7 +2,7 @@ import styled from "styled-components";
 import * as styles from "../../../global-styles";
 
 const StyledFollowingButton = styled.button`
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50px;

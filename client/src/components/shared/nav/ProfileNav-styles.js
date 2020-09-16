@@ -8,8 +8,37 @@ const StyledProfileNav = styled.nav`
   display: flex;
   flex-direction: column;
   padding-bottom: 0.5rem;
-  .profile-avatar {
+  .profile {
     margin-top: 2rem;
+    display: flex;
+    .userInfo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .name {
+        font: ${styles.avatar.lg.name};
+        color: ${styles.colors.black};
+        margin-bottom: 0.5rem;
+        margin-left: 0.5rem;
+      }
+      .follow {
+        margin-left: 0.5rem;
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        color: ${styles.colorsDark.gray};
+        span {
+          font-weight: 700;
+        }
+        .spacer {
+          width: 0.5rem;
+          height: 0.5rem;
+          border-radius: 50%;
+          margin: 0 0.5rem;
+          background-color: ${styles.colorsDark.gray};
+        }
+      }
+    }
   }
   ul {
     display: flex;

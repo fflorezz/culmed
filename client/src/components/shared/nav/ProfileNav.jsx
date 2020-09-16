@@ -5,6 +5,7 @@ import * as styles from "../../../global-styles";
 
 import StyledProfileNav from "./ProfileNav-styles";
 import Avatar from "../../user/avatar/Avatar";
+import FollowingButton from "./../button/FollowingButton";
 
 const linkActiveStyle = {
   backgroundColor: styles.colors.complementary,
@@ -16,17 +17,31 @@ const ProfileNav = ({ user, isOwnProfile, isFollowing }) => {
 
   return (
     <StyledProfileNav>
-      <div className="profile-avatar">
+      <div className="profile">
         <Avatar
           src={avatarImg}
           name={userName}
           following={following}
           followers={followers}
           size="lg"
-          text
-          followingBtn={!isOwnProfile}
-          isFollowing={isFollowing}
         />
+        <div className="userInfo">
+          <p className="name">{userName}</p>
+          <div className="follow">
+            <p className="followers">
+              Seguidores <span>{followers && followers.length}</span>
+            </p>
+            <div className="spacer"></div>
+            <p className="following">
+              Siguiendo <span>{following && following.length}</span>
+            </p>
+          </div>
+          {isOwnProfile ? null : (
+            <div className="followingBtn">
+              <FollowingButton isFollowing={isFollowing} />
+            </div>
+          )}
+        </div>
       </div>
       <ul>
         <li>
