@@ -17,6 +17,7 @@ const StyledProfileNav = styled.nav`
       justify-content: center;
       .name {
         font: ${styles.avatar.lg.name};
+        font-size: 3rem;
         color: ${styles.colors.black};
         margin-bottom: 0.5rem;
         margin-left: 0.5rem;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledProfileRow = styled.div`
+const StyledProfileRow = styled.li`
   display: inline-flex;
   align-items: center;
   margin: 0 auto;

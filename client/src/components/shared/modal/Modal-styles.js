@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import StyledIcon from "./../icon/Icon-styles";
 
 const StyledModal = styled.div`
   z-index: 999;
@@ -11,12 +10,15 @@ const StyledModal = styled.div`
   overflow-y: scroll;
   background: rgba(0, 0, 0, 0.8);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  ${StyledIcon} {
+  .closeBtn {
     position: absolute;
     right: 26rem;
     top: 1rem;
     opacity: 0.7;
     cursor: pointer;
+    &:hover {
+      opacity: 1;
+    }
   }
 `;
 

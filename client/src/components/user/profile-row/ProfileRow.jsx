@@ -36,13 +36,15 @@ const ProfileRow = ({ id, isFollowing, isOwnProfile }) => {
         </Link>
         {isOwnProfile ? null : <FollowingButton isFollowing={isFollowing} />}
       </div>
-      <div className="row-events">
+      <ul className="row-events">
         {events.map(({ img, date, title, id }, idx) =>
           idx > 3 ? null : (
-            <CardImage key={id} img={img} title={title} id={id} date={date} />
+            <li key={id}>
+              <CardImage img={img} title={title} id={id} date={date} />
+            </li>
           )
         )}
-      </div>
+      </ul>
     </StyledProfileRow>
   );
 };
