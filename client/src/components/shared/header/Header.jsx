@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useRouteMatch, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Logo from "./../logo/Logo";

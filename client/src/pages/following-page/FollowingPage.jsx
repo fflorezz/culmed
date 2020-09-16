@@ -1,12 +1,12 @@
 import React from "react";
-import StyledFollowingPage from "./FollowingPage-styles";
 import FollowingList from "./../../components/user/following-list/FollowingList";
+import PageContainer from "./../../components/shared/page-container/PageContainer";
 
 const FollowingPage = () => {
   return (
-    <StyledFollowingPage>
+    <PageContainer>
       <FollowingList />
-    </StyledFollowingPage>
+    </PageContainer>
   );
 };
 

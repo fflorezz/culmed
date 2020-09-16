@@ -27,15 +27,13 @@ const CalendarPage = () => {
   }
 
   return (
-    <>
-      <PageContainer>
-        {loading ? (
-          <h4>Loading</h4>
-        ) : (
-          <EventsList events={calendarEvents} avatar />
-        )}
-      </PageContainer>
-    </>
+    <PageContainer>
+      {loading ? (
+        <h4>Loading</h4>
+      ) : (
+        <EventsList events={calendarEvents} avatar />
+      )}
+    </PageContainer>
   );
 };
 

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import StyledEventsPage from "./EventPage-styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { fetchEventsByAuthor } from "../../redux/slices/events";
@@ -25,11 +24,9 @@ const EventsPage = () => {
   }
 
   return (
-    <StyledEventsPage>
-      <PageContainer>
-        <EventsList events={events} />
-      </PageContainer>
-    </StyledEventsPage>
+    <PageContainer>
+      <EventsList events={events} />
+    </PageContainer>
   );
 };
 

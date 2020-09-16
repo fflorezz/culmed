@@ -18,9 +18,11 @@ const userSlice = createSlice({
     calendar: [],
     following: [],
     followers: [],
+    followingList: [],
   },
   reducers: {},
   extraReducers: {
+    // FETCH USER BY ID
     [fetchUserById.fulfilled]: (state, { payload }) => {
       state = { ...state, ...payload };
       state.error = null;
