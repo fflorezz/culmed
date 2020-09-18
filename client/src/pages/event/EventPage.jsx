@@ -5,7 +5,6 @@ import { fetchEventById } from "./../../redux/slices/events";
 
 import Modal from "./../../components/shared/modal/Modal";
 import Event from "./../../components/event/event/Event";
-import NotFoundPage from "./../not-found/NotFoundPage";
 import {
   addEventToCalendar,
   removeEventFromCalendar,
@@ -41,7 +40,7 @@ const EventPage = () => {
     setRemoved(true);
   }
 
-  // REFRESH HISTORY
+  // RELOAD LAST HISTORY LOCATION
   useEffect(() => {
     if (removed) {
       return () => {
@@ -51,7 +50,7 @@ const EventPage = () => {
   }, [removed]);
 
   if (error) {
-    return <NotFoundPage />;
+    return history.push("404");
   }
 
   if (!event) {

@@ -7,7 +7,11 @@ import NotFoundPage from "./../not-found/NotFoundPage";
 
 const CalendarPage = () => {
   const { events, loading, error } = useFetchEvents();
-  const calendarIds = useSelector(state => state.user.calendar);
+  const session = useSelector(state => state.session);
+  const user = useSelector(state => state.user);
+  const calendarIds = useSelector(state =>
+    session.id === user.id ? state.session.calendar : state.user.calendar
+  );
   const calendarEvents = events.filter(event => calendarIds.includes(event.id));
 
   if (error) {
