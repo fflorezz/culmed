@@ -6,6 +6,7 @@ import { fetchEventById } from "./../../redux/slices/events";
 import Modal from "./../../components/shared/modal/Modal";
 import Event from "./../../components/event/event/Event";
 import NotFoundPage from "./../not-found/NotFoundPage";
+import { addEventToCalendar } from "../../redux/slices/session.js";
 
 const EventPage = () => {
   const history = useHistory();
@@ -21,6 +22,9 @@ const EventPage = () => {
 
   function addEventHandler() {
     console.log("Added event with id: ", event.id, isCalendarEvent);
+    dispatch(
+      addEventToCalendar({ userId: session.id, eventId: parseInt(eventId) })
+    );
   }
 
   function removeEventHandler() {
