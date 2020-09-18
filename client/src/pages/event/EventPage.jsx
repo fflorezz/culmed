@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEventById } from "./../../redux/slices/events";
@@ -6,7 +6,10 @@ import { fetchEventById } from "./../../redux/slices/events";
 import Modal from "./../../components/shared/modal/Modal";
 import Event from "./../../components/event/event/Event";
 import NotFoundPage from "./../not-found/NotFoundPage";
-import { addEventToCalendar } from "../../redux/slices/session.js";
+import {
+  addEventToCalendar,
+  removeEventFromCalendar,
+} from "../../redux/slices/session.js";
 
 const EventPage = () => {
   const history = useHistory();
@@ -15,21 +18,36 @@ const EventPage = () => {
   const { event, error, loading } = useSelector(state => state.events);
   const session = useSelector(state => state.session);
   const isCalendarEvent = session.calendar.includes(parseInt(eventId));
+  const [removed, setRemoved] = useState(false);
 
   useEffect(() => {
     dispatch(fetchEventById(eventId));
   }, [eventId, dispatch]);
 
   function addEventHandler() {
-    console.log("Added event with id: ", event.id, isCalendarEvent);
     dispatch(
       addEventToCalendar({ userId: session.id, eventId: parseInt(eventId) })
     );
   }
 
   function removeEventHandler() {
-    console.log("Removed event with id: ", event.id);
+    dispatch(
+      removeEventFromCalendar({
+        userId: session.id,
+        eventId: parseInt(eventId),
+      })
+    );
+    setRemoved(true);
   }
+
+  // REFRESH HISTORY
+  useEffect(() => {
+    if (removed) {
+      return () => {
+        history.go(0);
+      };
+    } // eslint-disable-next-line
+  }, [removed]);
 
   if (error) {
     return <NotFoundPage />;
@@ -38,6 +56,7 @@ const EventPage = () => {
   if (!event) {
     return null;
   }
+
   return (
     <Modal handleClick={history.goBack}>
       {loading ? (

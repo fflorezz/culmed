@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addEvent, getUserData } from "../../API/user";
+import { addEvent, getUserData, removeEvent } from "../../API/user";
 
 export const fetchUserData = createAsyncThunk(
   "user/fetchUserDataStatus",
@@ -8,10 +8,19 @@ export const fetchUserData = createAsyncThunk(
     return userData;
   }
 );
+
 export const addEventToCalendar = createAsyncThunk(
   "user/addEventToCalendarStatus",
   async ({ userId, eventId }) => {
     const response = await addEvent(userId, eventId);
+    return response;
+  }
+);
+
+export const removeEventFromCalendar = createAsyncThunk(
+  "user/removeEventFromCalendarStatus",
+  async ({ userId, eventId }) => {
+    const response = await removeEvent(userId, eventId);
     return response;
   }
 );
@@ -55,6 +64,21 @@ const sessionSlice = createSlice({
       state.loading = false;
     },
     [addEventToCalendar.pending]: state => {
+      state.loading = true;
+    },
+
+    // REMOVE EVENT FROM CALENDAR
+    [removeEventFromCalendar.fulfilled]: (state, { payload }) => {
+      state = { ...state, ...payload };
+      state.error = null;
+      state.loading = false;
+      return state;
+    },
+    [removeEventFromCalendar.rejected]: (state, action) => {
+      state.error = action.error;
+      state.loading = false;
+    },
+    [removeEventFromCalendar.pending]: state => {
       state.loading = true;
     },
   },
