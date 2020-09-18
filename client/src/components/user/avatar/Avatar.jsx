@@ -2,20 +2,11 @@ import React from "react";
 
 import StyledAvatar from "./Avatar-styles";
 
-const user = {
-  id: 1,
-  img:
-    "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  name: "Jhon Doe",
-  following: 120,
-  followers: [1, 2, 3, 4],
-};
-
 const Avatar = ({
-  src = user.img,
-  name = user.name,
-  following = user.following,
-  followers = user.followers,
+  src,
+  name,
+  following,
+  followers,
   size,
   column,
   handleClick,

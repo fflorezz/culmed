@@ -12,3 +12,12 @@ export const mockEvent = {
   views: 127,
   participants: 42,
 };
+
+const user = {
+  id: 1,
+  img:
+    "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  name: "Jhon Doe",
+  following: 120,
+  followers: [1, 2, 3, 4],
+};

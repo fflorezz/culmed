@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useHistory, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEventById } from "./../../redux/slices/events";
@@ -18,7 +18,6 @@ const EventPage = () => {
   const session = useSelector(state => state.session);
   const isCalendarEvent = session.calendar.includes(parseInt(eventId));
   const isOwnEvent = session.events.includes(parseInt(eventId));
-  const [removed, setRemoved] = useState(false);
 
   useEffect(() => {
     dispatch(fetchEventById(eventId));
@@ -37,17 +36,7 @@ const EventPage = () => {
         eventId: parseInt(eventId),
       })
     );
-    setRemoved(true);
   }
-
-  // RELOAD LAST HISTORY LOCATION
-  useEffect(() => {
-    if (removed) {
-      return () => {
-        history.go(0);
-      };
-    } // eslint-disable-next-line
-  }, [removed]);
 
   if (error) {
     return history.push("404");
