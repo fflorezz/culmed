@@ -14,6 +14,7 @@ import { ReactComponent as ViewsSVG } from "../../../assets/svg/icon views.svg";
 import { ReactComponent as ArrowSVG } from "../../../assets/svg/icon arrow.svg";
 import { ReactComponent as LocationSVG } from "../../../assets/svg/icon location.svg";
 import { ReactComponent as CloseSVG } from "../../../assets/svg/icon close.svg";
+import { ReactComponent as CheckSVG } from "../../../assets/svg/icon check.svg";
 
 const Icon = ({ size, type, color }) => {
   const svgs = {
@@ -29,6 +30,7 @@ const Icon = ({ size, type, color }) => {
     arrow: <ArrowSVG />,
     location: <LocationSVG />,
     close: <CloseSVG />,
+    check: <CheckSVG />,
   };
   return (
     <StyledIcon size={size} color={color}>

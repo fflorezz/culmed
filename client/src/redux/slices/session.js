@@ -16,6 +16,8 @@ const sessionSlice = createSlice({
     loading: false,
     error: null,
     events: [],
+    calendar: [],
+    following: [],
   },
   reducers: {},
   extraReducers: {

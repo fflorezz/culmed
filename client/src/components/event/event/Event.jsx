@@ -10,12 +10,15 @@ import AddEventButton from "./../add-event-button/AddEventButton";
 
 import StyledEvent from "./Event-styles";
 
-const Event = ({ event, addEventHandler }) => {
+const Event = ({ event, addEventHandler, isCalendarEvent }) => {
   return (
     <StyledEvent onClick={e => e.stopPropagation()}>
       <div className="event-body">
         <h4>{event.title}</h4>
-        <AddEventButton handleClick={addEventHandler} />
+        <AddEventButton
+          handleClick={addEventHandler}
+          isCalendarEvent={isCalendarEvent}
+        />
         <p className="date">{event.date}</p>
         <p className="time">{event.time}</p>
         <p className="location">{event.location}</p>
