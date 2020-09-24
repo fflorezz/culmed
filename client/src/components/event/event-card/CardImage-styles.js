@@ -44,7 +44,7 @@ const StyledImage = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 0.8rem;
+    border-radius: 0.5rem;
   }
   .date-tag {
     opacity: 1;

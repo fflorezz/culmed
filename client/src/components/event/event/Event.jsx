@@ -4,8 +4,6 @@ import Icon from "./../../shared/icon/Icon";
 import Avatar from "./../../user/avatar/Avatar";
 import ViewsAndParticipants from "./../../shared/views-and-participants/ViewsAndParticipants";
 import Tags from "../tags/Tags";
-import Comment from "../comment/Comment";
-import CommentField from "../comment-field/CommentField";
 import AddEventButton from "./../add-event-button/AddEventButton";
 
 import StyledEvent from "./Event-styles";
@@ -40,8 +38,6 @@ const Event = ({ event, addEventHandler, isCalendarEvent, isOwnEvent }) => {
         </div>
         <p className="description">{event.description}</p>
         <Tags tags={event.tags} />
-        <Comment />
-        <CommentField />
       </div>
     </StyledEvent>
   );

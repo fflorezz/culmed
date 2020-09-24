@@ -67,6 +67,15 @@ const StyledCreateEventForm = styled.div`
         margin-right: 1rem;
       }
     }
+    .alert-text {
+      font: ${styles.font.psm};
+      color: ${styles.colorsDark.primary};
+      margin-bottom: 1.5rem;
+    }
+    .error {
+      outline-color: ${styles.colorsDark.primary};
+      border-color: ${styles.colorsDark.primary};
+    }
   }
 `;
 
