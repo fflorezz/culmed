@@ -33,6 +33,14 @@ export const followUser = createAsyncThunk(
   }
 );
 
+export const unfollowUser = createAsyncThunk(
+  "session/unfollowUserStatus",
+  async ({ userId, followId }) => {
+    const response = await API.unfollowUser(userId, followId);
+    return response;
+  }
+);
+
 const sessionSlice = createSlice({
   name: "session",
   initialState: {
@@ -102,6 +110,21 @@ const sessionSlice = createSlice({
       state.loading = false;
     },
     [followUser.pending]: state => {
+      state.loading = true;
+    },
+
+    // UNFOLLOW USER
+    [unfollowUser.fulfilled]: (state, { payload }) => {
+      state = { ...state, ...payload };
+      state.error = null;
+      state.loading = false;
+      return state;
+    },
+    [unfollowUser.rejected]: (state, action) => {
+      state.error = action.error;
+      state.loading = false;
+    },
+    [unfollowUser.pending]: state => {
       state.loading = true;
     },
   },

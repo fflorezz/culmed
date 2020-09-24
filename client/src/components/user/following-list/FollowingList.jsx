@@ -4,8 +4,10 @@ import ProfileRow from "./../profile-row/ProfileRow";
 import { useSelector } from "react-redux";
 
 const FollowingList = () => {
-  const followingIds = useSelector(state => state.user.following);
+  const user = useSelector(state => state.user);
   const session = useSelector(state => state.session);
+  const followingIds =
+    session.id === user.id ? session.following : user.following;
 
   if (followingIds.length === 0) {
     return <h4>No esta siguiendo</h4>;
