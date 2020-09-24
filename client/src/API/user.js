@@ -36,3 +36,31 @@ export async function removeEvent(userId, eventId) {
     throw new Error(error.message);
   }
 }
+
+export async function followUser(userId, followId) {
+  try {
+    const user = await getUserData(userId);
+    user.following.push(followId);
+    const response = await axios.put(
+      `http://localhost:5000/users/${userId}`,
+      user
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+export async function unfollowUser(userId, followId) {
+  try {
+    const user = await getUserData(userId);
+    user.following = user.following.filter(id => id !== followId);
+    const response = await axios.put(
+      `http://localhost:5000/users/${userId}`,
+      user
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}

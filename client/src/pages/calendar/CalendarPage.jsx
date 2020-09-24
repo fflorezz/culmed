@@ -9,9 +9,7 @@ const CalendarPage = () => {
   const { events, loading, error } = useFetchEvents();
   const session = useSelector(state => state.session);
   const user = useSelector(state => state.user);
-  const calendarIds = useSelector(state =>
-    session.id === user.id ? state.session.calendar : state.user.calendar
-  );
+  const calendarIds = session.id === user.id ? session.calendar : user.calendar;
   const calendarEvents = events.filter(event => calendarIds.includes(event.id));
 
   if (error) {

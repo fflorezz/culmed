@@ -10,8 +10,6 @@ import EventsList from "../../components/event/event-list/EventsList";
 import PageContainer from "./../../components/shared/page-container/PageContainer";
 import NotFoundPage from "./../not-found/NotFoundPage";
 
-import StyledExplorePage from "./ExplorePage-styles";
-
 const ExplorePage = () => {
   const { events, loading, error } = useFetchEvents();
 
@@ -29,12 +27,23 @@ const ExplorePage = () => {
     };
   }, [dispatch]);
 
+  if (!loading && filteredEvents.length === 0) {
+    return (
+      <>
+        <ExploreNav />
+        <PageContainer>
+          <h4>No hay eventos</h4>
+        </PageContainer>
+      </>
+    );
+  }
+
   if (error) {
     return <NotFoundPage />;
   }
 
   return (
-    <StyledExplorePage>
+    <>
       <ExploreNav />
       <PageContainer>
         {loading ? (
@@ -43,7 +52,7 @@ const ExplorePage = () => {
           <EventsList events={filteredEvents} avatar />
         )}
       </PageContainer>
-    </StyledExplorePage>
+    </>
   );
 };
 

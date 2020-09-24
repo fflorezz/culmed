@@ -1,26 +1,34 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addEvent, getUserData, removeEvent } from "../../API/user";
+import * as API from "../../API/user";
 
 export const fetchUserData = createAsyncThunk(
-  "user/fetchUserDataStatus",
+  "session/fetchUserDataStatus",
   async userId => {
-    const userData = await getUserData(userId);
+    const userData = await API.getUserData(userId);
     return userData;
   }
 );
 
 export const addEventToCalendar = createAsyncThunk(
-  "user/addEventToCalendarStatus",
+  "session/addEventToCalendarStatus",
   async ({ userId, eventId }) => {
-    const response = await addEvent(userId, eventId);
+    const response = await API.addEvent(userId, eventId);
     return response;
   }
 );
 
 export const removeEventFromCalendar = createAsyncThunk(
-  "user/removeEventFromCalendarStatus",
+  "session/removeEventFromCalendarStatus",
   async ({ userId, eventId }) => {
-    const response = await removeEvent(userId, eventId);
+    const response = await API.removeEvent(userId, eventId);
+    return response;
+  }
+);
+
+export const followUser = createAsyncThunk(
+  "session/followUserStatus",
+  async ({ userId, followId }) => {
+    const response = await API.followUser(userId, followId);
     return response;
   }
 );
@@ -79,6 +87,21 @@ const sessionSlice = createSlice({
       state.loading = false;
     },
     [removeEventFromCalendar.pending]: state => {
+      state.loading = true;
+    },
+
+    // FOLLOW USER
+    [followUser.fulfilled]: (state, { payload }) => {
+      state = { ...state, ...payload };
+      state.error = null;
+      state.loading = false;
+      return state;
+    },
+    [followUser.rejected]: (state, action) => {
+      state.error = action.error;
+      state.loading = false;
+    },
+    [followUser.pending]: state => {
       state.loading = true;
     },
   },

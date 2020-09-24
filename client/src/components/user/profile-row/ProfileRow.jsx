@@ -34,7 +34,9 @@ const ProfileRow = ({ id, isFollowing, isOwnProfile }) => {
             text
           />
         </Link>
-        {isOwnProfile ? null : <FollowingButton isFollowing={isFollowing} />}
+        {isOwnProfile ? null : (
+          <FollowingButton isFollowing={isFollowing} followId={id} />
+        )}
       </div>
       <ul className="row-events">
         {events.map(({ img, date, title, id }, idx) =>
