@@ -41,11 +41,17 @@ export async function followUser(userId, followId) {
   try {
     const user = await getUserData(userId);
     user.following.push(followId);
-    const response = await axios.put(
+    const userResponse = await axios.put(
       `http://localhost:5000/users/${userId}`,
       user
     );
-    return response.data;
+    const followed = await getUserData(followId);
+    followed.followers.push(userId);
+    const followedResponse = await axios.put(
+      `http://localhost:5000/users/${followId}`,
+      followed
+    );
+    return userResponse.data;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -55,11 +61,17 @@ export async function unfollowUser(userId, followId) {
   try {
     const user = await getUserData(userId);
     user.following = user.following.filter(id => id !== followId);
-    const response = await axios.put(
+    const userResponse = await axios.put(
       `http://localhost:5000/users/${userId}`,
       user
     );
-    return response.data;
+    const followed = await getUserData(followId);
+    followed.followers = followed.followers.filter(id => id !== userId);
+    const followedResponse = await axios.put(
+      `http://localhost:5000/users/${followId}`,
+      followed
+    );
+    return userResponse.data;
   } catch (error) {
     throw new Error(error.message);
   }
