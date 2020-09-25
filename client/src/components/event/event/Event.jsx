@@ -37,7 +37,7 @@ const Event = ({ event, addEventHandler, isCalendarEvent, isOwnEvent }) => {
           <ViewsAndParticipants />
         </div>
         <p className="description">{event.description}</p>
-        <Tags tags={event.tags} />
+        <Tags category={event.category} />
       </div>
     </StyledEvent>
   );

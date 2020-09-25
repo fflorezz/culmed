@@ -39,7 +39,6 @@ const FollowingButton = ({ isFollowing, followId }) => {
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
     >
-      {console.log(isFollowing)}
       {buttonText}
     </StyledFollowingButton>
   );

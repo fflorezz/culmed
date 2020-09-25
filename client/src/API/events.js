@@ -28,3 +28,12 @@ export async function getEventById(eventId) {
     throw new Error(error.message);
   }
 }
+
+export async function createEvent(event) {
+  try {
+    const response = await axios.post(`http://localhost:5000/events`, event);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}

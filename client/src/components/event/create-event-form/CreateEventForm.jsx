@@ -5,13 +5,24 @@ import { useForm } from "react-hook-form";
 import StyledCreateEventForm from "./CreateEventForm-styles";
 import Button from "./../../shared/button/Button";
 import ImageUpload from "./../image-upload/ImageUpload.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { createEvent } from "../../../redux/slices/events";
 
 const CreateEventForm = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const session = useSelector(state => state.session);
+  const { loading, error } = useSelector(state => state.events);
   const { register, handleSubmit, errors } = useForm();
 
   function onSubmit(data) {
-    console.log(data);
+    const event = {
+      ...data,
+      authorId: session.id,
+      authorName: session.name,
+      authorImg: session.avatarImg,
+    };
+    dispatch(createEvent(event));
   }
 
   function goBack(e) {
@@ -88,13 +99,13 @@ const CreateEventForm = () => {
           )}
           <div className="group">
             <div className="field">
-              <label htmlFor="tags">Etiquetas</label>
-              <select name="tags" id="tags" ref={register}>
+              <label htmlFor="category">Categoría</label>
+              <select name="category" id="category" ref={register}>
                 <option value="">Ninguna</option>
-                <option value="theater">Teatro</option>
-                <option value="dance">Danza</option>
-                <option value="film">Cine</option>
-                <option value="music">Música</option>
+                <option value="teatro">Teatro</option>
+                <option value="danza">Danza</option>
+                <option value="cine">Cine</option>
+                <option value="música">Música</option>
               </select>
             </div>
             <div className="field">

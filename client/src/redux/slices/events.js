@@ -1,31 +1,35 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  getAllEvents,
-  getEventById,
-  getEventsByAuthor,
-} from "../../API/events";
+import * as API from "../../API/events";
 
 export const fetchAllEvents = createAsyncThunk(
-  "user/fetchAllEventsStatus",
+  "events/fetchAllEventsStatus",
   async () => {
-    const events = await getAllEvents();
+    const events = await API.getAllEvents();
     return events;
   }
 );
 
 export const fetchEventsByAuthor = createAsyncThunk(
-  "user/fetchEventsByAuthorStatus",
+  "events/fetchEventsByAuthorStatus",
   async userId => {
-    const events = await getEventsByAuthor(userId);
+    const events = await API.getEventsByAuthor(userId);
     return events;
   }
 );
 
 export const fetchEventById = createAsyncThunk(
-  "user/fetchEventByIdStatus",
+  "events/fetchEventByIdStatus",
   async eventId => {
-    const eventData = await getEventById(eventId);
+    const eventData = await API.getEventById(eventId);
     return eventData;
+  }
+);
+
+export const createEvent = createAsyncThunk(
+  "events/createEventStatus",
+  async event => {
+    const response = await API.createEvent(event);
+    return response.status;
   }
 );
 
@@ -85,6 +89,19 @@ const eventsSlice = createSlice({
       state.loading = false;
     },
     [fetchEventById.pending]: state => {
+      state.loading = true;
+    },
+
+    // CREATE EVENT
+    [createEvent.fulfilled]: (state, { payload }) => {
+      state.error = null;
+      state.loading = false;
+    },
+    [createEvent.rejected]: (state, action) => {
+      state.error = action.error;
+      state.loading = false;
+    },
+    [createEvent.pending]: state => {
       state.loading = true;
     },
   },
