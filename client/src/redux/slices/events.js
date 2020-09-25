@@ -42,11 +42,15 @@ const eventsSlice = createSlice({
     error: null,
     loading: false,
     exploreFilter: "Todos",
+    eventCreated: false,
   },
   reducers: {
     setExploreFilter: (state, { payload }) => {
       state.exploreFilter = payload;
       return state;
+    },
+    clearEventCreated: (state, action) => {
+      state.eventCreated = false;
     },
   },
   extraReducers: {
@@ -94,10 +98,12 @@ const eventsSlice = createSlice({
 
     // CREATE EVENT
     [createEvent.fulfilled]: (state, { payload }) => {
+      state.eventCreated = true;
       state.error = null;
       state.loading = false;
     },
     [createEvent.rejected]: (state, action) => {
+      state.eventCreated = false;
       state.error = action.error;
       state.loading = false;
     },
@@ -107,6 +113,6 @@ const eventsSlice = createSlice({
   },
 });
 
-export const setExploreFilter = eventsSlice.actions.setExploreFilter;
+export const { setExploreFilter, clearEventCreated } = eventsSlice.actions;
 
 export const eventsReducer = eventsSlice.reducer;

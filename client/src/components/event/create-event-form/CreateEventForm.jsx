@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import { useForm } from "react-hook-form";
 
@@ -6,23 +6,50 @@ import StyledCreateEventForm from "./CreateEventForm-styles";
 import Button from "./../../shared/button/Button";
 import ImageUpload from "./../image-upload/ImageUpload.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { createEvent } from "../../../redux/slices/events";
+import { clearEventCreated, createEvent } from "../../../redux/slices/events";
+import PageContainer from "./../../shared/page-container/PageContainer";
 
 const CreateEventForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const session = useSelector(state => state.session);
-  const { loading, error } = useSelector(state => state.events);
+  const { loading, error, eventCreated } = useSelector(state => state.events);
   const { register, handleSubmit, errors } = useForm();
 
   function onSubmit(data) {
     const event = {
       ...data,
       authorId: session.id,
-      authorName: session.name,
+      authorName: session.userName,
       authorImg: session.avatarImg,
     };
     dispatch(createEvent(event));
+  }
+
+  useEffect(() => {
+    if (eventCreated) {
+      history.push(`/${session.id}/events`);
+      return () => {
+        dispatch(clearEventCreated());
+      };
+    }
+    // eslint-disable-next-line
+  }, [eventCreated]);
+
+  if (loading) {
+    return (
+      <PageContainer>
+        <h4>Estamos publicando tu evento...</h4>
+      </PageContainer>
+    );
+  }
+
+  if (error) {
+    return (
+      <PageContainer>
+        <h4>Algo salió mal, intentalo más tarde ...</h4>
+      </PageContainer>
+    );
   }
 
   function goBack(e) {
@@ -120,7 +147,9 @@ const CreateEventForm = () => {
             </div>
           </div>
           {errors.price && (
-            <p className="alert-text">El valor debe ser un número</p>
+            <p className="alert-text">
+              El valor debe ser un número sin puntos, ni comas
+            </p>
           )}
           <div className="buttons">
             <Button
