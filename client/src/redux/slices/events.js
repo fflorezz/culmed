@@ -27,8 +27,8 @@ export const fetchEventById = createAsyncThunk(
 
 export const createEvent = createAsyncThunk(
   "events/createEventStatus",
-  async event => {
-    const response = await API.createEvent(event);
+  async ({ event, userId }) => {
+    const response = await API.createEvent(event, userId);
     return response.status;
   }
 );

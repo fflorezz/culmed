@@ -23,7 +23,7 @@ const CreateEventForm = () => {
       authorName: session.userName,
       authorImg: session.avatarImg,
     };
-    dispatch(createEvent(event));
+    dispatch(createEvent({ event, userId: session.id }));
   }
 
   useEffect(() => {
