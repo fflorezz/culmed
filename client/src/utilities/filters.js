@@ -1,8 +1,8 @@
-export function filterEventsByTag(events, tag) {
-  if (tag === "Todos") {
+export function filterEventsByTag(events, category) {
+  if (category === "todos") {
     return events;
   }
-  return events.filter(event => event.tags.includes(tag));
+  return events.filter(event => event.category === category);
 }
 
 export function filterEventsById(events, id) {

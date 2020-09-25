@@ -8,11 +8,11 @@ import { useDispatch } from "react-redux";
 import { setExploreFilter } from "../../../redux/slices/events";
 
 const mockOptions = [
-  { id: 0, name: "Todos" },
-  { id: 1, name: "Cine" },
-  { id: 2, name: "Teatro" },
-  { id: 3, name: "Danza" },
-  { id: 4, name: "Música" },
+  { id: 0, title: "Todos", value: "todos" },
+  { id: 1, title: "Cine", value: "cine" },
+  { id: 2, title: "Teatro", value: "teatro" },
+  { id: 3, title: "Danza", value: "danza" },
+  { id: 4, title: "Música", value: "música" },
 ];
 
 const FilterDrop = ({ options = mockOptions }) => {
@@ -25,8 +25,8 @@ const FilterDrop = ({ options = mockOptions }) => {
   }
 
   function selectOption(option) {
-    setOption(option);
-    dispatch(setExploreFilter(option));
+    setOption(option.title);
+    dispatch(setExploreFilter(option.value));
     toggleFilter();
   }
   return (
@@ -38,8 +38,8 @@ const FilterDrop = ({ options = mockOptions }) => {
       {isOpen && (
         <div className="options">
           {options.map(option => (
-            <p key={option.id} onClick={() => selectOption(option.name)}>
-              {option.name}
+            <p key={option.id} onClick={() => selectOption(option)}>
+              {option.title}
             </p>
           ))}
         </div>

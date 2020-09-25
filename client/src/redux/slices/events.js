@@ -41,7 +41,7 @@ const eventsSlice = createSlice({
     event: null,
     error: null,
     loading: false,
-    exploreFilter: "Todos",
+    exploreFilter: "todos",
     eventCreated: false,
   },
   reducers: {
