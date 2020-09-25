@@ -5,6 +5,7 @@ import Avatar from "./../../user/avatar/Avatar";
 import ViewsAndParticipants from "./../../shared/views-and-participants/ViewsAndParticipants";
 import Tags from "../tags/Tags";
 import AddEventButton from "./../add-event-button/AddEventButton";
+import eventImageDefault from "../../../assets/img/calendar-default.jpg";
 
 import StyledEvent from "./Event-styles";
 
@@ -23,7 +24,7 @@ const Event = ({ event, addEventHandler, isCalendarEvent, isOwnEvent }) => {
         <p className="time">{event.time}</p>
         <p className="location">{event.location}</p>
         <div className="image">
-          <img src={event.img} alt={event.title} />
+          <img src={event.img || eventImageDefault} alt={event.title} />
           <h6 className="price">${event.price}</h6>
           <Icon size="md" type="location" color="white" />
         </div>

@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
+import eventImageDefault from "../../../assets/img/calendar-default.jpg";
 
 import StyledImage from "./CardImage-styles";
 
-const CardImage = ({ img, date, title, id }) => {
+const CardImage = ({ img = eventImageDefault, date, title, id }) => {
   let location = useLocation();
   return (
     <Link

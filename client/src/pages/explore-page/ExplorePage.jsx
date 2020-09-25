@@ -23,7 +23,7 @@ const ExplorePage = () => {
   // RESET FILTER
   useEffect(() => {
     return () => {
-      dispatch(setExploreFilter("Todos"));
+      dispatch(setExploreFilter("todos"));
     };
   }, [dispatch]);
 
