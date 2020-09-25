@@ -31,6 +31,7 @@ const CreateEventForm = () => {
       history.push(`/${session.id}/events`);
       return () => {
         dispatch(clearEventCreated());
+        history.go(0);
       };
     }
     // eslint-disable-next-line
