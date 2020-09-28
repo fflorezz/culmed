@@ -9,6 +9,7 @@ const StyledRegistrationForm = styled.div`
   display: inline-flex;
   flex-direction: column;
   background-color: ${styles.colors.white};
+  position: relative;
   h2 {
     margin-top: 8rem;
     margin-bottom: 4rem;
@@ -26,7 +27,7 @@ const StyledRegistrationForm = styled.div`
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 8rem;
+    margin-bottom: 1rem;
     label {
       font: ${styles.font.p1};
       color: ${styles.colorsDark.gray};
@@ -35,9 +36,12 @@ const StyledRegistrationForm = styled.div`
     input {
       width: 40rem;
       height: 4rem;
+      margin-bottom: 1rem;
+      padding-left: 1rem;
       border: 1px solid ${styles.colorsDark.gray};
       border-radius: 0.9rem;
-      margin-bottom: 1rem;
+      font: ${styles.font.p1};
+      color: ${styles.colors.black};
     }
     ${StyledElement} {
       margin-top: 2rem;
@@ -46,10 +50,21 @@ const StyledRegistrationForm = styled.div`
   .politics {
     font: ${styles.font.psm};
     color: ${styles.colorsDark.gray};
+    position: absolute;
+    bottom: 1rem;
     span {
       color: ${styles.colors.black};
       font-weight: 700;
     }
+  }
+  .alert-text {
+    font: ${styles.font.psm};
+    color: ${styles.colorsDark.primary};
+    margin-bottom: 1.5rem;
+  }
+  .error {
+    outline-color: ${styles.colorsDark.primary};
+    border-color: ${styles.colorsDark.primary};
   }
 `;
 

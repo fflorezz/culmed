@@ -4,6 +4,7 @@ import bgImg from "../../../assets/img/people-at-concert-1105666.jpg";
 
 const StyledLoginPage = styled.div`
   position: absolute;
+  z-index: 999;
   top: 0;
   left: 0;
   bottom: 0;

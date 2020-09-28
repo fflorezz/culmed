@@ -38,6 +38,9 @@ const StyledLoginForm = styled.div`
       border: 1px solid ${styles.colorsDark.gray};
       border-radius: 0.9rem;
       margin-bottom: 1rem;
+      font: ${styles.font.p1};
+      color: ${styles.colors.black};
+      padding-left: 1rem;
     }
     ${StyledElement} {
       margin-top: 2rem;
@@ -50,6 +53,15 @@ const StyledLoginForm = styled.div`
       color: ${styles.colors.black};
       font-weight: 700;
     }
+  }
+  .alert-text {
+    font: ${styles.font.psm};
+    color: ${styles.colorsDark.primary};
+    margin-bottom: 1.5rem;
+  }
+  .error {
+    outline-color: ${styles.colorsDark.primary};
+    border-color: ${styles.colorsDark.primary};
   }
 `;
 

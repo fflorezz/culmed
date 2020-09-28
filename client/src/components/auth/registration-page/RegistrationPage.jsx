@@ -1,4 +1,5 @@
 import React from "react";
+
 import RegistrationForm from "./../registration-form/RegistrationForm";
 import StyledRegistrationPage from "./RegistrationPage-styles";
 
