@@ -6,6 +6,8 @@ import connection from "./db";
 
 import config from "./config";
 
+import usersRouter from "./resources/user/user.router";
+
 const app = express();
 
 app.use(logger("dev"));
@@ -14,8 +16,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(compression());
 app.use(cors());
 
+app.use("/users", usersRouter);
+
 app.get("/", (req, res) => {
-  res.send({ message: "hello" });
+  res.send("<h1>Hello</h1>");
 });
 
 export const start = () => {
