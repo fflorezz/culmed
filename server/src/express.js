@@ -7,6 +7,7 @@ import connection from "./db";
 import config from "./config";
 
 import usersRouter from "./resources/user/user.router";
+import eventsRouter from "./resources/event/event.router";
 
 const app = express();
 
@@ -16,7 +17,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(compression());
 app.use(cors());
 
-app.use("/users", usersRouter);
+app.use("api/users", usersRouter);
+app.use("/api/events", eventsRouter);
 
 app.get("/", (req, res) => {
   res.send("<h1>Hello</h1>");
