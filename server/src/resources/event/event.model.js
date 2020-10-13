@@ -55,7 +55,6 @@ Event.updateById = (id, event, callback) => {
 
   connection.query(QUERY, [updatedEvent, id], (err, results) => {
     if (err) {
-      console.log(err);
       callback(err, null);
       return;
     }
@@ -71,4 +70,48 @@ Event.updateById = (id, event, callback) => {
   });
 };
 
+Event.getAll = callback => {
+  const QUERY = "SELECT * FROM Event";
+
+  connection.query(QUERY, (err, results) => {
+    if (err) {
+      callback(err, null);
+      return;
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
+Event.findById = (id, callback) => {
+  const QUERY = "SELECT * FROM Event WHERE id = ?";
+
+  connection.query(QUERY, id, (err, results) => {
+    if (err) {
+      callback(err, null);
+      return;
+    }
+    if (results.length) {
+      callback(null, results[0]);
+      return;
+    }
+    callback({ kind: "not found" }, null);
+  });
+};
+
+Event.remove = (id, callback) => {
+  const QUERY = "DELETE FROM Event WHERE id = ?";
+
+  connection.query(QUERY, id, (err, results) => {
+    if (err) {
+      callback(err, null);
+      return;
+    }
+    if (results.affectedRows == 0) {
+      callback({ kind: "not found" }, null);
+      return;
+    }
+    callback(null, results);
+  });
+};
 export default Event;
