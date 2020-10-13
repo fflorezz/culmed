@@ -1,4 +1,7 @@
 import connection from "./../../db";
+import { validationResult } from "express-validator";
+
+import Event from "./event.model";
 
 export const getAllEvents = (req, res) => {
   const QUERY = "SELECT * FROM Event";
@@ -12,21 +15,22 @@ export const getAllEvents = (req, res) => {
 };
 
 export const createEvent = (req, res) => {
-  const eventObject = req.body.event;
-  const QUERY = "INSERT INTO Event SET ?";
+  const errors = validationResult(req);
 
-  if (!eventObject) {
-    res.status(400).send({
-      message: "Content can not be empty!",
-    });
+  if (!errors.isEmpty()) {
+    return res.status(500).send({ Error: errors.array()[0].msg }).end();
   }
 
-  connection.query(QUERY, eventObject, (err, results) => {
-    console.log("reults:", results);
+  const event = new Event(req.body);
+
+  // PENDING: VALIDATE USER
+
+  Event.create(event, (err, data) => {
     if (err) {
-      return res.status(500).send({ Error: err.message }).end();
+      return res.status(409).send({ Error: err.message }).end();
+    } else {
+      res.status(201).send({ data });
     }
-    res.status(201).send({ data: eventObject });
   });
 };
 
@@ -47,25 +51,27 @@ export const getEvent = (req, res) => {
 };
 
 export const updateEvent = (req, res) => {
-  const eventId = req.params.id;
-  const updatedEvent = req.body.event;
-  const QUERY = `UPDATE Event SET ? WHERE id = "${eventId}"`;
+  const errors = validationResult(req);
 
-  if (!updatedEvent) {
-    return res.status(400).send({
-      message: "Content can not be empty!",
-    });
+  if (!errors.isEmpty()) {
+    return res.status(500).send({ Error: errors.array()[0].msg }).end();
   }
 
-  connection.query(QUERY, updatedEvent, (err, results) => {
+  const eventId = req.params.id;
+
+  Event.updateById(eventId, req.body, (err, data) => {
     if (err) {
-      console.log(err);
-      return res.status(500).end();
-    }
-    if (results.affectedRows) {
-      return res.send({ data: updatedEvent });
+      if (err.kind === "not found") {
+        res.status(404).send({
+          message: `Not found Event with id ${eventId}.`,
+        });
+      } else {
+        res.status(500).send({
+          message: `Error updating Event with id ${eventId}`,
+        });
+      }
     } else {
-      return res.status(404).send({ message: "Couldn't find event" });
+      res.status(200).send({ data });
     }
   });
 };
