@@ -1,9 +1,8 @@
-import connection from "./../../db";
 import { validationResult } from "express-validator";
 
 import Event from "./event.model";
 
-export const getAllEvents = (req, res) => {
+export const getAll = (req, res) => {
   Event.getAll((err, data) => {
     if (err) {
       return res.status(500).send({ Error: err.message }).end();
@@ -12,7 +11,7 @@ export const getAllEvents = (req, res) => {
   });
 };
 
-export const createEvent = (req, res) => {
+export const create = (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -32,7 +31,7 @@ export const createEvent = (req, res) => {
   });
 };
 
-export const getEvent = (req, res) => {
+export const getById = (req, res) => {
   const eventId = req.params.id;
 
   Event.findById(eventId, (err, data) => {
@@ -49,7 +48,24 @@ export const getEvent = (req, res) => {
   });
 };
 
-export const updateEvent = (req, res) => {
+export const getByUserId = (req, res) => {
+  const userId = req.params.userId;
+
+  Event.findByUserId(userId, (err, data) => {
+    if (err) {
+      if (err.kind === "not found") {
+        return res.status(404).send({ message: "Couldn't find Events" });
+      } else {
+        return res.status(500).send({
+          message: `Error retrieving Events`,
+        });
+      }
+    }
+    res.send({ data });
+  });
+};
+
+export const update = (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -77,8 +93,10 @@ export const updateEvent = (req, res) => {
   });
 };
 
-export const deleteEvent = (req, res) => {
+export const remove = (req, res) => {
   const eventId = req.params.id;
+
+  // PENDING: VALIDATE USER
 
   Event.remove(eventId, (err, data) => {
     if (err) {

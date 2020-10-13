@@ -99,6 +99,22 @@ Event.findById = (id, callback) => {
   });
 };
 
+Event.findByUserId = (userId, callback) => {
+  const QUERY = "SELECT * FROM Event WHERE authorId = ?";
+
+  connection.query(QUERY, userId, (err, results) => {
+    if (err) {
+      callback(err, null);
+      return;
+    }
+    if (results.length) {
+      callback(null, results);
+      return;
+    }
+    callback({ kind: "not found" }, null);
+  });
+};
+
 Event.remove = (id, callback) => {
   const QUERY = "DELETE FROM Event WHERE id = ?";
 
@@ -114,4 +130,5 @@ Event.remove = (id, callback) => {
     callback(null, results);
   });
 };
+
 export default Event;
