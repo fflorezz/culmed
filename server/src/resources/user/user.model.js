@@ -1,6 +1,7 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
 
 import sequelize from "./../../db";
+import Event from "./../event/event.model";
 
 class User extends Model {}
 
@@ -35,6 +36,13 @@ User.init(
     freezeTableName: true,
   }
 );
+
+User.hasMany(Event, {
+  foreignKey: "authorId",
+});
+Event.belongsTo(User, {
+  foreignKey: "authorId",
+});
 
 // User.sync().then((rej, res) => {
 //   console.log("The table for the User model was just (re)created!");
@@ -76,4 +84,5 @@ User.init(
 //   console.log(data);
 // });
 
+//console.log(User === sequelize.models.User);
 export default User;

@@ -4,11 +4,13 @@ import User from "./user.model";
 
 export const getAll = async (req, res) => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll({
+      attributes: ["userName", "avatarImg", "id"],
+    });
     res.send({ data: users });
   } catch (err) {
     console.log(err);
-    res.status(500).send({ message: "Something goes wrong" });
+    res.status(500).send({ message: "Something went wrong, Try again later" });
   }
 };
 
@@ -29,7 +31,7 @@ export const getById = async (req, res) => {
     res.send({ data: user[0] });
   } catch (err) {
     console.log(err);
-    res.status(500).send({ message: "Something goes wrong" });
+    res.status(500).send({ message: "Something went wrong, Try again later" });
   }
 };
 
@@ -58,6 +60,6 @@ export const signup = async (req, res) => {
     if (err.errors[0].type === "unique violation") {
       return res.status(400).send({ message: "user exists already" });
     }
-    res.status(500).send({ message: "Something goes wrong" });
+    res.status(500).send({ message: "Something went wrong, Try again later" });
   }
 };

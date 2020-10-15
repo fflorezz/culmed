@@ -10,18 +10,14 @@ import {
 } from "./event.controllers";
 
 const fakeController = (req, res) => {
-  res.send({ message: hello });
+  res.send({ message: "hello" });
 };
 
 const router = express.Router();
 
-router.route("/").get(fakeController).post(fakeController);
+router.route("/").get(getAll).post(create);
 
-router
-  .route("/:id")
-  .get(fakeController)
-  .put(fakeController)
-  .delete(fakeController);
+router.route("/:id").get(getById).put(fakeController).delete(fakeController);
 
 router.get("/user/:userId", fakeController);
 

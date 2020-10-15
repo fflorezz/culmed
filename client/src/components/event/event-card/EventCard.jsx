@@ -13,10 +13,9 @@ const EventCard = ({
   eventImg,
   title,
   date,
-  avatarImg,
-  userName,
   views,
   participants,
+  User: { userName, avatarImg },
 }) => {
   return (
     <>

@@ -36,7 +36,7 @@ Event.init(
       type: DataTypes.STRING,
     },
     authorId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: User,
