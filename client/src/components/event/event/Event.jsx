@@ -24,17 +24,12 @@ const Event = ({ event, addEventHandler, isCalendarEvent, isOwnEvent }) => {
         <p className="time">{event.time}</p>
         <p className="location">{event.location}</p>
         <div className="image">
-          <img src={event.img || eventImageDefault} alt={event.title} />
+          <img src={event.eventImg || eventImageDefault} alt={event.title} />
           <h6 className="price">${event.price}</h6>
           <Icon size="md" type="location" color="white" />
         </div>
         <div className="user-info">
-          <Avatar
-            src={event.authorImg}
-            name={event.authorName}
-            size="sm"
-            text
-          />
+          <Avatar src={event.avatarImg} name={event.userName} size="sm" text />
           <ViewsAndParticipants />
         </div>
         <p className="description">{event.description}</p>

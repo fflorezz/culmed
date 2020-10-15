@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import logger from "morgan";
 import compression from "compression";
-import connection from "./db";
+import sequelize from "./db";
 
 import config from "./config";
 
@@ -24,10 +24,14 @@ app.get("/", (req, res) => {
   res.send("<h1>Hello</h1>");
 });
 
-export const start = () => {
-  connection.connect(() => {
-    console.log("Connected to database");
-  });
+export const start = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log("Database connected");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
+
   app.listen(config.port, () => {
     console.info("Server started on port %s.", config.port);
   });

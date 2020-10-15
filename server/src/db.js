@@ -1,10 +1,8 @@
-import mysql from "mysql";
+import Sequelize from "sequelize";
 
-const connection = mysql.createConnection({
+const sequelize = new Sequelize("culmed2", "root", "password", {
   host: "localhost",
-  user: "root",
-  password: "password",
-  database: "culmed",
+  dialect: "mysql",
 });
 
-export default connection;
+export default sequelize;

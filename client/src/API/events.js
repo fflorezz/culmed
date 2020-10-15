@@ -3,8 +3,10 @@ import { getUserData } from "./user";
 
 export async function getAllEvents() {
   try {
-    const response = await axios(`http://localhost:5000/events/`);
-    return response.data;
+    //const response = await axios(`http://localhost:5000/events/`);
+    const response = await axios(`http://localhost:5000/api/events`);
+    console.log(response.data);
+    return response.data.data;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -23,8 +25,8 @@ export async function getEventsByAuthor(authorId) {
 
 export async function getEventById(eventId) {
   try {
-    const response = await axios(`http://localhost:5000/events/${eventId}`);
-    return response.data;
+    const response = await axios(`http://localhost:5000/api/events/${eventId}`);
+    return response.data.data;
   } catch (error) {
     throw new Error(error.message);
   }

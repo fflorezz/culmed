@@ -10,24 +10,24 @@ import { Link } from "react-router-dom";
 const EventCard = ({
   id,
   authorId,
-  img,
+  eventImg,
   title,
   date,
-  authorImg,
-  authorName,
+  avatarImg,
+  userName,
   views,
   participants,
 }) => {
   return (
     <>
       <StyledCard>
-        <CardImage img={img} date={date} title={title} id={id} />
+        <CardImage img={eventImg} date={date} title={title} id={id} />
         <div className="info">
           <Link to={`/${authorId}`}>
             <Avatar
-              src={authorImg}
+              src={avatarImg}
               userId={authorId}
-              name={authorName}
+              name={userName}
               size="sm"
               text
             />

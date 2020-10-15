@@ -136,3 +136,7 @@ VALUES(
     "https://images.pexels.com/photos/2115217/pexels-photo-2115217.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "segtf45sf"
   );
+SELECT Event.title,
+  User.userName
+FROM Event
+  INNER JOIN User ON Event.authorId = User.id;

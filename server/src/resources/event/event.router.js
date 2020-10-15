@@ -9,12 +9,20 @@ import {
   getByUserId,
 } from "./event.controllers";
 
+const fakeController = (req, res) => {
+  res.send({ message: hello });
+};
+
 const router = express.Router();
 
-router.route("/").get(getAll).post(create);
+router.route("/").get(fakeController).post(fakeController);
 
-router.route("/:id").get(getById).put(update).delete(remove);
+router
+  .route("/:id")
+  .get(fakeController)
+  .put(fakeController)
+  .delete(fakeController);
 
-router.get("/user/:userId", getByUserId);
+router.get("/user/:userId", fakeController);
 
 export default router;
