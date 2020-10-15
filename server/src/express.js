@@ -17,10 +17,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(compression());
 app.use(cors());
 
-app.use("api/users", usersRouter);
+app.use("/api/users", usersRouter);
 app.use("/api/events", eventsRouter);
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("<h1>Hello</h1>");
 });
 
