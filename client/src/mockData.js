@@ -13,7 +13,7 @@ export const mockEvent = {
   participants: 42,
 };
 
-const user = {
+export const user = {
   id: 1,
   img:
     "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
@@ -21,3 +21,12 @@ const user = {
   following: 120,
   followers: [1, 2, 3, 4],
 };
+
+export const mockOptions = [
+  { id: 0, title: "Todos", value: "todos" },
+  { id: 1, title: "Cine", value: "cine" },
+  { id: 2, title: "Teatro", value: "teatro" },
+  { id: 3, title: "Danza", value: "danza" },
+  { id: 4, title: "Música", value: "música" },
+  { id: 5, title: "Tecnología", value: "tecnología" },
+];
