@@ -4,16 +4,15 @@ import EventsList from "./../../components/event/event-list/EventsList";
 import { useSelector, useDispatch } from "react-redux";
 import NotFoundPage from "./../not-found/NotFoundPage";
 import { fetchCalendar } from "../../redux/slices/calendar";
+import { useParams } from "react-router";
 
 const CalendarPage = () => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
+  const { userId } = useParams();
   const { error, loading, events } = useSelector(state => state.calendar);
 
   useEffect(function () {
-    if (user.id) {
-      dispatch(fetchCalendar(user.id));
-    }
+    dispatch(fetchCalendar(userId));
     // eslint-disable-next-line
   }, []);
 

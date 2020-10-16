@@ -1,10 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
+import { getCalendar } from "../../API/calendar";
 import * as API from "../../API/user";
 
 export const fetchUserData = createAsyncThunk(
   "session/fetchUserDataStatus",
   async userId => {
     const userData = await API.getUserData(userId);
+    const calendar = await getCalendar(userId);
+    userData.calendar = calendar.map(event => {
+      return event.id;
+    });
     return userData;
   }
 );
@@ -47,7 +53,7 @@ const sessionSlice = createSlice({
     isLogin: true,
     loading: false,
     error: null,
-    events: [],
+    //events: [],
     calendar: [],
     following: [],
   },

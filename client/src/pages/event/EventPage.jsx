@@ -17,7 +17,6 @@ const EventPage = () => {
   const { event, error, loading } = useSelector(state => state.events);
   const session = useSelector(state => state.session);
   const isCalendarEvent = session.calendar.includes(parseInt(eventId));
-  const isOwnEvent = session.events.includes(parseInt(eventId));
 
   useEffect(() => {
     dispatch(fetchEventById(eventId));
@@ -57,7 +56,7 @@ const EventPage = () => {
             isCalendarEvent ? removeEventHandler : addEventHandler
           }
           isCalendarEvent={isCalendarEvent}
-          isOwnEvent={isOwnEvent}
+          isOwnEvent={event.authorId === session.id}
         />
       )}
     </Modal>
