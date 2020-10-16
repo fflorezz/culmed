@@ -9,6 +9,10 @@ import {
   getByUserId,
 } from "./event.controllers";
 
+const fakeController = (req, res) => {
+  res.send({ message: "hello" });
+};
+
 const router = express.Router();
 
 router.route("/").get(getAll).post(create);
