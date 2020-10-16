@@ -66,7 +66,6 @@ export const create = async (req, res) => {
 
 export const getById = async (req, res) => {
   const eventId = req.params.id;
-
   try {
     const event = await Event.findAll({
       where: {
@@ -87,36 +86,28 @@ export const getById = async (req, res) => {
       message: err.message || "Something went wrong, Try again later",
     });
   }
-
-  Event.findById(eventId, (err, data) => {
-    if (err) {
-      if (err.kind === "not found") {
-        return res.status(404).send({ message: "Couldn't find event" });
-      } else {
-        return res.status(500).send({
-          message: `Error retrieving Event with id ${eventId}`,
-        });
-      }
-    }
-    res.send({ data });
-  });
 };
 
-export const getByUserId = (req, res) => {
+export const getByUserId = async (req, res) => {
   const userId = req.params.userId;
+  try {
+    const events = await Event.findAll({
+      where: {
+        authorId: userId,
+      },
+      include: {
+        model: User,
+        attributes: ["userName", "avatarImg"],
+      },
+    });
 
-  Event.findByUserId(userId, (err, data) => {
-    if (err) {
-      if (err.kind === "not found") {
-        return res.status(404).send({ message: "Couldn't find Events" });
-      } else {
-        return res.status(500).send({
-          message: `Error retrieving Events`,
-        });
-      }
-    }
-    res.send({ data });
-  });
+    res.send({ data: events });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      message: err.message || "Something went wrong, Try again later",
+    });
+  }
 };
 
 export const update = (req, res) => {

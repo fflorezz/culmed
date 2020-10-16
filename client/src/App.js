@@ -12,7 +12,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUserData(3));
+    dispatch(fetchUserData("7541c7bb-e41a-46ab-9f57-bce436b303f4"));
     // eslint-disable-next-line
   }, []);
 

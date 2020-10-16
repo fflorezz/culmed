@@ -51,11 +51,4 @@ Event.init(
   }
 );
 
-// `sequelize.define` also returns the model
-//console.log(Event === sequelize.models.Event); // true
-
-// Event.sync().then((rej, res) => {
-//   console.log("The table for the Event model was just (re)created!");
-// });
-
 export default Event;

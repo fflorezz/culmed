@@ -1,11 +1,8 @@
 import axios from "axios";
-import { getUserData } from "./user";
 
 export async function getAllEvents() {
   try {
-    //const response = await axios(`http://localhost:5000/events/`);
     const response = await axios(`http://localhost:5000/api/events`);
-    console.log(response.data);
     return response.data.data;
   } catch (error) {
     throw new Error(error.message);
@@ -15,9 +12,9 @@ export async function getAllEvents() {
 export async function getEventsByAuthor(authorId) {
   try {
     const response = await axios(
-      `http://localhost:5000/events?authorId=${authorId}`
+      `http://localhost:5000/api/events/user/${authorId}`
     );
-    return response.data;
+    return response.data.data;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -34,12 +31,11 @@ export async function getEventById(eventId) {
 
 export async function createEvent(event, userId) {
   try {
-    const response = await axios.post(`http://localhost:5000/events`, event);
-    const createdEvent = response.data;
-    const user = await getUserData(userId);
-    user.events.push(createdEvent.id);
-    await axios.put(`http://localhost:5000/users/${userId}`, user);
-    return response.data;
+    const response = await axios.post(
+      `http://localhost:5000/api/events`,
+      event
+    );
+    return response.data.data;
   } catch (error) {
     throw new Error(error.message);
   }

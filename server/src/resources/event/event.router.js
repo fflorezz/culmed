@@ -19,6 +19,6 @@ router.route("/").get(getAll).post(create);
 
 router.route("/:id").get(getById).put(fakeController).delete(fakeController);
 
-router.get("/user/:userId", fakeController);
+router.get("/user/:userId", getByUserId);
 
 export default router;
