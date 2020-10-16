@@ -5,7 +5,7 @@ import eventImageDefault from "../../../assets/img/calendar-default.jpg";
 
 import StyledImage from "./CardImage-styles";
 
-const CardImage = ({ img = eventImageDefault, date, title, id }) => {
+const CardImage = ({ eventImg = eventImageDefault, date, title, id }) => {
   let location = useLocation();
   return (
     <Link
@@ -15,7 +15,7 @@ const CardImage = ({ img = eventImageDefault, date, title, id }) => {
       }}
     >
       <StyledImage>
-        <img src={img} alt="" />
+        <img src={eventImg} alt="" />
         <div className="date-tag">
           <p>{date}</p>
         </div>

@@ -8,6 +8,7 @@ import config from "./config";
 
 import usersRouter from "./resources/user/user.router";
 import eventsRouter from "./resources/event/event.router";
+import calendarRouter from "./resources/calendar/calendar.router";
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(cors());
 
 app.use("/api/users", usersRouter);
 app.use("/api/events", eventsRouter);
+app.use("/api/calendar", calendarRouter);
 
 app.get("/api", (req, res) => {
   res.send("<h1>Hello</h1>");

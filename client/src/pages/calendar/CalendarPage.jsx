@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PageContainer from "../../components/shared/page-container/PageContainer";
 import EventsList from "./../../components/event/event-list/EventsList";
-import { useFetchEvents } from "./../../hooks/useFetchEvents";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import NotFoundPage from "./../not-found/NotFoundPage";
+import { fetchCalendar } from "../../redux/slices/calendar";
 
 const CalendarPage = () => {
-  const { events, loading, error } = useFetchEvents();
-  const session = useSelector(state => state.session);
+  const dispatch = useDispatch();
   const user = useSelector(state => state.user);
-  const calendarIds = session.id === user.id ? session.calendar : user.calendar;
-  const calendarEvents = events.filter(event => calendarIds.includes(event.id));
+  const { error, loading, events } = useSelector(state => state.calendar);
+
+  useEffect(function () {
+    if (user.id) {
+      dispatch(fetchCalendar(user.id));
+    }
+    // eslint-disable-next-line
+  }, []);
 
   if (error) {
     return (
@@ -20,7 +25,7 @@ const CalendarPage = () => {
     );
   }
 
-  if (!loading && calendarEvents.length === 0) {
+  if (!loading && events.length === 0) {
     return (
       <PageContainer>
         <h4>No hay eventos</h4>
@@ -30,11 +35,7 @@ const CalendarPage = () => {
 
   return (
     <PageContainer>
-      {loading ? (
-        <h4>Loading</h4>
-      ) : (
-        <EventsList events={calendarEvents} avatar />
-      )}
+      {loading ? <h4>Loading</h4> : <EventsList events={events} avatar />}
     </PageContainer>
   );
 };
