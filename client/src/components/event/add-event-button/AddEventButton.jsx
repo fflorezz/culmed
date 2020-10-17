@@ -2,16 +2,15 @@ import React, { useEffect, useState } from "react";
 import StyledAddEventButton from "./AddEventButton-styles";
 import Icon from "./../../shared/icon/Icon";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserData } from "./../../../redux/slices/session";
 import {
   addEventToCalendar,
   removeEventFromCalendar,
-  clearResponse,
-} from "../../../redux/slices/calendar";
+  clearStatus,
+} from "../../../redux/slices/session";
 
 const AddEventButton = ({ eventId, isCalendarEvent }) => {
   const dispatch = useDispatch();
-  const { response, loading } = useSelector(state => state.calendar);
+  const { status, loading } = useSelector(state => state.session);
   const userId = useSelector(state => state.session.id);
   const [calendarEvent, setCalendarEvent] = useState(isCalendarEvent);
 
@@ -29,13 +28,12 @@ const AddEventButton = ({ eventId, isCalendarEvent }) => {
   }
 
   useEffect(() => {
-    if (response === 200) {
+    if (status === 200) {
       setCalendarEvent(!calendarEvent);
-      dispatch(fetchUserData(userId));
-      dispatch(clearResponse());
+      dispatch(clearStatus());
     }
     // eslint-disable-next-line
-  }, [response]);
+  }, [status]);
 
   return (
     <StyledAddEventButton onClick={handleClick}>

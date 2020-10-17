@@ -6,14 +6,7 @@ import Icon from "./../icon/Icon";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setExploreFilter } from "../../../redux/slices/events";
-
-const mockOptions = [
-  { id: 0, title: "Todos", value: "todos" },
-  { id: 1, title: "Cine", value: "cine" },
-  { id: 2, title: "Teatro", value: "teatro" },
-  { id: 3, title: "Danza", value: "danza" },
-  { id: 4, title: "Música", value: "música" },
-];
+import { mockOptions } from "../../../mockData";
 
 const FilterDrop = ({ options = mockOptions }) => {
   const [isOpen, setIsOpen] = useState(false);

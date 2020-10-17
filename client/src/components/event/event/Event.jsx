@@ -9,7 +9,7 @@ import eventImageDefault from "../../../assets/img/calendar-default.jpg";
 
 import StyledEvent from "./Event-styles";
 
-const Event = ({ event, addEventHandler, isCalendarEvent, isOwnEvent }) => {
+const Event = ({ event, isCalendarEvent, isOwnEvent }) => {
   return (
     <StyledEvent onClick={e => e.stopPropagation()}>
       <div className="event-body">

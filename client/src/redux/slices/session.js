@@ -29,6 +29,22 @@ export const unfollowUser = createAsyncThunk(
   }
 );
 
+export const addEventToCalendar = createAsyncThunk(
+  "session/addEventToCalendarStatus",
+  async ({ userId, eventId }) => {
+    const response = await Calendar.addEvent(userId, eventId);
+    return response;
+  }
+);
+
+export const removeEventFromCalendar = createAsyncThunk(
+  "session/removeEventFromCalendarStatus",
+  async ({ userId, eventId }) => {
+    const response = await Calendar.removeEvent(userId, eventId);
+    return response;
+  }
+);
+
 const sessionSlice = createSlice({
   name: "session",
   initialState: {
@@ -38,8 +54,13 @@ const sessionSlice = createSlice({
     //events: [],
     calendar: [],
     following: [],
+    status: null,
   },
-  reducers: {},
+  reducers: {
+    clearStatus: (state, action) => {
+      state.status = null;
+    },
+  },
   extraReducers: {
     // FETCH USER
     [fetchUserData.fulfilled]: (state, { payload }) => {
@@ -85,7 +106,42 @@ const sessionSlice = createSlice({
     [unfollowUser.pending]: state => {
       state.loading = true;
     },
+
+    // ADD EVENT TO CALENDAR
+    [addEventToCalendar.fulfilled]: (state, { payload }) => {
+      state.calendar = [...state.calendar, payload];
+      state.status = 200;
+      state.error = null;
+      state.loading = false;
+      return state;
+    },
+    [addEventToCalendar.rejected]: (state, action) => {
+      state.error = action.error;
+      state.status = null;
+      state.loading = false;
+    },
+    [addEventToCalendar.pending]: state => {
+      state.loading = true;
+    },
+
+    // REMOVE EVENT FROM CALENDAR
+    [removeEventFromCalendar.fulfilled]: (state, { payload }) => {
+      state.calendar = state.calendar.filter(e => e.id !== payload.id);
+      state.status = 200;
+      state.error = null;
+      state.loading = false;
+      return state;
+    },
+    [removeEventFromCalendar.rejected]: (state, action) => {
+      state.status = null;
+      state.error = action.error;
+      state.loading = false;
+    },
+    [removeEventFromCalendar.pending]: state => {
+      state.loading = true;
+    },
   },
 });
 
+export const { clearStatus } = sessionSlice.actions;
 export const sessionReducer = sessionSlice.reducer;

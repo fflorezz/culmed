@@ -14,7 +14,6 @@ const CalendarPage = () => {
   let calendarEvents = events;
 
   if (session.id && session.id === userId) {
-    console.log("same");
     calendarEvents = session.calendar;
   }
 

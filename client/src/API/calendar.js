@@ -16,7 +16,7 @@ export async function addEvent(userId, eventId) {
       userId,
       eventId,
     });
-    return response.status;
+    return response.data.data;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -33,7 +33,7 @@ export async function removeEvent(userId, eventId) {
       },
     });
 
-    return response.status;
+    return response.data.data;
   } catch (error) {
     throw new Error(error.message);
   }

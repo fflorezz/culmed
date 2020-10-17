@@ -37,11 +37,23 @@ export const addEvent = async (req, res) => {
   // PENDDING: AUTH USER
 
   try {
-    const addedEvent = await Calendar.create({ userId, eventId });
-    res.send({ data: addedEvent });
+    const event = await Event.findOne({
+      where: {
+        id: eventId,
+      },
+      include: {
+        model: User,
+        attributes: ["userName", "avatarImg"],
+      },
+    });
+    if (!event) {
+      return res.status(404).send({ message: "Couldn't find event" });
+    }
+    await Calendar.create({ userId, eventId });
+    res.send({ data: event });
   } catch (err) {
     console.log(err);
-    if (err.errors[0].type === "unique violation") {
+    if (err.errors && err.errors[0].type === "unique violation") {
       return res.status(400).send({ message: "Event added already" });
     }
     res.status(500).send({
@@ -65,7 +77,7 @@ export const removeEvent = async (req, res) => {
     if (removedEvent === 0) {
       return res.status(404).send({ message: "Couldn't find event" });
     }
-    res.send({ data: removedEvent });
+    res.send({ data: { id: eventId } });
   } catch (err) {
     console.log(err);
     res.status(500).send({
