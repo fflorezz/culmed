@@ -15,12 +15,19 @@ const EventCard = ({
   date,
   views,
   participants,
+  startDate,
   User: { userName, avatarImg },
 }) => {
   return (
     <>
       <StyledCard>
-        <CardImage eventImg={eventImg} date={date} title={title} id={id} />
+        <CardImage
+          eventImg={eventImg}
+          date={date}
+          title={title}
+          id={id}
+          startDate={startDate}
+        />
         <div className="info">
           <Link to={`/${authorId}`}>
             <Avatar

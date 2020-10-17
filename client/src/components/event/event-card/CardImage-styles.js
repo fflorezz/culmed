@@ -68,9 +68,9 @@ const StyledImage = styled.div`
     top: 100%;
     left: 0;
     z-index: 1;
-    transform: translateY(-104%);
-    border-bottom-left-radius: 0.8rem;
-    border-bottom-right-radius: 0.8rem;
+    transform: translateY(-102%);
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
     padding: 0.8rem 1rem;
     background: linear-gradient(
       0deg,
