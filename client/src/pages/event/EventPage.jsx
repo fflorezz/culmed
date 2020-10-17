@@ -21,7 +21,7 @@ const EventPage = () => {
   useEffect(() => {
     dispatch(fetchEventById(eventId));
   }, [eventId, dispatch]);
-
+  
   function addEventHandler() {
     dispatch(
       addEventToCalendar({ userId: session.id, eventId: parseInt(eventId) })
