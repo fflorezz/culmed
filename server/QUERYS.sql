@@ -140,3 +140,7 @@ SELECT Event.title,
   User.userName
 FROM Event
   INNER JOIN User ON Event.authorId = User.id;
+USE culmed2;
+UPDATE Event
+SET authorId = "7541c7bb-e41a-46ab-9f57-bce436b303f4"
+WHERE id = 17;

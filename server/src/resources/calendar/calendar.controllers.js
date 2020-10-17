@@ -33,6 +33,9 @@ export const getByUserId = async (req, res) => {
 
 export const addEvent = async (req, res) => {
   const { userId, eventId } = req.body;
+
+  // PENDDING: AUTH USER
+
   try {
     const addedEvent = await Calendar.create({ userId, eventId });
     res.send({ data: addedEvent });
@@ -41,6 +44,30 @@ export const addEvent = async (req, res) => {
     if (err.errors[0].type === "unique violation") {
       return res.status(400).send({ message: "Event added already" });
     }
+    res.status(500).send({
+      message: err || "Something went wrong, Try again later",
+    });
+  }
+};
+
+export const removeEvent = async (req, res) => {
+  const { userId, eventId } = req.body;
+
+  // PENDDING: AUTH USER
+
+  try {
+    const removedEvent = await Calendar.destroy({
+      where: {
+        userId: userId,
+        eventId: eventId,
+      },
+    });
+    if (removedEvent === 0) {
+      return res.status(404).send({ message: "Couldn't find event" });
+    }
+    res.send({ data: removedEvent });
+  } catch (err) {
+    console.log(err);
     res.status(500).send({
       message: err || "Something went wrong, Try again later",
     });

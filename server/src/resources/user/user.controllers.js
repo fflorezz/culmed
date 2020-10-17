@@ -17,18 +17,16 @@ export const getAll = async (req, res) => {
 export const getById = async (req, res) => {
   const userId = req.params.userId;
   try {
-    const user = await User.findAll({
+    const user = await User.findOne({
       attributes: ["id", "userName", "avatarImg"],
       where: {
         id: userId,
       },
     });
-    if (!user.length) {
-      return res
-        .status(404)
-        .send({ message: `couldn't find user with id ${userId}` });
+    if (!user) {
+      return res.status(404).send({ message: `couldn't find user` });
     }
-    res.send({ data: user[0] });
+    res.send({ data: user });
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: "Something went wrong, Try again later" });
