@@ -1,40 +1,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import { getCalendar } from "../../API/calendar";
-import * as API from "../../API/user";
+import * as Calendar from "../../API/calendar";
+import * as User from "../../API/user";
 
 export const fetchUserData = createAsyncThunk(
   "session/fetchUserDataStatus",
   async userId => {
-    const userData = await API.getUserData(userId);
-    const calendar = await getCalendar(userId);
-    userData.calendar = calendar.map(event => {
-      return event.id;
-    });
+    const userData = await User.getUserData(userId);
+    const calendar = await Calendar.getEvents(userId);
+    userData.calendar = calendar;
     return userData;
-  }
-);
-
-export const addEventToCalendar = createAsyncThunk(
-  "session/addEventToCalendarStatus",
-  async ({ userId, eventId }) => {
-    const response = await API.addEvent(userId, eventId);
-    return response;
-  }
-);
-
-export const removeEventFromCalendar = createAsyncThunk(
-  "session/removeEventFromCalendarStatus",
-  async ({ userId, eventId }) => {
-    const response = await API.removeEvent(userId, eventId);
-    return response;
   }
 );
 
 export const followUser = createAsyncThunk(
   "session/followUserStatus",
   async ({ userId, followId }) => {
-    const response = await API.followUser(userId, followId);
+    const response = await User.followUser(userId, followId);
     return response;
   }
 );
@@ -42,7 +24,7 @@ export const followUser = createAsyncThunk(
 export const unfollowUser = createAsyncThunk(
   "session/unfollowUserStatus",
   async ({ userId, followId }) => {
-    const response = await API.unfollowUser(userId, followId);
+    const response = await User.unfollowUser(userId, followId);
     return response;
   }
 );
@@ -71,36 +53,6 @@ const sessionSlice = createSlice({
       state.loading = false;
     },
     [fetchUserData.pending]: state => {
-      state.loading = true;
-    },
-
-    // ADD EVENT TO CALENDAR
-    [addEventToCalendar.fulfilled]: (state, { payload }) => {
-      state = { ...state, ...payload };
-      state.error = null;
-      state.loading = false;
-      return state;
-    },
-    [addEventToCalendar.rejected]: (state, action) => {
-      state.error = action.error;
-      state.loading = false;
-    },
-    [addEventToCalendar.pending]: state => {
-      state.loading = true;
-    },
-
-    // REMOVE EVENT FROM CALENDAR
-    [removeEventFromCalendar.fulfilled]: (state, { payload }) => {
-      state = { ...state, ...payload };
-      state.error = null;
-      state.loading = false;
-      return state;
-    },
-    [removeEventFromCalendar.rejected]: (state, action) => {
-      state.error = action.error;
-      state.loading = false;
-    },
-    [removeEventFromCalendar.pending]: state => {
       state.loading = true;
     },
 

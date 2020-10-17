@@ -5,10 +5,6 @@ import { fetchEventById } from "./../../redux/slices/events";
 
 import Modal from "./../../components/shared/modal/Modal";
 import Event from "./../../components/event/event/Event";
-import {
-  addEventToCalendar,
-  removeEventFromCalendar,
-} from "../../redux/slices/session.js";
 
 const EventPage = () => {
   const history = useHistory();
@@ -16,26 +12,13 @@ const EventPage = () => {
   const { eventId } = useParams();
   const { event, error, loading } = useSelector(state => state.events);
   const session = useSelector(state => state.session);
-  const isCalendarEvent = session.calendar.includes(parseInt(eventId));
+  const isCalendarEvent = session.calendar.some(
+    e => e.id === parseInt(eventId)
+  );
 
   useEffect(() => {
     dispatch(fetchEventById(eventId));
   }, [eventId, dispatch]);
-  
-  function addEventHandler() {
-    dispatch(
-      addEventToCalendar({ userId: session.id, eventId: parseInt(eventId) })
-    );
-  }
-
-  function removeEventHandler() {
-    dispatch(
-      removeEventFromCalendar({
-        userId: session.id,
-        eventId: parseInt(eventId),
-      })
-    );
-  }
 
   if (error) {
     return history.push("404");
@@ -52,9 +35,6 @@ const EventPage = () => {
       ) : (
         <Event
           event={event}
-          addEventHandler={
-            isCalendarEvent ? removeEventHandler : addEventHandler
-          }
           isCalendarEvent={isCalendarEvent}
           isOwnEvent={event.authorId === session.id}
         />

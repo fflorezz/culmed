@@ -16,7 +16,7 @@ const Event = ({ event, addEventHandler, isCalendarEvent, isOwnEvent }) => {
         <h4>{event.title}</h4>
         {!isOwnEvent && (
           <AddEventButton
-            handleClick={addEventHandler}
+            eventId={event.id}
             isCalendarEvent={isCalendarEvent}
           />
         )}

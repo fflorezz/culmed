@@ -9,7 +9,14 @@ import { useParams } from "react-router";
 const CalendarPage = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
+  const session = useSelector(state => state.session);
   const { error, loading, events } = useSelector(state => state.calendar);
+  let calendarEvents = events;
+
+  if (session.id && session.id === userId) {
+    console.log("same");
+    calendarEvents = session.calendar;
+  }
 
   useEffect(function () {
     dispatch(fetchCalendar(userId));
@@ -24,7 +31,7 @@ const CalendarPage = () => {
     );
   }
 
-  if (!loading && events.length === 0) {
+  if (!loading && calendarEvents.length === 0) {
     return (
       <PageContainer>
         <h4>No hay eventos</h4>
@@ -34,7 +41,11 @@ const CalendarPage = () => {
 
   return (
     <PageContainer>
-      {loading ? <h4>Loading</h4> : <EventsList events={events} avatar />}
+      {loading ? (
+        <h4>Loading</h4>
+      ) : (
+        <EventsList events={calendarEvents} avatar />
+      )}
     </PageContainer>
   );
 };
