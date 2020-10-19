@@ -57,7 +57,7 @@ export const addEvent = async (req, res) => {
       return res.status(400).send({ message: "Event added already" });
     }
     res.status(500).send({
-      message: err || "Something went wrong, Try again later",
+      message: "Something went wrong, Try again later",
     });
   }
 };

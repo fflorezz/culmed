@@ -65,7 +65,7 @@ export const create = async (req, res) => {
 };
 
 export const getById = async (req, res) => {
-  const eventId = req.params.id;
+  const eventId = req.params.eventId;
   try {
     const event = await Event.findAll({
       where: {
@@ -117,7 +117,7 @@ export const update = async (req, res) => {
     return res.status(500).send({ Error: errors.array()[0].msg }).end();
   }
 
-  const eventId = req.params.id;
+  const eventId = req.params.eventId;
 
   const {
     title,
@@ -128,13 +128,12 @@ export const update = async (req, res) => {
     category,
     price,
     eventImg,
-    authorId,
   } = req.body;
 
   // PENDING: VALIDATE USER
 
   try {
-    const updatedPlace = await Event.update(
+    const results = await Event.update(
       {
         title,
         startDate,
@@ -144,18 +143,27 @@ export const update = async (req, res) => {
         category,
         price,
         eventImg,
-        authorId,
       },
       {
         where: {
           id: eventId,
         },
+        returning: true,
       }
     );
-    if (updatedPlace[0] === 0) {
+    if (results[0] === 0) {
       res.status(404).send({ message: "Couldn't find event" });
     }
-    res.send({ data: { id: eventId } });
+    const updatedEvent = await Event.findOne({
+      where: {
+        id: eventId,
+      },
+      include: {
+        model: User,
+        attributes: ["id", "userName", "avatarImg"],
+      },
+    });
+    res.send({ data: updatedEvent });
   } catch (err) {
     console.log(err);
     res.status(500).send({
@@ -171,7 +179,7 @@ export const remove = async (req, res) => {
     return res.status(500).send({ Error: errors.array()[0].msg }).end();
   }
 
-  const eventId = req.params.id;
+  const eventId = req.params.eventId;
 
   // PENDING: VALIDATE USER
 

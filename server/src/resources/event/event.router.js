@@ -17,7 +17,7 @@ const router = express.Router();
 
 router.route("/").get(getAll).post(create);
 
-router.route("/:id").get(getById).put(update).delete(remove);
+router.route("/:eventId").get(getById).put(update).delete(remove);
 
 router.get("/user/:userId", getByUserId);
 

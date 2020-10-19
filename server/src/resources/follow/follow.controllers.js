@@ -1,44 +1,43 @@
 import Follow from "./follow.model";
 import User from "./../user/user.model";
-import sequelize from "./../../db";
 
 export const getFollows = async (req, res) => {
   const userId = req.params.userId;
   try {
-    const { following } = await User.findOne({
+    const results = await User.findOne({
       where: {
         id: userId,
       },
       attributes: [],
-      include: {
-        model: User,
-        as: "following",
-        attributes: ["id", "userName", "avatarImg"],
-        through: {
-          attributes: [],
+      include: [
+        {
+          model: User,
+          as: "following",
+          attributes: ["id", "userName", "avatarImg"],
+          through: {
+            attributes: [],
+          },
         },
-      },
-    });
-    const { followers } = await User.findOne({
-      where: {
-        id: userId,
-      },
-      attributes: [],
-      include: {
-        model: User,
-        as: "followers",
-        attributes: ["id", "userName", "avatarImg"],
-        through: {
-          attributes: [],
+        {
+          model: User,
+          as: "followers",
+          attributes: ["id", "userName", "avatarImg"],
+          through: {
+            attributes: [],
+          },
         },
-      },
+      ],
     });
+    if (!results) {
+      return res.status(404).send({ message: "Couldn't find user" });
+    }
+    const { following, followers } = results;
     res.send({
       data: { following, followers },
     });
   } catch (err) {
     console.log(err);
-    res.status(500).send({ message: err });
+    res.status(500).send({ message: "Something went wrong, Try again later" });
   }
 };
 
@@ -61,6 +60,6 @@ export const addFollow = async (req, res) => {
     res.send({ data: followed });
   } catch (err) {
     console.log(err);
-    res.status(500).send({ message: err });
+    res.status(500).send({ message: "Something went wrong, Try again later" });
   }
 };
