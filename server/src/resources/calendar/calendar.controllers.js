@@ -77,7 +77,7 @@ export const removeEvent = async (req, res) => {
     if (removedEvent === 0) {
       return res.status(404).send({ message: "Couldn't find event" });
     }
-    res.send({ data: { id: eventId } });
+    res.send({ data: { id: parseInt(eventId) } });
   } catch (err) {
     console.log(err);
     res.status(500).send({

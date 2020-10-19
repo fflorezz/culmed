@@ -20,7 +20,6 @@ const CardImage = ({ eventImg = eventImageDefault, startDate, title, id }) => {
         state: { background: location },
       }}
     >
-      {console.log(startDate)}
       <StyledImage>
         <img src={eventImg} alt="" />
         <div className="date-tag">
