@@ -1,11 +1,17 @@
 import express from "express";
 
-import { getFollows, addFollow } from "./follow.controllers";
+import {
+  getFollowersAndFollowings,
+  follow,
+  unfollow,
+} from "./follow.controllers";
 
 const router = express.Router();
 
-router.route("/").post(addFollow);
+router.route("/:userId/add/:followingId").post(follow);
 
-router.route("/user/:userId").get(getFollows);
+router.route("/:userId/remove/:followingId").delete(unfollow);
+
+router.route("/:userId").get(getFollowersAndFollowings);
 
 export default router;

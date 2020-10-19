@@ -1,7 +1,7 @@
 import Follow from "./follow.model";
 import User from "./../user/user.model";
 
-export const getFollows = async (req, res) => {
+export const getFollowersAndFollowings = async (req, res) => {
   const userId = req.params.userId;
   try {
     const results = await User.findOne({
@@ -41,12 +41,12 @@ export const getFollows = async (req, res) => {
   }
 };
 
-export const addFollow = async (req, res) => {
-  const { followerId, followedId } = req.body;
+export const follow = async (req, res) => {
+  const { userId, followingId } = req.params;
   try {
     const followed = await User.findOne({
       where: {
-        id: followedId,
+        id: followingId,
       },
       attributes: ["id", "userName", "avatarImg"],
     });
@@ -54,10 +54,35 @@ export const addFollow = async (req, res) => {
       return res.status(404).send({ message: "Couldn't find user" });
     }
     await Follow.create({
-      followerId,
-      followedId,
+      followerId: userId,
+      followedId: followingId,
     });
     res.send({ data: followed });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ message: "Something went wrong, Try again later" });
+  }
+};
+
+export const unfollow = async (req, res) => {
+  const { userId, followingId } = req.params;
+  try {
+    const followed = await User.findOne({
+      where: {
+        id: followingId,
+      },
+      attributes: ["id", "userName", "avatarImg"],
+    });
+    if (!followed) {
+      return res.status(404).send({ message: "Couldn't find user" });
+    }
+    await Follow.destroy({
+      where: {
+        followerId: userId,
+        followedId: followingId,
+      },
+    });
+    res.send({ data: followingId });
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: "Something went wrong, Try again later" });
