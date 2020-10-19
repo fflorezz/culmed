@@ -32,7 +32,15 @@ Calendar.init(
   }
 );
 
-User.belongsToMany(Event, { through: Calendar, foreignKey: "userId" });
-Event.belongsToMany(User, { through: Calendar, foreignKey: "eventId" });
+User.belongsToMany(Event, {
+  through: Calendar,
+  foreignKey: "userId",
+  otherKey: "eventId",
+});
+Event.belongsToMany(User, {
+  through: Calendar,
+  foreignKey: "eventId",
+  otherKey: "userId",
+});
 
 export default Calendar;
