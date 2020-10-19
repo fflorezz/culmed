@@ -32,7 +32,7 @@ export const getByUserId = async (req, res) => {
 };
 
 export const addEvent = async (req, res) => {
-  const { userId, eventId } = req.body;
+  const { userId, eventId } = req.params;
 
   // PENDDING: AUTH USER
 
@@ -63,7 +63,7 @@ export const addEvent = async (req, res) => {
 };
 
 export const removeEvent = async (req, res) => {
-  const { userId, eventId } = req.body;
+  const { userId, eventId } = req.params;
 
   // PENDDING: AUTH USER
 

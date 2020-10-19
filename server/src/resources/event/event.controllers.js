@@ -160,7 +160,7 @@ export const update = async (req, res) => {
       },
       include: {
         model: User,
-        attributes: ["id", "userName", "avatarImg"],
+        attributes: ["userName", "avatarImg"],
       },
     });
     res.send({ data: updatedEvent });
