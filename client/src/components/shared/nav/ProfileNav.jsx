@@ -38,7 +38,7 @@ const ProfileNav = ({ user, isOwnProfile, isFollowing }) => {
           </div>
           {isOwnProfile ? null : (
             <div className="followingBtn">
-              <FollowingButton isFollowing={isFollowing} followId={id} />
+              <FollowingButton isFollowing={isFollowing} followingId={id} />
             </div>
           )}
         </div>

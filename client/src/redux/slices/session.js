@@ -2,29 +2,35 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import * as Calendar from "../../API/calendar";
 import * as User from "../../API/user";
+import * as Follow from "../../API/follow";
 
 export const fetchUserData = createAsyncThunk(
   "session/fetchUserDataStatus",
   async userId => {
     const userData = await User.getUserData(userId);
     const calendar = await Calendar.getEvents(userId);
+    const { following, followers } = await Follow.getFollowersandFollowings(
+      userId
+    );
     userData.calendar = calendar;
+    userData.following = following;
+    userData.followers = followers;
     return userData;
   }
 );
 
 export const followUser = createAsyncThunk(
   "session/followUserStatus",
-  async ({ userId, followId }) => {
-    const response = await User.followUser(userId, followId);
+  async ({ userId, followingId }) => {
+    const response = await Follow.followUser(userId, followingId);
     return response;
   }
 );
 
 export const unfollowUser = createAsyncThunk(
   "session/unfollowUserStatus",
-  async ({ userId, followId }) => {
-    const response = await User.unfollowUser(userId, followId);
+  async ({ userId, followingId }) => {
+    const response = await Follow.unfollowUser(userId, followingId);
     return response;
   }
 );
@@ -51,18 +57,18 @@ const sessionSlice = createSlice({
     isLogin: true,
     loading: false,
     error: null,
-    //events: [],
+    events: [],
     calendar: [],
     following: [],
     status: null,
   },
   reducers: {
-    clearStatus: (state, action) => {
+    clearStatus: state => {
       state.status = null;
     },
   },
   extraReducers: {
-    // FETCH USER
+    // FETCH USER DATA
     [fetchUserData.fulfilled]: (state, { payload }) => {
       state = { ...state, ...payload };
       state.error = null;
@@ -79,7 +85,7 @@ const sessionSlice = createSlice({
 
     // FOLLOW USER
     [followUser.fulfilled]: (state, { payload }) => {
-      state = { ...state, ...payload };
+      state.following = [...state.following, payload];
       state.error = null;
       state.loading = false;
       return state;
@@ -94,7 +100,7 @@ const sessionSlice = createSlice({
 
     // UNFOLLOW USER
     [unfollowUser.fulfilled]: (state, { payload }) => {
-      state = { ...state, ...payload };
+      state.following = state.following.filter(u => u.id !== payload.id);
       state.error = null;
       state.loading = false;
       return state;

@@ -1,10 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getUserData } from "../../API/user";
+import * as Follow from "../../API/follow";
 
-export const fetchUserById = createAsyncThunk(
-  "user/fetchUserByIdStatus",
+export const fetchUserData = createAsyncThunk(
+  "user/fetchUserData",
   async userId => {
     const userData = await getUserData(userId);
+    const { following, followers } = await Follow.getFollowersandFollowings(
+      userId
+    );
+    userData.following = following;
+    userData.followers = followers;
     return userData;
   }
 );
@@ -17,22 +23,21 @@ const userSlice = createSlice({
     id: null,
     following: [],
     followers: [],
-    followingList: [],
   },
   reducers: {},
   extraReducers: {
-    // FETCH USER BY ID
-    [fetchUserById.fulfilled]: (state, { payload }) => {
+    // FETCH USER DATA
+    [fetchUserData.fulfilled]: (state, { payload }) => {
       state = { ...state, ...payload };
       state.error = null;
       state.loading = false;
       return state;
     },
-    [fetchUserById.rejected]: (state, action) => {
+    [fetchUserData.rejected]: (state, action) => {
       state.error = action.error;
       state.loading = false;
     },
-    [fetchUserById.pending]: state => {
+    [fetchUserData.pending]: state => {
       state.loading = true;
     },
   },

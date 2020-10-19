@@ -2,19 +2,15 @@ import React, { useState, useEffect } from "react";
 import StyledProfileRow from "./ProfileRow-styles";
 import Avatar from "../avatar/Avatar";
 import CardImage from "./../../event/event-card/CardImage";
-import { getUserData } from "../../../API/user";
 import { getEventsByAuthor } from "../../../API/events";
 import { Link } from "react-router-dom";
 import FollowingButton from "../../shared/button/FollowingButton";
 
-const ProfileRow = ({ id, isFollowing, isOwnProfile }) => {
-  const [user, setUser] = useState({});
+const ProfileRow = ({ id, isFollowing, isOwnProfile, userName, avatarImg }) => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
     async function asyncData() {
-      const user = await getUserData(id);
-      setUser(user);
       const events = await getEventsByAuthor(id);
       setEvents(events);
     }
@@ -26,16 +22,16 @@ const ProfileRow = ({ id, isFollowing, isOwnProfile }) => {
       <div className="row-avatar">
         <Link to={`/${id}`}>
           <Avatar
-            src={user.avatarImg}
-            name={user.userName}
-            followers={user.followers}
+            src={avatarImg}
+            name={userName}
+            followers={20}
             size="lg"
             column
             text
           />
         </Link>
         {isOwnProfile ? null : (
-          <FollowingButton isFollowing={isFollowing} followId={id} />
+          <FollowingButton isFollowing={isFollowing} followingId={id} />
         )}
       </div>
       <ul className="row-events">

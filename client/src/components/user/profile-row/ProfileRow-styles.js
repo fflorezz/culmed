@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledProfileRow = styled.li`
-  display: inline-flex;
+  display: flex;
   align-items: center;
   margin: 0 auto;
   padding-bottom: 4rem;

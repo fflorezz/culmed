@@ -3,7 +3,7 @@ import ProfileNav from "../../components/shared/nav/ProfileNav";
 import ProfileRoutes from "./ProfileRoutes";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserById } from "./../../redux/slices/user.slice";
+import { fetchUserData } from "./../../redux/slices/user.slice";
 import NotFoundPage from "./../not-found/NotFoundPage";
 
 const ProfilePage = () => {
@@ -17,11 +17,11 @@ const ProfilePage = () => {
 
   if (session.id) {
     isOwnProfile = session.id === user.id;
-    isFollowing = session.following.includes(user.id);
+    isFollowing = session.following.some(u => u.id === userId);
   }
 
   useEffect(() => {
-    dispatch(fetchUserById(userId));
+    dispatch(fetchUserData(userId));
   }, [userId, dispatch]);
 
   if (error) {

@@ -82,7 +82,7 @@ export const unfollow = async (req, res) => {
         followedId: followingId,
       },
     });
-    res.send({ data: followingId });
+    res.send({ data: { id: followingId } });
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: "Something went wrong, Try again later" });

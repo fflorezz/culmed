@@ -79,11 +79,7 @@ const large = css`
       img {
         margin-right: 0;
       }
-      .followers {
-        width: 100%;
-      }
-      .following,
-      .spacer {
+      .follow {
         display: none;
       }
     `}
