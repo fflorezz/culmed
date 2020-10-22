@@ -10,7 +10,8 @@ export const eventValidator = [
     .withMessage("description is required")
     .isLength({ min: 15, max: 300 })
     .withMessage("description require min 15 characters max 120 characters"),
-  body("price")
-    .isNumeric({ no_symbols: true })
-    .withMessage("price should contain only numbers without symbols"),
+  // body("price")
+  //   .optional({ nullable: true })
+  //   .isNumeric({ no_symbols: true })
+  //   .withMessage("price should contain only numbers without symbols"),
 ];

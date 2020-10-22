@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as Calendar from "../../API/calendar";
 import * as User from "../../API/user";
 import * as Follow from "../../API/follow";
+import * as Event from "../../API/events";
 
 export const fetchUserData = createAsyncThunk(
   "session/fetchUserDataStatus",
@@ -48,6 +49,14 @@ export const removeEventFromCalendar = createAsyncThunk(
   async ({ userId, eventId }) => {
     const response = await Calendar.removeEvent(userId, eventId);
     return response;
+  }
+);
+
+export const createEvent = createAsyncThunk(
+  "session/createEventStatus",
+  async event => {
+    const response = await Event.createEvent(event);
+    return response.status;
   }
 );
 
@@ -144,6 +153,21 @@ const sessionSlice = createSlice({
       state.loading = false;
     },
     [removeEventFromCalendar.pending]: state => {
+      state.loading = true;
+    },
+
+    // CREATE EVENT
+    [createEvent.fulfilled]: (state, { payload }) => {
+      state.eventCreated = true;
+      state.error = null;
+      state.loading = false;
+    },
+    [createEvent.rejected]: (state, action) => {
+      state.eventCreated = false;
+      state.error = action.error;
+      state.loading = false;
+    },
+    [createEvent.pending]: state => {
       state.loading = true;
     },
   },

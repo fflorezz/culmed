@@ -25,14 +25,6 @@ export const fetchEventById = createAsyncThunk(
   }
 );
 
-export const createEvent = createAsyncThunk(
-  "events/createEventStatus",
-  async ({ event, userId }) => {
-    const response = await API.createEvent(event, userId);
-    return response.status;
-  }
-);
-
 const eventsSlice = createSlice({
   name: "events",
   initialState: {
@@ -93,21 +85,6 @@ const eventsSlice = createSlice({
       state.loading = false;
     },
     [fetchEventById.pending]: state => {
-      state.loading = true;
-    },
-
-    // CREATE EVENT
-    [createEvent.fulfilled]: (state, { payload }) => {
-      state.eventCreated = true;
-      state.error = null;
-      state.loading = false;
-    },
-    [createEvent.rejected]: (state, action) => {
-      state.eventCreated = false;
-      state.error = action.error;
-      state.loading = false;
-    },
-    [createEvent.pending]: state => {
       state.loading = true;
     },
   },

@@ -6,7 +6,7 @@ import StyledCreateEventForm from "./CreateEventForm-styles";
 import Button from "./../../shared/button/Button";
 import ImageUpload from "./../image-upload/ImageUpload.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { clearEventCreated, createEvent } from "../../../redux/slices/events";
+import { createEvent } from "../../../redux/slices/session";
 import PageContainer from "./../../shared/page-container/PageContainer";
 
 const CreateEventForm = () => {
@@ -17,24 +17,19 @@ const CreateEventForm = () => {
   const { register, handleSubmit, errors } = useForm();
 
   function onSubmit(data) {
-    const event = {
-      ...data,
-      authorId: session.id,
-      authorName: session.userName,
-      authorImg: session.avatarImg,
-    };
-    dispatch(createEvent({ event, userId: session.id }));
+    console.log(data);
+    dispatch(createEvent({ ...data, authorId: session.id }));
   }
 
   useEffect(() => {
-    if (eventCreated) {
-      history.push(`/${session.id}/events`);
-      return () => {
-        dispatch(clearEventCreated());
-        history.go(0);
-      };
-    }
-    // eslint-disable-next-line
+    // if (eventCreated) {
+    //   history.push(`/${session.id}/events`);
+    //   return () => {
+    //     dispatch(clearEventCreated());
+    //     history.go(0);
+    //   };
+    // }
+    // // eslint-disable-next-line
   }, [eventCreated]);
 
   if (loading) {
@@ -78,7 +73,7 @@ const CreateEventForm = () => {
               <label htmlFor="start">Inicia</label>
               <input
                 type="datetime-local"
-                name="start"
+                name="startDate"
                 ref={register({ required: true })}
                 className={`date ${errors.start && "error"}`}
               />
@@ -88,7 +83,7 @@ const CreateEventForm = () => {
               <input
                 className="date"
                 type="datetime-local"
-                name="end"
+                name="endDate"
                 ref={register}
               />
             </div>

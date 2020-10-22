@@ -29,7 +29,7 @@ export async function getEventById(eventId) {
   }
 }
 
-export async function createEvent(event, userId) {
+export async function createEvent(event) {
   try {
     const response = await axios.post(
       `http://localhost:5000/api/events`,

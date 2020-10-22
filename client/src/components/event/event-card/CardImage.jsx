@@ -5,7 +5,7 @@ import eventImageDefault from "../../../assets/img/calendar-default.jpg";
 
 import StyledImage from "./CardImage-styles";
 
-const CardImage = ({ eventImg = eventImageDefault, startDate, title, id }) => {
+const CardImage = ({ eventImg, startDate, title, id }) => {
   let location = useLocation();
 
   const date = new Date(startDate).toLocaleDateString("es-ES", {
@@ -21,7 +21,7 @@ const CardImage = ({ eventImg = eventImageDefault, startDate, title, id }) => {
       }}
     >
       <StyledImage>
-        <img src={eventImg} alt="" />
+        <img src={eventImg || eventImageDefault} alt="" />
         <div className="date-tag">
           <p>{date}</p>
         </div>

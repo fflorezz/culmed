@@ -17,6 +17,7 @@ Event.init(
     },
     endDate: {
       type: DataTypes.DATE,
+      allowNull: true,
     },
     location: {
       type: DataTypes.STRING,
@@ -52,3 +53,5 @@ Event.init(
 );
 
 export default Event;
+
+//Event.sync({ force: true });

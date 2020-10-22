@@ -40,20 +40,30 @@ export const create = async (req, res) => {
   } = req.body;
 
   // PENDING: VALIDATE USER
+  console.log("*** ENDDate", endDate);
 
   try {
-    const event = await Event.create({
+    const createdEvent = await Event.create({
       title,
       startDate,
-      endDate,
+      endDate: endDate || null,
       location,
       description,
-      category,
-      price,
+      category: category || null,
+      price: price || null,
       eventImg,
       authorId,
     });
-    if (event) {
+    if (createdEvent) {
+      const event = await Event.findOne({
+        where: {
+          id: createdEvent.id,
+        },
+        include: {
+          model: User,
+          attributes: ["userName", "avatarImg"],
+        },
+      });
       res.status(201).send({ data: event });
     }
   } catch (err) {
@@ -67,7 +77,7 @@ export const create = async (req, res) => {
 export const getById = async (req, res) => {
   const eventId = req.params.eventId;
   try {
-    const event = await Event.findAll({
+    const event = await Event.findOne({
       where: {
         id: eventId,
       },
@@ -76,10 +86,10 @@ export const getById = async (req, res) => {
         attributes: ["userName", "avatarImg"],
       },
     });
-    if (!event.length) {
+    if (!event) {
       return res.status(404).send({ message: "Couldn't find event" });
     }
-    res.send({ data: event[0] });
+    res.send({ data: event });
   } catch (err) {
     console.log(err);
     res.status(500).send({
