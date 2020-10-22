@@ -26,7 +26,9 @@ const Avatar = ({
       <img src={src} alt="" />
       {text && (
         <div className="text">
-          <p className="name">{name}</p>
+          <p className="name">
+            {name.length > 12 ? `${name.substring(0, 12)}...` : name}
+          </p>
           <div className="follow">
             <p className="followers">
               Seguidores <span>{followers && followers.length}</span>

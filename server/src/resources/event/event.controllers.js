@@ -24,7 +24,7 @@ export const create = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.status(500).send({ Error: errors.array()[0].msg }).end();
+    return res.status(400).send({ errors: errors.array() }).end();
   }
 
   const {
@@ -114,7 +114,7 @@ export const update = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.status(500).send({ Error: errors.array()[0].msg }).end();
+    return res.status(400).send({ errors: errors.array() }).end();
   }
 
   const eventId = req.params.eventId;

@@ -69,15 +69,10 @@ const CreateEventForm = () => {
             name="title"
             ref={register({
               required: true,
-              minLength: 5,
             })}
             className={errors.title && "error"}
           />
-          {errors.title && (
-            <p className="alert-text">
-              Es necesario un título con mas de 5 caracteres
-            </p>
-          )}
+          {errors.title && <p className="alert-text">Es necesario un título</p>}
           <div className="group">
             <div className="field">
               <label htmlFor="start">Inicia</label>
@@ -117,7 +112,7 @@ const CreateEventForm = () => {
             id="description"
             cols="30"
             rows="3"
-            ref={register({ required: true, minLength: 15, maxLength: 120 })}
+            ref={register({ required: true, minLength: 15, maxLength: 300 })}
             className={errors.description && "error"}
           ></textarea>
           {errors.description && (

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledProfileRow = styled.li`
-  display: flex;
+  display: inline-flex;
   align-items: center;
   margin: 0 auto;
   padding-bottom: 4rem;
@@ -10,8 +10,8 @@ const StyledProfileRow = styled.li`
     flex-direction: column;
     align-items: center;
     margin-right: 4rem;
-    width: 10rem;
-    min-width: 14rem;
+    width: 16rem;
+    min-width: 16rem;
   }
   .row-events {
     display: inline-flex;

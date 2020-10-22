@@ -1,4 +1,5 @@
 import express from "express";
+import { eventValidator } from "./event.validators";
 
 import {
   getAll,
@@ -15,9 +16,13 @@ const fakeController = (req, res) => {
 
 const router = express.Router();
 
-router.route("/").get(getAll).post(create);
+router.route("/").get(getAll).post(eventValidator, create);
 
-router.route("/:eventId").get(getById).put(update).delete(remove);
+router
+  .route("/:eventId")
+  .get(getById)
+  .put(eventValidator, update)
+  .delete(remove);
 
 router.get("/user/:userId", getByUserId);
 
