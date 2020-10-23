@@ -14,6 +14,16 @@ const StyledEvent = styled.main`
   border-radius: 0.5rem;
   display: flex;
   justify-content: center;
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 4rem;
+    & button:first-child {
+      margin-right: 1rem;
+    }
+  }
+  .buttons:first-child {
+  }
   .event-body {
     width: 45rem;
     margin: 0 auto;

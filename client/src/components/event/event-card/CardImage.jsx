@@ -4,14 +4,12 @@ import { Link, useLocation } from "react-router-dom";
 import eventImageDefault from "../../../assets/img/calendar-default.jpg";
 
 import StyledImage from "./CardImage-styles";
+import { formatDate } from "./../../../utilities/formaters";
 
 const CardImage = ({ eventImg, startDate, title, id }) => {
   let location = useLocation();
 
-  const date = new Date(startDate).toLocaleDateString("es-ES", {
-    month: "long",
-    day: "numeric",
-  });
+  const date = formatDate(startDate);
 
   return (
     <Link

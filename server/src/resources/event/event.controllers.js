@@ -40,7 +40,6 @@ export const create = async (req, res) => {
   } = req.body;
 
   // PENDING: VALIDATE USER
-  console.log("*** ENDDate", endDate);
 
   try {
     const createdEvent = await Event.create({
