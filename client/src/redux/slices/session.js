@@ -158,12 +158,13 @@ const sessionSlice = createSlice({
 
     // CREATE EVENT
     [createEvent.fulfilled]: (state, { payload }) => {
-      state.eventCreated = true;
+      state.events = [...state.events, payload];
+      state.status = 201;
       state.error = null;
       state.loading = false;
     },
     [createEvent.rejected]: (state, action) => {
-      state.eventCreated = false;
+      state.status = null;
       state.error = action.error;
       state.loading = false;
     },

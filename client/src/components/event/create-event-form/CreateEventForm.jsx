@@ -6,31 +6,32 @@ import StyledCreateEventForm from "./CreateEventForm-styles";
 import Button from "./../../shared/button/Button";
 import ImageUpload from "./../image-upload/ImageUpload.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { createEvent } from "../../../redux/slices/session";
+import { createEvent, clearStatus } from "../../../redux/slices/session";
 import PageContainer from "./../../shared/page-container/PageContainer";
 
 const CreateEventForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const session = useSelector(state => state.session);
-  const { loading, error, eventCreated } = useSelector(state => state.events);
+  const { loading, error, status } = session;
   const { register, handleSubmit, errors } = useForm();
 
   function onSubmit(data) {
-    console.log(data);
+    if (loading) {
+      return;
+    }
     dispatch(createEvent({ ...data, authorId: session.id }));
   }
 
   useEffect(() => {
-    // if (eventCreated) {
-    //   history.push(`/${session.id}/events`);
-    //   return () => {
-    //     dispatch(clearEventCreated());
-    //     history.go(0);
-    //   };
-    // }
-    // // eslint-disable-next-line
-  }, [eventCreated]);
+    if (status === 201) {
+      history.push(`/${session.id}/events`);
+      return () => {
+        dispatch(clearStatus());
+      };
+    }
+    // eslint-disable-next-line
+  }, [status]);
 
   if (loading) {
     return (
