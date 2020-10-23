@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Icon from "./../../shared/icon/Icon";
 import Avatar from "./../../user/avatar/Avatar";
@@ -10,18 +10,32 @@ import eventImageDefault from "../../../assets/img/calendar-default.jpg";
 import StyledEvent from "./Event-styles";
 import Button from "./../../shared/button/Button";
 import { formatDate, formatHour } from "./../../../utilities/formaters";
+import DeleteModal from "../delete-modal/DeleteModal";
 
 const Event = ({ event, isCalendarEvent, isOwnEvent }) => {
+  const [showDeleteModal, setDeleteModal] = useState(false);
   const date = formatDate(event.startDate);
   const hour = formatHour(event.startDate);
+
+  function showModal(option) {
+    setDeleteModal(option);
+  }
 
   return (
     <StyledEvent onClick={e => e.stopPropagation()}>
       <div className="event-body">
         {isOwnEvent ? (
           <div className="buttons">
-            <Button text="Eliminar" size="sm" color="complementary" outline />
-            <Button text="editar" size="sm" color="complementary" />
+            <Button
+              text="Eliminar"
+              size="sm"
+              color="complementary"
+              outline
+              handleClick={() => {
+                showModal(true);
+              }}
+            />
+            <Button text="Editar" size="sm" color="complementary" />
           </div>
         ) : (
           <AddEventButton
@@ -29,6 +43,7 @@ const Event = ({ event, isCalendarEvent, isOwnEvent }) => {
             isCalendarEvent={isCalendarEvent}
           />
         )}
+        {<DeleteModal show={showDeleteModal} showModal={showModal} />}
         <h4>{event.title}</h4>
         <p className="date">{date}</p>
         <p className="time">{hour}</p>
