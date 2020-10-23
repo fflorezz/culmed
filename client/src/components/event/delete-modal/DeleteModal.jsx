@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import StyledDeleteModal from "./DeleteModal-styles";
 import Button from "./../../shared/button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
+import { deleteEvent, clearStatus } from "../../../redux/slices/session";
 
-const DeleteModal = ({ show, showModal }) => {
+const DeleteModal = ({ show, showModal, eventId }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { loading, status, id } = useSelector(state => state.session);
+
+  function deleteHandler() {
+    if (loading) {
+      return;
+    }
+    dispatch(deleteEvent(eventId));
+  }
+
+  useEffect(() => {
+    if (status === 200) {
+      history.push(`/${id}/events`);
+      return () => {
+        dispatch(clearStatus());
+      };
+    }
+    // eslint-disable-next-line
+  }, [status]);
+
   if (!show) {
     return null;
   }
@@ -21,7 +45,12 @@ const DeleteModal = ({ show, showModal }) => {
             showModal(false);
           }}
         />
-        <Button text="Eliminar" size="sm" color="secondary" />
+        <Button
+          text="Eliminar"
+          size="sm"
+          color="secondary"
+          handleClick={deleteHandler}
+        />
       </div>
     </StyledDeleteModal>
   );

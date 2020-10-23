@@ -43,7 +43,13 @@ const Event = ({ event, isCalendarEvent, isOwnEvent }) => {
             isCalendarEvent={isCalendarEvent}
           />
         )}
-        {<DeleteModal show={showDeleteModal} showModal={showModal} />}
+        {
+          <DeleteModal
+            show={showDeleteModal}
+            showModal={showModal}
+            eventId={event.id}
+          />
+        }
         <h4>{event.title}</h4>
         <p className="date">{date}</p>
         <p className="time">{hour}</p>

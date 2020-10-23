@@ -13,9 +13,11 @@ export const fetchUserData = createAsyncThunk(
     const { following, followers } = await Follow.getFollowersandFollowings(
       userId
     );
+    const events = await Event.getEventsByAuthor(userId);
     userData.calendar = calendar;
     userData.following = following;
     userData.followers = followers;
+    userData.events = events;
     return userData;
   }
 );
@@ -56,7 +58,15 @@ export const createEvent = createAsyncThunk(
   "session/createEventStatus",
   async event => {
     const response = await Event.createEvent(event);
-    return response.status;
+    return response;
+  }
+);
+
+export const deleteEvent = createAsyncThunk(
+  "session/deleteEventStatus",
+  async eventId => {
+    const response = await Event.deleteEvent(eventId);
+    return response;
   }
 );
 
@@ -169,6 +179,24 @@ const sessionSlice = createSlice({
       state.loading = false;
     },
     [createEvent.pending]: state => {
+      state.loading = true;
+    },
+
+    // DELETE EVENT
+    [deleteEvent.fulfilled]: (state, { payload }) => {
+      console.log(payload);
+      state.events = state.events.filter(e => e.id !== payload.id);
+      state.status = 200;
+      state.error = null;
+      state.loading = false;
+      return state;
+    },
+    [deleteEvent.rejected]: (state, action) => {
+      state.status = null;
+      state.error = action.error;
+      state.loading = false;
+    },
+    [deleteEvent.pending]: state => {
       state.loading = true;
     },
   },

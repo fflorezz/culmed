@@ -198,11 +198,10 @@ export const remove = async (req, res) => {
         id: eventId,
       },
     });
-    console.log(deletedPlace);
     if (deletedPlace === 0) {
       res.status(404).send({ message: "Couldn't find event" });
     }
-    res.send({ data: { id: eventId } });
+    res.status(200).send({ data: { id: parseInt(eventId) } });
   } catch (err) {
     console.log(err);
     res.status(500).send({

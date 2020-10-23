@@ -40,3 +40,14 @@ export async function createEvent(event) {
     throw new Error(error.message);
   }
 }
+
+export async function deleteEvent(eventId) {
+  try {
+    const response = await axios.delete(
+      `http://localhost:5000/api/events/${eventId}`
+    );
+    return response.data.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
