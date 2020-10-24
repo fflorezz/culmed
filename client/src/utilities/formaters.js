@@ -12,3 +12,7 @@ export function formatHour(date) {
     hour12: true,
   });
 }
+
+export function formatDateInput(date) {
+  return new Date(date).toISOString().substr(0, 16);
+}

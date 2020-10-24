@@ -1,33 +1,32 @@
 import React, { useEffect } from "react";
-import StyledEditForm from "./EditForm-styles";
-import Button from "./../../shared/button/Button";
-import { clearStatus, updateEvent } from "../../../redux/slices/session";
-import { useHistory } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import PageContainer from "./../../shared/page-container/PageContainer";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+
+import { clearStatus, updateEvent } from "../../../redux/slices/session";
+import { formatDateInput } from "./../../../utilities/formaters";
+
+import Button from "./../../shared/button/Button";
+import PageContainer from "./../../shared/page-container/PageContainer";
+
+import StyledEditForm from "./EditForm-styles";
 
 const EditForm = ({ toggleEditForm, event }) => {
-  const history = useHistory();
   const dispatch = useDispatch();
   const session = useSelector(state => state.session);
   const { loading, error, status } = session;
   const { register, handleSubmit, errors } = useForm();
-  const defaultStartDate = new Date(event.startDate)
-    .toISOString()
-    .substr(0, 16);
+  const defaultStartDate = formatDateInput(event.startDate);
 
   function onSubmit(data) {
     if (loading) {
       return;
     }
-    console.log(data);
     dispatch(updateEvent({ ...data, authorId: session.id, id: event.id }));
   }
 
   useEffect(() => {
     if (status === 201) {
-      history.push(`/${session.id}/events`);
+      toggleEditForm(false);
       return () => {
         dispatch(clearStatus());
       };

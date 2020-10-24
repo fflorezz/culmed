@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as API from "../../API/events";
+import { updateEvent } from "../slices/session";
 
 export const fetchAllEvents = createAsyncThunk(
   "events/fetchAllEventsStatus",
@@ -34,7 +35,6 @@ const eventsSlice = createSlice({
     error: null,
     loading: false,
     exploreFilter: "todos",
-    eventCreated: false,
   },
   reducers: {
     setExploreFilter: (state, { payload }) => {
@@ -86,6 +86,11 @@ const eventsSlice = createSlice({
     },
     [fetchEventById.pending]: state => {
       state.loading = true;
+    },
+
+    //************ UPDATE EVENT
+    [updateEvent.fulfilled]: (state, { payload }) => {
+      state.event = payload;
     },
   },
 });
