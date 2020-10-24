@@ -137,6 +137,7 @@ export const update = async (req, res) => {
     category,
     price,
     eventImg,
+    authorId,
   } = req.body;
 
   // PENDING: VALIDATE USER
@@ -146,12 +147,13 @@ export const update = async (req, res) => {
       {
         title,
         startDate,
-        endDate,
+        endDate: endDate || null,
         location,
         description,
-        category,
-        price,
+        category: category || null,
+        price: price || null,
         eventImg,
+        authorId,
       },
       {
         where: {

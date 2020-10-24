@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import StyledEditForm from "./EditForm-styles";
 import Button from "./../../shared/button/Button";
-import { clearStatus, createEvent } from "../../../redux/slices/session";
+import { clearStatus, updateEvent } from "../../../redux/slices/session";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import PageContainer from "./../../shared/page-container/PageContainer";
@@ -22,7 +22,7 @@ const EditForm = ({ toggleEditForm, event }) => {
       return;
     }
     console.log(data);
-    //  dispatch(createEvent({ ...data, authorId: session.id }));
+    dispatch(updateEvent({ ...data, authorId: session.id, id: event.id }));
   }
 
   useEffect(() => {
@@ -37,9 +37,9 @@ const EditForm = ({ toggleEditForm, event }) => {
 
   if (loading) {
     return (
-      <PageContainer>
-        <h4>Estamos publicando tu evento...</h4>
-      </PageContainer>
+      <StyledEditForm>
+        <h4>Estamos editando tu evento...</h4>
+      </StyledEditForm>
     );
   }
 

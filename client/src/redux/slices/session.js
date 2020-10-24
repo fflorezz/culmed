@@ -70,6 +70,14 @@ export const deleteEvent = createAsyncThunk(
   }
 );
 
+export const updateEvent = createAsyncThunk(
+  "session/updateEventStatus",
+  async event => {
+    const response = await Event.updateEvent(event);
+    return response;
+  }
+);
+
 const sessionSlice = createSlice({
   name: "session",
   initialState: {
@@ -196,6 +204,28 @@ const sessionSlice = createSlice({
       state.loading = false;
     },
     [deleteEvent.pending]: state => {
+      state.loading = true;
+    },
+
+    // UPDATE EVENT
+    [updateEvent.fulfilled]: (state, { payload }) => {
+      state.events = state.events.map(e => {
+        if (e.id === payload.id) {
+          return payload;
+        } else {
+          return e;
+        }
+      });
+      state.status = 201;
+      state.error = null;
+      state.loading = false;
+    },
+    [updateEvent.rejected]: (state, action) => {
+      state.status = null;
+      state.error = action.error;
+      state.loading = false;
+    },
+    [updateEvent.pending]: state => {
       state.loading = true;
     },
   },
