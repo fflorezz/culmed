@@ -11,14 +11,24 @@ import StyledEvent from "./Event-styles";
 import Button from "./../../shared/button/Button";
 import { formatDate, formatHour } from "./../../../utilities/formaters";
 import DeleteModal from "../delete-modal/DeleteModal";
+import EditForm from "./../edit-form/EditForm";
 
 const Event = ({ event, isCalendarEvent, isOwnEvent }) => {
   const [showDeleteModal, setDeleteModal] = useState(false);
+  const [showEditForm, setEditForm] = useState(false);
   const date = formatDate(event.startDate);
   const hour = formatHour(event.startDate);
 
-  function showModal(option) {
+  function toggleDeleteModal(option) {
     setDeleteModal(option);
+  }
+
+  function toggleEditForm(option) {
+    setEditForm(option);
+  }
+
+  if (showEditForm) {
+    return <EditForm toggleEditForm={toggleEditForm} event={event} />;
   }
 
   return (
@@ -32,10 +42,17 @@ const Event = ({ event, isCalendarEvent, isOwnEvent }) => {
               color="complementary"
               outline
               handleClick={() => {
-                showModal(true);
+                toggleDeleteModal(true);
               }}
             />
-            <Button text="Editar" size="sm" color="complementary" />
+            <Button
+              text="Editar"
+              size="sm"
+              color="complementary"
+              handleClick={() => {
+                toggleEditForm(true);
+              }}
+            />
           </div>
         ) : (
           <AddEventButton
@@ -44,7 +61,7 @@ const Event = ({ event, isCalendarEvent, isOwnEvent }) => {
           />
         )}
         {showDeleteModal && (
-          <DeleteModal showModal={showModal} eventId={event.id} />
+          <DeleteModal showModal={toggleDeleteModal} eventId={event.id} />
         )}
         <h4>{event.title}</h4>
         <p className="date">{date}</p>

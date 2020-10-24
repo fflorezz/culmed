@@ -22,8 +22,6 @@ const StyledEvent = styled.main`
       margin-right: 1rem;
     }
   }
-  .buttons:first-child {
-  }
   .event-body {
     width: 45rem;
     margin: 0 auto;
