@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { deleteEvent, clearStatus } from "../../../redux/slices/session";
 
-const DeleteModal = ({ show, showModal, eventId }) => {
+const DeleteModal = ({ showModal, eventId }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { loading, status, id } = useSelector(state => state.session);
@@ -26,10 +26,6 @@ const DeleteModal = ({ show, showModal, eventId }) => {
     }
     // eslint-disable-next-line
   }, [status]);
-
-  if (!show) {
-    return null;
-  }
 
   return (
     <StyledDeleteModal>

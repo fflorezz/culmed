@@ -184,7 +184,6 @@ const sessionSlice = createSlice({
 
     // DELETE EVENT
     [deleteEvent.fulfilled]: (state, { payload }) => {
-      console.log(payload);
       state.events = state.events.filter(e => e.id !== payload.id);
       state.status = 200;
       state.error = null;

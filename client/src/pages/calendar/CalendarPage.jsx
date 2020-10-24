@@ -11,11 +11,7 @@ const CalendarPage = () => {
   const { userId } = useParams();
   const session = useSelector(state => state.session);
   const { error, loading, events } = useSelector(state => state.calendar);
-  let calendarEvents = events;
-
-  if (session.id && session.id === userId) {
-    calendarEvents = session.calendar;
-  }
+  let calendarEvents = session.id === userId ? session.calendar : events;
 
   useEffect(function () {
     dispatch(fetchCalendar(userId));
