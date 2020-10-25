@@ -1,6 +1,7 @@
 import express from "express";
 import { eventValidator } from "./event.validators";
-import multer from "multer";
+
+import { upload } from "../../middlewares/multer";
 
 import {
   getAll,
@@ -10,8 +11,6 @@ import {
   remove,
   getByUserId,
 } from "./event.controllers";
-
-const upload = multer({ dest: "uploads" });
 
 const router = express.Router();
 
