@@ -17,9 +17,9 @@ export const StyledImagePlaceholder = styled.div`
   margin-right: 6rem;
   margin-top: 2rem;
   padding-top: 6rem;
-   p{
-      color:${styles.colors.primary};
-    }
+  p {
+    color: ${styles.colors.primary};
+  }
   ${StyledIcon} {
     svg {
       transform: scale(3) translateY(-50%);
@@ -28,17 +28,16 @@ export const StyledImagePlaceholder = styled.div`
       }
     }
   }
-  &:hover{
+  &:hover {
     border: 0.1rem dashed ${styles.colorsDark.primary};
-    p{
-      color:${styles.colorsDark.primary};
+    p {
+      color: ${styles.colorsDark.primary};
     }
     svg {
-     path {
+      path {
         fill: ${styles.colorsDark.primary};
       }
     }
-  }
   }
 `;
 

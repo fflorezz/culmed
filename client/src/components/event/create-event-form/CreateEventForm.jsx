@@ -20,8 +20,18 @@ const CreateEventForm = () => {
     if (loading) {
       return;
     }
-    // dispatch(createEvent({ ...data, authorId: session.id }));+
-    console.log(data);
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("startDate", data.startDate);
+    formData.append("endDate", data.endDate);
+    formData.append("location", data.location);
+    formData.append("description", data.description);
+    formData.append("category", data.category);
+    formData.append("authorId", session.id);
+    formData.append("price", data.price);
+    formData.append("image", data.image[0]);
+
+    dispatch(createEvent(formData));
   }
 
   useEffect(() => {

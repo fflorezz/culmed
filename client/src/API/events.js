@@ -30,11 +30,16 @@ export async function getEventById(eventId) {
 }
 
 export async function createEvent(event) {
+  console.log("API", event);
   try {
-    const response = await axios.post(
-      `http://localhost:5000/api/events`,
-      event
-    );
+    const response = await axios({
+      url: "http://localhost:5000/api/events",
+      data: event,
+      method: "POST",
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
     return response.data.data;
   } catch (error) {
     throw new Error(error.message);

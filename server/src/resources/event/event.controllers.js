@@ -21,6 +21,7 @@ export const getAll = async (req, res) => {
 };
 
 export const create = async (req, res) => {
+  console.log("************", req.file);
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {

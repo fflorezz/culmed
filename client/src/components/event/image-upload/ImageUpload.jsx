@@ -4,21 +4,7 @@ import {
   StyledImagePreview,
 } from "./ImageUpload-styles";
 import Icon from "./../../shared/icon/Icon";
-
-const mergeRefs = (...refs) => {
-  const filteredRefs = refs.filter(Boolean);
-  if (!filteredRefs.length) return null;
-  if (filteredRefs.length === 0) return filteredRefs[0];
-  return inst => {
-    for (const ref of filteredRefs) {
-      if (typeof ref === "function") {
-        ref(inst);
-      } else if (ref) {
-        ref.current = inst;
-      }
-    }
-  };
-};
+import { mergeRefs } from "./../../../utilities/mergeRefs";
 
 const ImageUpload = ({ register }) => {
   const [file, setFile] = useState();

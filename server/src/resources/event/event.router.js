@@ -1,5 +1,6 @@
 import express from "express";
 import { eventValidator } from "./event.validators";
+import multer from "multer";
 
 import {
   getAll,
@@ -10,9 +11,14 @@ import {
   getByUserId,
 } from "./event.controllers";
 
+const upload = multer({ dest: "uploads" });
+
 const router = express.Router();
 
-router.route("/").get(getAll).post(eventValidator, create);
+router
+  .route("/")
+  .get(getAll)
+  .post(upload.single("image"), eventValidator, create);
 
 router
   .route("/:eventId")
