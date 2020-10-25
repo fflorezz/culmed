@@ -20,7 +20,8 @@ const CreateEventForm = () => {
     if (loading) {
       return;
     }
-    dispatch(createEvent({ ...data, authorId: session.id }));
+    // dispatch(createEvent({ ...data, authorId: session.id }));+
+    console.log(data);
   }
 
   useEffect(() => {
@@ -57,7 +58,7 @@ const CreateEventForm = () => {
   return (
     <StyledCreateEventForm>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <ImageUpload />
+        <ImageUpload register={register} />
         <div className="form-text">
           <label htmlFor="title">Evento</label>
           <input
