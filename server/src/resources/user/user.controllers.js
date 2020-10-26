@@ -72,3 +72,66 @@ export const signup = async (req, res) => {
     res.status(500).send({ message: "Something went wrong, Try again later" });
   }
 };
+
+export const login = async (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).send({ Error: errors.array()[0].msg }).end();
+  }
+
+  const { email, password } = req.body;
+
+  let existingUser;
+  try {
+    existingUser = await User.findOne({
+      attributes: ["id", "userName", "avatarImg", "password"],
+      where: {
+        email: email,
+      },
+    });
+    console.log("******", existingUser.id);
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .send({ message: "Login in  failed, please try again" });
+  }
+
+  if (!existingUser) {
+    return res
+      .status(401)
+      .send({ message: "Invalid credentials, could not  log you in " });
+  }
+
+  let isValidPassword;
+  try {
+    isValidPassword = await bcrypt.compare(password, existingUser.password);
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .send({ message: "Login in  failed, please try again " });
+  }
+
+  if (!isValidPassword) {
+    return res
+      .status(401)
+      .send({ message: "Invalid credentials, could not  log you in " });
+  }
+
+  let token;
+  try {
+    token = createToken({
+      sub: existingUser.id,
+      userName: existingUser.userName,
+    });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .send({ message: "Login in failed, please try again" });
+  }
+
+  res.status(200).send({ data: { id: existingUser.id, token } });
+};
