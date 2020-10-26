@@ -1,4 +1,7 @@
 import { validationResult } from "express-validator";
+import fs from "fs-extra";
+
+import cloudinary from "./../../middlewares/cloudinary";
 
 import Event from "./event.model";
 import User from "./../user/user.model";
@@ -21,7 +24,6 @@ export const getAll = async (req, res) => {
 };
 
 export const create = async (req, res) => {
-  console.log("----------", req.file);
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -36,13 +38,16 @@ export const create = async (req, res) => {
     description,
     category,
     price,
-    eventImg,
     authorId,
   } = req.body;
 
   // PENDING: VALIDATE USER
 
   try {
+    const image = await cloudinary.uploader.upload(req.file.path, {
+      width: 800,
+    });
+
     const createdEvent = await Event.create({
       title,
       startDate,
@@ -51,10 +56,11 @@ export const create = async (req, res) => {
       description,
       category: category || null,
       price: price || null,
-      eventImg: `http://localhost:5000/${req.file.path}` || null,
+      eventImg: image.url || null,
       authorId,
     });
     if (createdEvent) {
+      await fs.unlink(req.file.path);
       const event = await Event.findOne({
         where: {
           id: createdEvent.id,

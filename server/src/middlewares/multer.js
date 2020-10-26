@@ -3,7 +3,7 @@ import path from "path";
 import { v4 as uuid4 } from "uuid";
 
 const storage = multer.diskStorage({
-  destination: "uploads",
+  destination: path.join(__dirname, "../uploads"),
   filename: (req, file, cb) => {
     cb(null, `${uuid4()}${path.extname(file.originalname)}`);
   },

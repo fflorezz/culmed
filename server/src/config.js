@@ -7,6 +7,11 @@ const config = {
   dbName: process.env.DATABASE_NAME,
   dbUser: process.env.DATABASE_USER,
   dbPassword: process.env.DATABASE_PASSWORD,
+  cloudinary: {
+    name: process.env.CLOUDINARY_NAME,
+    apiKey: process.env.CLOUDINARY_API_KEY,
+    apiSecret: process.env.CLOUDINARY_API_SECRET,
+  },
 };
 
 export default config;
