@@ -21,7 +21,7 @@ export const getAll = async (req, res) => {
 };
 
 export const create = async (req, res) => {
-  console.log("************", req.file);
+  console.log("----------", req.file);
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -51,7 +51,7 @@ export const create = async (req, res) => {
       description,
       category: category || null,
       price: price || null,
-      eventImg,
+      eventImg: `http://localhost:5000/${req.file.path}` || null,
       authorId,
     });
     if (createdEvent) {

@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(compression());
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static("uploads"));
 
 app.use("/api/users", usersRouter);
 app.use("/api/events", eventsRouter);

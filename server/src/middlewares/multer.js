@@ -2,12 +2,8 @@ import multer from "multer";
 import path from "path";
 import { v4 as uuid4 } from "uuid";
 
-const dtn = path.join(__dirname, "../uploads");
-
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, dtn);
-  },
+  destination: "uploads",
   filename: (req, file, cb) => {
     cb(null, `${uuid4()}${path.extname(file.originalname)}`);
   },
@@ -15,7 +11,6 @@ const storage = multer.diskStorage({
 
 export const upload = multer({
   storage: storage,
-  dest: dtn,
   fileFilter: function (req, file, cb) {
     const filetypes = /jpeg|jpg|png/;
     const mimetype = filetypes.test(file.mimetype);
