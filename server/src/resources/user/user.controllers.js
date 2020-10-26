@@ -1,6 +1,8 @@
 import { validationResult } from "express-validator";
+import bcrypt from "bcrypt";
 
 import User from "./user.model";
+import { createToken } from "./../../helpers/jwt";
 
 export const getAll = async (req, res) => {
   try {
@@ -37,7 +39,7 @@ export const signup = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.status(500).send({ Error: errors.array()[0].msg }).end();
+    return res.status(400).send({ Error: errors.array()[0].msg }).end();
   }
 
   if (!req.body.userName || !req.body.email || !req.body.password) {
@@ -46,12 +48,21 @@ export const signup = async (req, res) => {
       .send({ message: "username, email and password are required" });
   }
 
-  const { userName, email, password, avatarImg } = req.body;
+  const { userName, email, password } = req.body;
 
   try {
-    const user = await User.create({ userName, email, password, avatarImg });
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const user = await User.create({
+      userName,
+      email,
+      password: hashedPassword,
+    });
     if (user) {
-      res.status(201).send({ data: { id: user.toJSON().id } });
+      const token = createToken({
+        sub: user.toJSON().id,
+        userName: user.toJSON().userName,
+      });
+      res.status(201).send({ data: { id: user.toJSON().id, token } });
     }
   } catch (err) {
     console.log(err);
