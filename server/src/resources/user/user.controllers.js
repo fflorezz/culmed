@@ -90,7 +90,6 @@ export const login = async (req, res) => {
         email: email,
       },
     });
-    console.log("******", existingUser.id);
   } catch (error) {
     console.log(error);
     return res
@@ -101,7 +100,7 @@ export const login = async (req, res) => {
   if (!existingUser) {
     return res
       .status(401)
-      .send({ message: "Invalid credentials, could not  log you in " });
+      .send({ message: "Invalid credentials, could not log you in" });
   }
 
   let isValidPassword;
@@ -117,7 +116,7 @@ export const login = async (req, res) => {
   if (!isValidPassword) {
     return res
       .status(401)
-      .send({ message: "Invalid credentials, could not  log you in " });
+      .send({ message: "Invalid credentials, could not log you in" });
   }
 
   let token;
