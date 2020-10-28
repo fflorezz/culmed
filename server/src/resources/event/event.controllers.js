@@ -38,10 +38,9 @@ export const create = async (req, res) => {
     description,
     category,
     price,
-    authorId,
   } = req.body;
 
-  // PENDING: VALIDATE USER
+  const userId = req.user.id;
 
   try {
     const image = await cloudinary.uploader.upload(req.file.path, {
@@ -57,7 +56,7 @@ export const create = async (req, res) => {
       category: category || null,
       price: price || null,
       eventImg: image.url || null,
-      authorId,
+      authorId: userId,
     });
     if (createdEvent) {
       await fs.unlink(req.file.path);
@@ -135,6 +134,8 @@ export const update = async (req, res) => {
 
   const eventId = req.params.eventId;
 
+  const userId = req.user.id;
+
   const {
     title,
     startDate,
@@ -144,12 +145,15 @@ export const update = async (req, res) => {
     category,
     price,
     eventImg,
-    authorId,
   } = req.body;
 
-  // PENDING: VALIDATE USER
-
   try {
+    const event = Event.findByPk(eventId);
+    if (event.authorId !== userId) {
+      return res
+        .status(401)
+        .send({ message: "You are not allowed to edit this event" });
+    }
     const results = await Event.update(
       {
         title,
@@ -160,7 +164,7 @@ export const update = async (req, res) => {
         category: category || null,
         price: price || null,
         eventImg,
-        authorId,
+        authorId: userId,
       },
       {
         where: {
@@ -192,16 +196,18 @@ export const update = async (req, res) => {
 
 export const remove = async (req, res) => {
   const errors = validationResult(req);
-
   if (!errors.isEmpty()) {
     return res.status(500).send({ Error: errors.array()[0].msg }).end();
   }
-
   const eventId = req.params.eventId;
-
-  // PENDING: VALIDATE USER
-
+  const userId = req.user.id;
   try {
+    const event = Event.findByPk(eventId);
+    if (event.authorId !== userId) {
+      return res
+        .status(401)
+        .send({ message: "You are not allowed to delete this event" });
+    }
     const deletedPlace = await Event.destroy({
       where: {
         id: eventId,

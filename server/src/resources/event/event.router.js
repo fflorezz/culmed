@@ -3,6 +3,7 @@ import { eventValidator } from "./event.validators";
 
 import { upload } from "../../middlewares/multer";
 
+import { checkAuth } from "./../../middlewares/check-auth";
 import {
   getAll,
   create,
@@ -17,13 +18,13 @@ const router = express.Router();
 router
   .route("/")
   .get(getAll)
-  .post(upload.single("image"), eventValidator, create);
+  .post(checkAuth, upload.single("image"), eventValidator, create);
 
 router
   .route("/:eventId")
   .get(getById)
-  .put(eventValidator, update)
-  .delete(remove);
+  .put(checkAuth, eventValidator, update)
+  .delete(checkAuth, remove);
 
 router.get("/user/:userId", getByUserId);
 
