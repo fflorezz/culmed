@@ -42,7 +42,8 @@ export const getFollowersAndFollowings = async (req, res) => {
 };
 
 export const follow = async (req, res) => {
-  const { userId, followingId } = req.params;
+  const { followingId } = req.params;
+  const userId = req.user.id;
   try {
     const followed = await User.findOne({
       where: {
@@ -65,7 +66,8 @@ export const follow = async (req, res) => {
 };
 
 export const unfollow = async (req, res) => {
-  const { userId, followingId } = req.params;
+  const { followingId } = req.params;
+  const userId = req.user.id;
   try {
     const followed = await User.findOne({
       where: {
@@ -85,6 +87,8 @@ export const unfollow = async (req, res) => {
     res.send({ data: { id: followingId } });
   } catch (err) {
     console.log(err);
-    res.status(500).send({ message: "Something went wrong, Try again later" });
+    res.status(500).send({
+      message: err.message || "Something went wrong, Try again later",
+    });
   }
 };

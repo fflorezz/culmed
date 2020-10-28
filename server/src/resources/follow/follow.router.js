@@ -1,5 +1,6 @@
 import express from "express";
 
+import { checkAuth } from "./../../middlewares/check-auth";
 import {
   getFollowersAndFollowings,
   follow,
@@ -8,9 +9,11 @@ import {
 
 const router = express.Router();
 
-router.route("/:userId/add/:followingId").post(follow);
+router.use("/", checkAuth);
 
-router.route("/:userId/remove/:followingId").delete(unfollow);
+router.route("/add/:followingId").post(follow);
+
+router.route("/remove/:followingId").delete(unfollow);
 
 router.route("/:userId").get(getFollowersAndFollowings);
 
