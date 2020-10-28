@@ -127,15 +127,11 @@ export const getByUserId = async (req, res) => {
 
 export const update = async (req, res) => {
   const errors = validationResult(req);
-
   if (!errors.isEmpty()) {
     return res.status(400).send({ errors: errors.array() }).end();
   }
-
   const eventId = req.params.eventId;
-
   const userId = req.user.id;
-
   const {
     title,
     startDate,
@@ -148,13 +144,17 @@ export const update = async (req, res) => {
   } = req.body;
 
   try {
-    const event = Event.findByPk(eventId);
+    const event = await Event.findByPk(eventId);
+    console.log("*****", event);
+    if (!event) {
+      res.status(404).send({ message: "Couldn't find event" });
+    }
     if (event.authorId !== userId) {
       return res
         .status(401)
         .send({ message: "You are not allowed to edit this event" });
     }
-    const results = await Event.update(
+    await Event.update(
       {
         title,
         startDate,
@@ -173,9 +173,6 @@ export const update = async (req, res) => {
         returning: true,
       }
     );
-    if (results[0] === 0) {
-      res.status(404).send({ message: "Couldn't find event" });
-    }
     const updatedEvent = await Event.findOne({
       where: {
         id: eventId,
@@ -202,21 +199,21 @@ export const remove = async (req, res) => {
   const eventId = req.params.eventId;
   const userId = req.user.id;
   try {
-    const event = Event.findByPk(eventId);
+    const event = await Event.findByPk(eventId);
+    if (!event) {
+      res.status(404).send({ message: "Couldn't find event" });
+    }
     if (event.authorId !== userId) {
       return res
         .status(401)
         .send({ message: "You are not allowed to delete this event" });
     }
-    const deletedPlace = await Event.destroy({
+    await Event.destroy({
       where: {
         id: eventId,
       },
     });
-    if (deletedPlace === 0) {
-      res.status(404).send({ message: "Couldn't find event" });
-    }
-    res.status(200).send({ data: { id: parseInt(eventId) } });
+    res.status(200).send({ data: { id: event.id } });
   } catch (err) {
     console.log(err);
     res.status(500).send({
