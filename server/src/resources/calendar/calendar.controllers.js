@@ -32,10 +32,8 @@ export const getByUserId = async (req, res) => {
 };
 
 export const addEvent = async (req, res) => {
-  const { userId, eventId } = req.params;
-
-  // PENDDING: AUTH USER
-
+  const { eventId } = req.params;
+  const userId = req.user.id;
   try {
     const event = await Event.findOne({
       where: {
@@ -63,10 +61,8 @@ export const addEvent = async (req, res) => {
 };
 
 export const removeEvent = async (req, res) => {
-  const { userId, eventId } = req.params;
-
-  // PENDDING: AUTH USER
-
+  const { eventId } = req.params;
+  const userId = req.user.id;
   try {
     const removedEvent = await Calendar.destroy({
       where: {
