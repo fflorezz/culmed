@@ -78,10 +78,16 @@ export const updateEvent = createAsyncThunk(
   }
 );
 
+export const login = createAsyncThunk("session/loginStatus", async user => {
+  const response = await User.login(user);
+  return response;
+});
+
 const sessionSlice = createSlice({
   name: "session",
   initialState: {
-    isLogin: true,
+    id: null,
+    isLogin: false,
     loading: false,
     error: null,
     events: [],
@@ -226,6 +232,24 @@ const sessionSlice = createSlice({
       state.loading = false;
     },
     [updateEvent.pending]: state => {
+      state.loading = true;
+    },
+
+    // LOGIN
+    [login.fulfilled]: (state, { payload }) => {
+      state = { ...state, id: payload.id };
+      localStorage.setItem("token", payload.token);
+      state.isLogin = true;
+      state.status = "LOGIN";
+      state.error = null;
+      state.loading = false;
+      return state;
+    },
+    [login.rejected]: (state, action) => {
+      state.error = action.error;
+      state.loading = false;
+    },
+    [login.pending]: state => {
       state.loading = true;
     },
   },

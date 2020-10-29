@@ -1,7 +1,4 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-
-import { fetchUserData } from "./redux/slices/session";
+import React from "react";
 
 import AppRoutes from "./AppRoutes";
 import Header from "./components/shared/header/Header";
@@ -9,13 +6,6 @@ import Header from "./components/shared/header/Header";
 import "./App.css";
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchUserData("7541c7bb-e41a-46ab-9f57-bce436b303f4"));
-    // eslint-disable-next-line
-  }, []);
-
   return (
     <div className="App">
       <Header />

@@ -9,23 +9,30 @@ import ExploreNav from "../../components/shared/nav/ExploreNav";
 import EventsList from "../../components/event/event-list/EventsList";
 import PageContainer from "./../../components/shared/page-container/PageContainer";
 import NotFoundPage from "./../not-found/NotFoundPage";
+import { fetchUserData } from "./../../redux/slices/session";
 
 const ExplorePage = () => {
   const { events, loading, error } = useFetchEvents();
 
   const filterOption = useSelector(state => state.events.exploreFilter);
-  const userId = useSelector(state => state.session.id);
+  const session = useSelector(state => state.session);
   const dispatch = useDispatch();
 
-  const exploreEvents = userId ? filterEventsById(events, userId) : events;
+  const exploreEvents = session.id
+    ? filterEventsById(events, session.id)
+    : events;
   const filteredEvents = filterEventsByTag(exploreEvents, filterOption);
 
-  // RESET FILTER
   useEffect(() => {
+    if (session.id) {
+      console.log(session.id);
+      dispatch(fetchUserData(session.id));
+    }
     return () => {
+      // RESET FILTER
       dispatch(setExploreFilter("todos"));
     };
-  }, [dispatch]);
+  }, [dispatch, session.id]);
 
   if (!loading && filteredEvents.length === 0) {
     return (

@@ -1,9 +1,13 @@
 import axios from "axios";
 
 export async function getEvents(userId) {
+  const token = localStorage.getItem("token");
   try {
-    const response = await axios(
-      `http://localhost:5000/api/calendar/${userId}`
+    const response = await axios.get(
+      `http://localhost:5000/api/calendar/${userId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
     );
     return response.data.data;
   } catch (error) {

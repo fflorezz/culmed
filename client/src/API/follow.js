@@ -1,8 +1,11 @@
 import axios from "axios";
 
 export const getFollowersandFollowings = async userId => {
+  const token = localStorage.getItem("token");
   try {
-    const response = await axios(`http://localhost:5000/api/follow/${userId}`);
+    const response = await axios(`http://localhost:5000/api/follow/${userId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     return response.data.data;
   } catch (error) {
     throw new Error(error.message);

@@ -1,17 +1,35 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import Button from "./../../shared/button/Button";
 
 import StyledLoginForm from "./LoginForm-styles";
+import { useSelector, useDispatch } from "react-redux";
+import { clearStatus, login } from "./../../../redux/slices/session";
 
 const LoginForm = () => {
   const { handleSubmit, errors, register } = useForm();
+  const { loading, status } = useSelector(state => state.session);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   function onSubmit(data) {
-    console.log(data);
+    if (loading) {
+      return;
+    }
+    dispatch(login(data));
   }
+
+  useEffect(() => {
+    if (status === "LOGIN") {
+      history.push("/");
+      return () => {
+        dispatch(clearStatus());
+      };
+    }
+    // eslint-disable-next-line
+  }, [status]);
 
   return (
     <StyledLoginForm>
@@ -38,7 +56,7 @@ const LoginForm = () => {
         )}
         <label htmlFor="password">Contraseña</label>
         <input
-          type="text"
+          type="password"
           name="password"
           ref={register({ required: true, minLength: 6 })}
           className={errors.password && "error"}
