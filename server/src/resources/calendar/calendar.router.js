@@ -5,9 +5,9 @@ import { checkAuth } from "./../../middlewares/check-auth";
 
 const router = express.Router();
 
+router.use("/", checkAuth);
 router.route("/:userId").get(getByUserId);
-
-router.route("/add/:eventId").post(checkAuth, addEvent);
-router.route("/remove/:eventId").delete(checkAuth, removeEvent);
+router.route("/add/:eventId").post(addEvent);
+router.route("/remove/:eventId").delete(removeEvent);
 
 export default router;
