@@ -30,7 +30,6 @@ export async function getEventById(eventId) {
 }
 
 export async function createEvent(event) {
-  console.log("API", event);
   try {
     const response = await axios({
       url: "http://localhost:5000/api/events",

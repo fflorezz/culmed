@@ -15,7 +15,11 @@ export async function login(user) {
       "http://localhost:5000/api/users/login",
       user
     );
-    return response.data.data;
+    const { data } = response.data;
+    if (!data.token) {
+      throw new Error("No token");
+    }
+    return data;
   } catch (error) {
     throw new Error(error.message);
   }

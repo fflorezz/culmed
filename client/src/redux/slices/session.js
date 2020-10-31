@@ -4,6 +4,7 @@ import * as Calendar from "../../API/calendar";
 import * as User from "../../API/user";
 import * as Follow from "../../API/follow";
 import * as Event from "../../API/events";
+import { getUserIdFromToken } from "../../utilities/jwtHelpers";
 
 export const fetchUserData = createAsyncThunk(
   "session/fetchUserDataStatus",
@@ -80,6 +81,9 @@ export const updateEvent = createAsyncThunk(
 
 export const login = createAsyncThunk("session/loginStatus", async user => {
   const response = await User.login(user);
+  const userId = getUserIdFromToken(response.token);
+  localStorage.setItem("userId", userId);
+  localStorage.setItem("token", response.token);
   return response;
 });
 
@@ -237,8 +241,6 @@ const sessionSlice = createSlice({
 
     // LOGIN
     [login.fulfilled]: (state, { payload }) => {
-      state = { ...state, id: payload.id };
-      localStorage.setItem("token", payload.token);
       state.isLogin = true;
       state.status = "LOGIN";
       state.error = null;

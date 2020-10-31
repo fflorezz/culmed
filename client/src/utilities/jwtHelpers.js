@@ -11,6 +11,15 @@ export function getTokenExpirationDate(token) {
   return date;
 }
 
+export function getUserIdFromToken(token) {
+  const decoded = decode(token);
+  if (!decoded.sub) {
+    return null;
+  }
+
+  return decoded.sub;
+}
+
 export function isTokenExpired(token) {
   const date = getTokenExpirationDate(token);
   const offsetSeconds = 0;
