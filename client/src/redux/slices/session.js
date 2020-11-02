@@ -6,8 +6,8 @@ import * as Follow from "../../API/follow";
 import * as Event from "../../API/events";
 import { getUserIdFromToken } from "../../utilities/jwtHelpers";
 
-export const fetchUserData = createAsyncThunk(
-  "session/fetchUserDataStatus",
+export const setUser = createAsyncThunk(
+  "session/setUserStatus",
   async userId => {
     const userData = await User.getUserData(userId);
     const calendar = await Calendar.getEvents(userId);
@@ -105,18 +105,19 @@ const sessionSlice = createSlice({
     },
   },
   extraReducers: {
-    // FETCH USER DATA
-    [fetchUserData.fulfilled]: (state, { payload }) => {
+    // SET USER DATA
+    [setUser.fulfilled]: (state, { payload }) => {
       state = { ...state, ...payload };
+      state.isLogin = true;
       state.error = null;
       state.loading = false;
       return state;
     },
-    [fetchUserData.rejected]: (state, action) => {
+    [setUser.rejected]: (state, action) => {
       state.error = action.error;
       state.loading = false;
     },
-    [fetchUserData.pending]: state => {
+    [setUser.pending]: state => {
       state.loading = true;
     },
 

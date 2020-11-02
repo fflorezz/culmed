@@ -6,7 +6,7 @@ import Button from "./../../shared/button/Button";
 
 import StyledLoginForm from "./LoginForm-styles";
 import { useSelector, useDispatch } from "react-redux";
-import { clearStatus, login } from "./../../../redux/slices/session";
+import { clearStatus, login, setUser } from "./../../../redux/slices/session";
 
 const LoginForm = () => {
   const { handleSubmit, errors, register } = useForm();
@@ -23,6 +23,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (status === "LOGIN") {
+      dispatch(setUser(localStorage.getItem("userId")));
       history.push("/");
       return () => {
         dispatch(clearStatus());
