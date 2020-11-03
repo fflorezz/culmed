@@ -5,6 +5,7 @@ import * as User from "../../API/user";
 import * as Follow from "../../API/follow";
 import * as Event from "../../API/events";
 import { getUserIdFromToken } from "../../utilities/jwtHelpers";
+import { isTokenExpired } from "./../../utilities/jwtHelpers";
 
 export const setUser = createAsyncThunk(
   "session/setUserStatus",
@@ -97,7 +98,7 @@ const sessionSlice = createSlice({
   name: "session",
   initialState: {
     id: null,
-    isLogin: false,
+    isLogin: !isTokenExpired(localStorage.getItem("token")),
     loading: false,
     error: null,
     events: [],
@@ -117,7 +118,6 @@ const sessionSlice = createSlice({
     // SET USER DATA
     [setUser.fulfilled]: (state, { payload }) => {
       state = { ...state, ...payload };
-      state.isLogin = true;
       state.error = null;
       state.loading = false;
       return state;
@@ -251,7 +251,6 @@ const sessionSlice = createSlice({
 
     // LOGIN
     [login.fulfilled]: (state, { payload }) => {
-      state.isLogin = true;
       state.status = "LOGIN";
       state.error = null;
       state.loading = false;
@@ -268,7 +267,6 @@ const sessionSlice = createSlice({
     // LOGOUT
     [logout]: state => {
       state.id = null;
-      state.isLogin = false;
       state.events = [];
       state.calendar = [];
       state.following = [];
