@@ -43,10 +43,12 @@ export const create = async (req, res) => {
   const userId = req.user.id;
 
   try {
-    const image = await cloudinary.uploader.upload(req.file.path, {
-      width: 800,
-    });
-
+    let image;
+    if (req.file) {
+      image = await cloudinary.uploader.upload(req.file.path, {
+        width: 800,
+      });
+    }
     const createdEvent = await Event.create({
       title,
       startDate,
@@ -55,11 +57,13 @@ export const create = async (req, res) => {
       description,
       category: category || null,
       price: price || null,
-      eventImg: image.url || null,
+      eventImg: image ? image.url : null,
       authorId: userId,
     });
     if (createdEvent) {
-      await fs.unlink(req.file.path);
+      if (image) {
+        await fs.unlink(req.file.path);
+      }
       const event = await Event.findOne({
         where: {
           id: createdEvent.id,

@@ -26,6 +26,6 @@ router
   .put(checkAuth, eventValidator, update)
   .delete(checkAuth, remove);
 
-router.get("/user/:userId", getByUserId);
+router.get("/user/:userId", checkAuth, getByUserId);
 
 export default router;

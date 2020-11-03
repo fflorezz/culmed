@@ -1,4 +1,5 @@
 import axios from "axios";
+import { authHeader } from "../utilities/jwtHelpers";
 
 export async function getAllEvents() {
   try {
@@ -11,7 +12,9 @@ export async function getAllEvents() {
 
 export async function getEventsByAuthor(authorId) {
   try {
-    const response = await axios(`/events/user/${authorId}`);
+    const response = await axios(`/events/user/${authorId}`, {
+      headers: authHeader(),
+    });
     return response.data.data;
   } catch (error) {
     throw new Error(error.message);
@@ -28,6 +31,7 @@ export async function getEventById(eventId) {
 }
 
 export async function createEvent(event) {
+  const { Authorization } = authHeader();
   try {
     const response = await axios({
       url: "/events",
@@ -35,6 +39,7 @@ export async function createEvent(event) {
       method: "POST",
       headers: {
         "content-type": "multipart/form-data",
+        Authorization,
       },
     });
     return response.data.data;
@@ -45,7 +50,9 @@ export async function createEvent(event) {
 
 export async function deleteEvent(eventId) {
   try {
-    const response = await axios.delete(`/events/${eventId}`);
+    const response = await axios.delete(`/events/${eventId}`, {
+      headers: authHeader(),
+    });
     return response.data.data;
   } catch (error) {
     throw new Error(error.message);
@@ -54,7 +61,9 @@ export async function deleteEvent(eventId) {
 
 export async function updateEvent(event) {
   try {
-    const response = await axios.put(`/events/${event.id}`, event);
+    const response = await axios.put(`/events/${event.id}`, event, {
+      headers: authHeader(),
+    });
     return response.data.data;
   } catch (error) {
     throw new Error(error.message);

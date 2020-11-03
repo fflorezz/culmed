@@ -28,3 +28,13 @@ export function isTokenExpired(token) {
   }
   return !(date.valueOf() > new Date().valueOf() + offsetSeconds * 1000);
 }
+
+export function authHeader() {
+  const token = localStorage.getItem("token");
+
+  if (token && !isTokenExpired(token)) {
+    return { Authorization: "Bearer " + token };
+  } else {
+    return {};
+  }
+}

@@ -1,8 +1,10 @@
 import axios from "axios";
 
+import { authHeader } from "../utilities/jwtHelpers";
+
 export async function getUserData(userId) {
   try {
-    const response = await axios(`/users/${userId}`);
+    const response = await axios(`/users/${userId}`, { headers: authHeader() });
     return response.data.data;
   } catch (error) {
     throw new Error(error.message);
