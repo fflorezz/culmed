@@ -1,6 +1,7 @@
 import React from "react";
 
 import StyledAvatar from "./Avatar-styles";
+import avatarImgDefault from "../../../assets/img/default-avatar.jpg";
 
 const Avatar = ({
   src,
@@ -23,7 +24,7 @@ const Avatar = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <img src={src} alt="" />
+      <img src={src || avatarImgDefault} alt="" />
       {text && (
         <div className="text">
           <p className="name">

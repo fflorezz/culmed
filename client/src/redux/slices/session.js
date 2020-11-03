@@ -118,6 +118,7 @@ const sessionSlice = createSlice({
     // SET USER DATA
     [setUser.fulfilled]: (state, { payload }) => {
       state = { ...state, ...payload };
+      state.isLogin = true;
       state.error = null;
       state.loading = false;
       return state;
@@ -251,6 +252,7 @@ const sessionSlice = createSlice({
 
     // LOGIN
     [login.fulfilled]: (state, { payload }) => {
+      state.isLogin = true;
       state.status = "LOGIN";
       state.error = null;
       state.loading = false;
@@ -267,6 +269,7 @@ const sessionSlice = createSlice({
     // LOGOUT
     [logout]: state => {
       state.id = null;
+      state.isLogin = false;
       state.events = [];
       state.calendar = [];
       state.following = [];
