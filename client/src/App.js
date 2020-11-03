@@ -17,7 +17,8 @@ function App() {
     if (token && !isTokenExpired(token)) {
       dispatch(setUser(userId));
     }
-  }, [dispatch]);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className="App">

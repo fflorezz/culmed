@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function getAllEvents() {
   try {
-    const response = await axios(`http://localhost:5000/api/events`);
+    const response = await axios(`/events`);
     return response.data.data;
   } catch (error) {
     throw new Error(error.message);
@@ -11,9 +11,7 @@ export async function getAllEvents() {
 
 export async function getEventsByAuthor(authorId) {
   try {
-    const response = await axios(
-      `http://localhost:5000/api/events/user/${authorId}`
-    );
+    const response = await axios(`/events/user/${authorId}`);
     return response.data.data;
   } catch (error) {
     throw new Error(error.message);
@@ -22,7 +20,7 @@ export async function getEventsByAuthor(authorId) {
 
 export async function getEventById(eventId) {
   try {
-    const response = await axios(`http://localhost:5000/api/events/${eventId}`);
+    const response = await axios(`/events/${eventId}`);
     return response.data.data;
   } catch (error) {
     throw new Error(error.message);
@@ -32,7 +30,7 @@ export async function getEventById(eventId) {
 export async function createEvent(event) {
   try {
     const response = await axios({
-      url: "http://localhost:5000/api/events",
+      url: "/events",
       data: event,
       method: "POST",
       headers: {
@@ -47,9 +45,7 @@ export async function createEvent(event) {
 
 export async function deleteEvent(eventId) {
   try {
-    const response = await axios.delete(
-      `http://localhost:5000/api/events/${eventId}`
-    );
+    const response = await axios.delete(`/events/${eventId}`);
     return response.data.data;
   } catch (error) {
     throw new Error(error.message);
@@ -58,10 +54,7 @@ export async function deleteEvent(eventId) {
 
 export async function updateEvent(event) {
   try {
-    const response = await axios.put(
-      `http://localhost:5000/api/events/${event.id}`,
-      event
-    );
+    const response = await axios.put(`/events/${event.id}`, event);
     return response.data.data;
   } catch (error) {
     throw new Error(error.message);
