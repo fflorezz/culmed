@@ -15,7 +15,6 @@ function App() {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
     if (token && !isTokenExpired(token)) {
-      console.log("works!");
       dispatch(setUser(userId));
     }
     // eslint-disable-next-line

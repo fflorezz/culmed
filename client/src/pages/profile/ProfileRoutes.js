@@ -11,6 +11,7 @@ import FollowingPage from "../following-page/FollowingPage";
 import CalendarPage from "../calendar/CalendarPage";
 import EventsPage from "../events/EventsPage";
 import EditProfilePage from "../edit-profile/EditProfilePage";
+import { isTokenExpired } from "./../../utilities/jwtHelpers";
 
 let ProfileRoutes = () => {
   let location = useLocation();
@@ -40,12 +41,14 @@ let ProfileRoutes = () => {
 };
 
 let PrivateRoute = ({ component: Component, ...rest }) => {
-  let isLogin = true;
+  const token = localStorage.getItem("token");
+  const isTokenValid = token && !isTokenExpired(token);
+
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        isLogin ? (
+        isTokenValid ? (
           <Component />
         ) : (
           <Redirect to={{ pathname: "/login", state: { from: location } }} />
