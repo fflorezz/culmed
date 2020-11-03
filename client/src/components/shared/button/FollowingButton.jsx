@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import StyledFollowingButton from "./FollowingButton-styles";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { followUser } from "../../../redux/slices/session";
 import { unfollowUser } from "./../../../redux/slices/session";
 
 const FollowingButton = ({ isFollowing, followingId }) => {
   const dispatch = useDispatch();
-  const userId = useSelector(state => state.session.id);
   const [buttonText, setText] = useState("");
 
   useEffect(() => {
@@ -26,11 +25,7 @@ const FollowingButton = ({ isFollowing, followingId }) => {
   }
 
   function handleClick() {
-    dispatch(
-      isFollowing
-        ? unfollowUser({ userId, followingId })
-        : followUser({ userId, followingId })
-    );
+    dispatch(isFollowing ? unfollowUser(followingId) : followUser(followingId));
   }
 
   return (

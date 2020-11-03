@@ -78,7 +78,7 @@ export const unfollow = async (req, res) => {
     if (!followed) {
       return res.status(404).send({ message: "Couldn't find user" });
     }
-    await Follow.destroy({
+    const result = await Follow.destroy({
       where: {
         followerId: userId,
         followedId: followingId,

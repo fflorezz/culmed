@@ -14,7 +14,8 @@ export const getFollowersandFollowings = async userId => {
 
 export const followUser = async followingId => {
   try {
-    const response = await axios.post(`/follow/add/${followingId}`, {
+    const response = await axios(`/follow/add/${followingId}`, {
+      method: "POST",
       headers: authHeader(),
     });
     return response.data.data;

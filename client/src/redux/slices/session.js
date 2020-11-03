@@ -26,16 +26,16 @@ export const setUser = createAsyncThunk(
 
 export const followUser = createAsyncThunk(
   "session/followUserStatus",
-  async ({ userId, followingId }) => {
-    const response = await Follow.followUser(userId, followingId);
+  async followingId => {
+    const response = await Follow.followUser(followingId);
     return response;
   }
 );
 
 export const unfollowUser = createAsyncThunk(
   "session/unfollowUserStatus",
-  async ({ userId, followingId }) => {
-    const response = await Follow.unfollowUser(userId, followingId);
+  async followingId => {
+    const response = await Follow.unfollowUser(followingId);
     return response;
   }
 );
