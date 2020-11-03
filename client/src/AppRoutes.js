@@ -9,6 +9,7 @@ import CreateEventPage from "./pages/create-event/CreateEventPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import NotFoundPage from "./pages/not-found/NotFoundPage";
 import EventPage from "./pages/event/EventPage";
+import { useSelector } from "react-redux";
 
 let AppRoutes = () => {
   let location = useLocation();
@@ -37,7 +38,8 @@ let AppRoutes = () => {
 };
 
 let PrivateRoute = ({ component: Component, ...rest }) => {
-  let isLogin = true;
+  const { isLogin } = useSelector(state => state.session);
+
   return (
     <Route
       {...rest}

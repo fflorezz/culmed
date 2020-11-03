@@ -11,9 +11,8 @@ import ProfileDrop from "./../../user/profile-drop/ProfileDrop";
 import StyledHeader from "./Header-styles";
 
 const Header = () => {
-  const isLogin = true;
   const [isOpen, setIsOpen] = useState(false);
-  const { id, avatarImg } = useSelector(state => state.session);
+  const { id, avatarImg, isLogin } = useSelector(state => state.session);
 
   function toggleDrop() {
     setIsOpen(!isOpen);

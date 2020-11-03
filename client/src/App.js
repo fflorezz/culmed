@@ -17,7 +17,7 @@ function App() {
     if (token && !isTokenExpired(token)) {
       dispatch(setUser(userId));
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="App">
