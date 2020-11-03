@@ -13,8 +13,9 @@ export async function getEvents(userId) {
 }
 export async function addEvent(eventId) {
   try {
-    const response = await axios.post(`/calendar/add/${eventId}`, {
+    const response = await axios(`/calendar/add/${eventId}`, {
       headers: authHeader(),
+      method: "POST",
     });
     return response.data.data;
   } catch (error) {

@@ -11,7 +11,6 @@ import {
 const AddEventButton = ({ eventId, isCalendarEvent }) => {
   const dispatch = useDispatch();
   const { status, loading } = useSelector(state => state.session);
-  const userId = useSelector(state => state.session.id);
   const [calendarEvent, setCalendarEvent] = useState(isCalendarEvent);
 
   //PENDING: ERROR HANDLING
@@ -21,9 +20,9 @@ const AddEventButton = ({ eventId, isCalendarEvent }) => {
       return;
     }
     if (calendarEvent) {
-      dispatch(removeEventFromCalendar({ eventId, userId }));
+      dispatch(removeEventFromCalendar(eventId));
     } else {
-      dispatch(addEventToCalendar({ eventId, userId }));
+      dispatch(addEventToCalendar(eventId));
     }
   }
 

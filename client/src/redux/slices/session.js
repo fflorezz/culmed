@@ -42,16 +42,16 @@ export const unfollowUser = createAsyncThunk(
 
 export const addEventToCalendar = createAsyncThunk(
   "session/addEventToCalendarStatus",
-  async ({ userId, eventId }) => {
-    const response = await Calendar.addEvent(userId, eventId);
+  async eventId => {
+    const response = await Calendar.addEvent(eventId);
     return response;
   }
 );
 
 export const removeEventFromCalendar = createAsyncThunk(
   "session/removeEventFromCalendarStatus",
-  async ({ userId, eventId }) => {
-    const response = await Calendar.removeEvent(userId, eventId);
+  async eventId => {
+    const response = await Calendar.removeEvent(eventId);
     return response;
   }
 );
