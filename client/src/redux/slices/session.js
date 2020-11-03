@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 
 import * as Calendar from "../../API/calendar";
 import * as User from "../../API/user";
@@ -87,6 +87,12 @@ export const login = createAsyncThunk("session/loginStatus", async user => {
   return response;
 });
 
+export const logout = createAction("session/logout", function () {
+  localStorage.removeItem("token");
+  localStorage.removeItem("userId");
+  return {};
+});
+
 const sessionSlice = createSlice({
   name: "session",
   initialState: {
@@ -97,7 +103,10 @@ const sessionSlice = createSlice({
     events: [],
     calendar: [],
     following: [],
+    followers: [],
     status: null,
+    avatarImg: null,
+    userName: null,
   },
   reducers: {
     clearStatus: state => {
@@ -254,6 +263,18 @@ const sessionSlice = createSlice({
     },
     [login.pending]: state => {
       state.loading = true;
+    },
+
+    // LOGOUT
+    [logout]: state => {
+      state.id = null;
+      state.isLogin = false;
+      state.events = [];
+      state.calendar = [];
+      state.following = [];
+      state.followers = [];
+      state.avatarImg = null;
+      state.userName = null;
     },
   },
 });

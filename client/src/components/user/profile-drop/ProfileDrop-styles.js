@@ -7,7 +7,17 @@ const StyledDrop = styled.div`
   background-color: ${styles.colors.white};
   border-radius: 0.5rem;
   border: 1px solid ${styles.colors.gray};
-  a {
+  & button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+  & a,
+  button {
     display: block;
     padding: 0.5rem 0;
     font: 500 1.2rem roboto, sans-serif;
