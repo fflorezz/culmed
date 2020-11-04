@@ -94,6 +94,14 @@ export const logout = createAction("session/logout", function () {
   return {};
 });
 
+export const signup = createAsyncThunk("session/signupStatus", async user => {
+  const response = await User.signup(user);
+  const userId = getUserIdFromToken(response.token);
+  localStorage.setItem("userId", userId);
+  localStorage.setItem("token", response.token);
+  return response;
+});
+
 const sessionSlice = createSlice({
   name: "session",
   initialState: {
@@ -276,6 +284,22 @@ const sessionSlice = createSlice({
       state.followers = [];
       state.avatarImg = null;
       state.userName = null;
+    },
+
+    // SIGNUP
+    [signup.fulfilled]: (state, { payload }) => {
+      state.isLogin = true;
+      state.status = "SIGNUP";
+      state.error = null;
+      state.loading = false;
+      return state;
+    },
+    [signup.rejected]: (state, action) => {
+      state.error = action.error;
+      state.loading = false;
+    },
+    [signup.pending]: state => {
+      state.loading = true;
     },
   },
 });
