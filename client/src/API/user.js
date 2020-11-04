@@ -23,3 +23,16 @@ export async function login(user) {
     throw new Error(error.message);
   }
 }
+
+export async function signup(user) {
+  try {
+    const response = await axios.post("/users/signup", user);
+    const { data } = response.data;
+    if (!data.token) {
+      throw new Error("No token");
+    }
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
