@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { signup, setUser, clearStatus } from "../../../redux/slices/session";
 
 import Button from "./../../shared/button/Button";
 
@@ -8,10 +10,28 @@ import StyledRegistrationForm from "./RegistrationForm-styles";
 
 const RegistrationForm = () => {
   const { handleSubmit, errors, register } = useForm();
+  const { loading, status } = useSelector(state => state.session);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   function onSubmit(data) {
-    console.log(data);
+    if (loading) {
+      return;
+    }
+    dispatch(signup(data));
   }
+
+  useEffect(() => {
+    if (status === "SIGNUP") {
+      dispatch(setUser(localStorage.getItem("userId")));
+      history.push("/");
+      return () => {
+        dispatch(clearStatus());
+      };
+    }
+    // eslint-disable-next-line
+  }, [status]);
+
   return (
     <StyledRegistrationForm>
       <p className="login">
@@ -25,7 +45,7 @@ const RegistrationForm = () => {
         <label htmlFor="name">Nombre</label>
         <input
           type="text"
-          name="name"
+          name="userName"
           ref={register({ required: true, minLength: 5 })}
           className={errors.name && "error"}
         />
