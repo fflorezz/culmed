@@ -10,6 +10,7 @@ import ProfilePage from "./pages/profile/ProfilePage";
 import NotFoundPage from "./pages/not-found/NotFoundPage";
 import EventPage from "./pages/event/EventPage";
 import { useSelector } from "react-redux";
+import { isTokenExpired } from "./utilities/jwtHelpers";
 
 let AppRoutes = () => {
   let location = useLocation();
@@ -38,13 +39,13 @@ let AppRoutes = () => {
 };
 
 let PrivateRoute = ({ component: Component, ...rest }) => {
-  const { isLogin } = useSelector(state => state.session);
+  const isTokenValid = !isTokenExpired(localStorage.getItem("token"));
 
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        isLogin ? (
+        isTokenValid ? (
           <Component />
         ) : (
           <Redirect to={{ pathname: "/login", state: { from: location } }} />
