@@ -11,4 +11,8 @@ const sequelize = new Sequelize(
   }
 );
 
+// sequelize.sync({ force: true }).then(() => {
+//   console.log("Follow sync");
+// });
+
 export default sequelize;

@@ -34,13 +34,17 @@ Calendar.init(
 
 User.belongsToMany(Event, {
   through: Calendar,
+  as: "calendarEvents",
   foreignKey: "userId",
-  otherKey: "eventId",
+  // otherKey: "eventId",
 });
 Event.belongsToMany(User, {
   through: Calendar,
+  as: "eventUsers",
   foreignKey: "eventId",
-  otherKey: "userId",
+  // otherKey: "userId",
 });
-
+// Calendar.sync({ force: true }).then(() => {
+//   console.log("Follow sync");
+// });
 export default Calendar;

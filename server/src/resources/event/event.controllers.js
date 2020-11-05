@@ -5,15 +5,39 @@ import cloudinary from "./../../middlewares/cloudinary";
 
 import Event from "./event.model";
 import User from "./../user/user.model";
+import Calendar from "./../calendar/calendar.model";
+import sequelize from "./../../db";
 
 export const getAll = async (req, res) => {
   try {
     const events = await Event.findAll({
-      include: {
-        model: User,
-        attributes: ["userName", "avatarImg"],
-      },
+      attributes: [
+        "id",
+        "title",
+        "startDate",
+        "endDate",
+        "location",
+        "description",
+        "category",
+        "price",
+        "eventImg",
+        "authorId",
+        [sequelize.fn("COUNT", sequelize.col("eventUsers.id")), "addCount"],
+      ],
+      group: ["title"],
+      include: [
+        {
+          model: User,
+          attributes: ["userName", "avatarImg"],
+        },
+        {
+          model: User,
+          as: "eventUsers",
+          attributes: [],
+        },
+      ],
     });
+
     res.send({ data: events });
   } catch (err) {
     console.log(err);

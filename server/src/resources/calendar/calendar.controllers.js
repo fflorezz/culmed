@@ -11,8 +11,10 @@ export const getByUserId = async (req, res) => {
     }
     const results = await User.findOne({
       where: { id: userId },
+      attributes: [],
       include: {
         model: Event,
+        as: "calendarEvents",
         include: {
           model: User,
           attributes: ["userName", "avatarImg"],
@@ -22,7 +24,7 @@ export const getByUserId = async (req, res) => {
         },
       },
     });
-    res.send({ data: results.Events });
+    res.send({ data: results.calendarEvents });
   } catch (err) {
     console.log(err);
     res.status(500).send({
