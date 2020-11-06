@@ -9,10 +9,11 @@ export const getByUserId = async (req, res) => {
     if (!user) {
       return res.status(404).send({ message: "Couldn't find user" });
     }
-    const results = await User.findOne({
+    const { calendarEvents } = await User.findOne({
       where: { id: userId },
       include: {
         model: Event,
+        as: "calendarEvents",
         include: {
           model: User,
           attributes: ["userName", "avatarImg"],
@@ -22,7 +23,7 @@ export const getByUserId = async (req, res) => {
         },
       },
     });
-    res.send({ data: results.Events });
+    res.send({ data: calendarEvents });
   } catch (err) {
     console.log(err);
     res.status(500).send({

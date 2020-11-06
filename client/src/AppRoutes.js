@@ -9,7 +9,6 @@ import CreateEventPage from "./pages/create-event/CreateEventPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import NotFoundPage from "./pages/not-found/NotFoundPage";
 import EventPage from "./pages/event/EventPage";
-import { useSelector } from "react-redux";
 import { isTokenExpired } from "./utilities/jwtHelpers";
 
 let AppRoutes = () => {

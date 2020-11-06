@@ -34,11 +34,13 @@ Calendar.init(
 
 User.belongsToMany(Event, {
   through: Calendar,
+  as: "calendarEvents",
   foreignKey: "userId",
   otherKey: "eventId",
 });
 Event.belongsToMany(User, {
   through: Calendar,
+  as: "eventUsers",
   foreignKey: "eventId",
   otherKey: "userId",
 });
