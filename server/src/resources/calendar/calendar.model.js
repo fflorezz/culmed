@@ -40,7 +40,7 @@ User.belongsToMany(Event, {
 });
 Event.belongsToMany(User, {
   through: Calendar,
-  as: "eventUsers",
+  as: "participants",
   foreignKey: "eventId",
   otherKey: "userId",
 });

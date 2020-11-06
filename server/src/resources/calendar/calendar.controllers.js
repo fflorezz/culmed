@@ -1,6 +1,7 @@
 import Calendar from "./calendar.model";
 import User from "./../user/user.model";
 import Event from "./../event/event.model";
+import sequelize from "./../../db";
 
 export const getByUserId = async (req, res) => {
   const { userId } = req.params;
@@ -11,13 +12,40 @@ export const getByUserId = async (req, res) => {
     }
     const { calendarEvents } = await User.findOne({
       where: { id: userId },
+      group: ["calendarEvents.id"],
       include: {
         model: Event,
         as: "calendarEvents",
-        include: {
-          model: User,
-          attributes: ["userName", "avatarImg"],
-        },
+        attributes: [
+          "id",
+          "title",
+          "startDate",
+          "endDate",
+          "location",
+          "description",
+          "location",
+          "category",
+          "eventImg",
+          "authorId",
+          [
+            sequelize.fn(
+              "COUNT",
+              sequelize.col("calendarEvents.participants.id")
+            ),
+            "participantsCount",
+          ],
+        ],
+        include: [
+          {
+            model: User,
+            attributes: ["userName", "avatarImg"],
+          },
+          {
+            model: User,
+            as: "participants",
+            attributes: [],
+          },
+        ],
         through: {
           attributes: [],
         },

@@ -5,14 +5,35 @@ import cloudinary from "./../../middlewares/cloudinary";
 
 import Event from "./event.model";
 import User from "./../user/user.model";
+import sequelize from "./../../db";
 
 export const getAll = async (req, res) => {
   try {
     const events = await Event.findAll({
-      include: {
-        model: User,
-        attributes: ["userName", "avatarImg"],
-      },
+      attributes: [
+        "id",
+        "title",
+        "startDate",
+        "endDate",
+        "location",
+        "description",
+        "location",
+        "category",
+        "eventImg",
+        "authorId",
+        [
+          sequelize.fn("COUNT", sequelize.col("participants.id")),
+          "participantsCount",
+        ],
+      ],
+      group: ["id"],
+      include: [
+        {
+          model: User,
+          attributes: ["userName", "avatarImg"],
+        },
+        { model: User, as: "participants", attributes: [] },
+      ],
     });
     res.send({ data: events });
   } catch (err) {
@@ -90,10 +111,30 @@ export const getById = async (req, res) => {
       where: {
         id: eventId,
       },
-      include: {
-        model: User,
-        attributes: ["userName", "avatarImg"],
-      },
+      attributes: [
+        "id",
+        "title",
+        "startDate",
+        "endDate",
+        "location",
+        "description",
+        "location",
+        "category",
+        "eventImg",
+        "authorId",
+        [
+          sequelize.fn("COUNT", sequelize.col("participants.id")),
+          "participantsCount",
+        ],
+      ],
+      group: ["id"],
+      include: [
+        {
+          model: User,
+          attributes: ["userName", "avatarImg"],
+        },
+        { model: User, as: "participants", attributes: [] },
+      ],
     });
     if (!event) {
       return res.status(404).send({ message: "Couldn't find event" });

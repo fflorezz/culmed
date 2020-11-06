@@ -11,17 +11,17 @@ const mockData = {
 
 const ViewsAndParticipants = ({
   views = mockData.views,
-  participants = mockData.participants,
+  participantsCount,
 }) => {
   return (
-    <StyledViews views={views} participants={participants}>
+    <StyledViews>
       <div className="views">
         <Icon type="views" size="xs" />
-        <p>{views}</p>
+        <p>{views || "0"}</p>
       </div>
       <div className="participants">
         <Icon type="add" size="xs" />
-        <p>{participants}</p>
+        <p>{participantsCount || "0"}</p>
       </div>
     </StyledViews>
   );
