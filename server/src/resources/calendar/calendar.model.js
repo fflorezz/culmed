@@ -3,6 +3,7 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "./../../db";
 import User from "./../user/user.model";
 import Event from "./../event/event.model";
+import EventViews from "./../eventViews/eventViews.model";
 
 class Calendar extends Model {}
 
