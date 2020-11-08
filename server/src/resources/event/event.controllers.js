@@ -6,6 +6,7 @@ import cloudinary from "./../../middlewares/cloudinary";
 import Event from "./event.model";
 import User from "./../user/user.model";
 import sequelize from "./../../db";
+import EventViews from "./../eventViews/eventViews.model";
 
 export const getAll = async (req, res) => {
   try {
@@ -106,6 +107,8 @@ export const create = async (req, res) => {
 
 export const getById = async (req, res) => {
   const eventId = req.params.eventId;
+  const userId = req.query.userId;
+
   try {
     const event = await Event.findOne({
       where: {
@@ -138,6 +141,20 @@ export const getById = async (req, res) => {
     });
     if (!event) {
       return res.status(404).send({ message: "Couldn't find event" });
+    }
+    if (userId) {
+      const view = await EventViews.findOne({
+        where: {
+          viewerId: userId,
+          eventId: eventId,
+        },
+      });
+      if (!view) {
+        await EventViews.create({
+          viewerId: userId,
+          eventId,
+        });
+      }
     }
     res.send({ data: event });
   } catch (err) {

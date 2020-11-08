@@ -22,8 +22,15 @@ export async function getEventsByAuthor(authorId) {
 }
 
 export async function getEventById(eventId) {
+  const userId = localStorage.getItem("userId");
   try {
-    const response = await axios(`/events/${eventId}`);
+    const response = await axios({
+      method: "get",
+      url: `/events/${eventId}`,
+      params: {
+        userId,
+      },
+    });
     return response.data.data;
   } catch (error) {
     throw new Error(error.message);
