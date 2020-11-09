@@ -5,38 +5,34 @@ import cloudinary from "./../../middlewares/cloudinary";
 
 import Event from "./event.model";
 import User from "./../user/user.model";
-import sequelize from "./../../db";
 import EventViews from "./../eventViews/eventViews.model";
+import eventFormater from "./../../helpers/eventFormater";
+import e from "cors";
 
 export const getAll = async (req, res) => {
   try {
     const events = await Event.findAll({
-      attributes: [
-        "id",
-        "title",
-        "startDate",
-        "endDate",
-        "location",
-        "description",
-        "location",
-        "category",
-        "eventImg",
-        "authorId",
-        [
-          sequelize.fn("COUNT", sequelize.col("participants.id")),
-          "participantsCount",
-        ],
-      ],
-      group: ["id"],
+      group: ["id", "views.id", "participants.id"],
       include: [
         {
           model: User,
           attributes: ["userName", "avatarImg"],
         },
-        { model: User, as: "participants", attributes: [] },
+        {
+          model: User,
+          as: "participants",
+          attributes: ["id"],
+          through: { attributes: [] },
+        },
+        {
+          model: User,
+          as: "views",
+          attributes: ["id"],
+          through: { attributes: [] },
+        },
       ],
     });
-    res.send({ data: events });
+    res.send({ data: events.map(event => eventFormater(event)) });
   } catch (err) {
     console.log(err);
     res.status(500).send({
@@ -114,29 +110,24 @@ export const getById = async (req, res) => {
       where: {
         id: eventId,
       },
-      attributes: [
-        "id",
-        "title",
-        "startDate",
-        "endDate",
-        "location",
-        "description",
-        "location",
-        "category",
-        "eventImg",
-        "authorId",
-        [
-          sequelize.fn("COUNT", sequelize.col("participants.id")),
-          "participantsCount",
-        ],
-      ],
       group: ["id"],
       include: [
         {
           model: User,
           attributes: ["userName", "avatarImg"],
         },
-        { model: User, as: "participants", attributes: [] },
+        {
+          model: User,
+          as: "participants",
+          attributes: ["id"],
+          through: { attributes: [] },
+        },
+        {
+          model: User,
+          as: "views",
+          attributes: ["id"],
+          through: { attributes: [] },
+        },
       ],
     });
     if (!event) {
@@ -156,7 +147,7 @@ export const getById = async (req, res) => {
         });
       }
     }
-    res.send({ data: event });
+    res.send({ data: eventFormater(event) });
   } catch (err) {
     console.log(err);
     res.status(500).send({
