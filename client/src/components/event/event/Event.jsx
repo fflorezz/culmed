@@ -80,8 +80,8 @@ const Event = ({ event, isCalendarEvent, isOwnEvent }) => {
             text
           />
           <ViewsAndParticipants
-            participants={event.participants}
-            views={event.views}
+            participants={event.participantsCount}
+            views={event.viewsCount}
           />
         </div>
         <p className="description">{event.description}</p>
