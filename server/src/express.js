@@ -39,7 +39,7 @@ export const start = async () => {
     console.error("Unable to connect to the database:", error);
   }
 
-  app.listen(config.port, () => {
+  app.listen(5001, () => {
     console.info("Server started on port %s.", config.port);
   });
 };

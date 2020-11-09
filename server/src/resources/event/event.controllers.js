@@ -7,12 +7,23 @@ import Event from "./event.model";
 import User from "./../user/user.model";
 import EventViews from "./../eventViews/eventViews.model";
 import eventFormater from "./../../helpers/eventFormater";
-import e from "cors";
+import sequelize from "./../../db";
+
+const SELECT_VIEWS =
+  "(SELECT COUNT(*) FROM eventViews WHERE event.id = eventId)";
+const SELECT_PARTICIPANTS =
+  "(SELECT COUNT(*) FROM calendar WHERE event.id = eventId)";
 
 export const getAll = async (req, res) => {
   try {
     const events = await Event.findAll({
-      group: ["id", "views.id", "participants.id"],
+      group: ["id"],
+      attributes: {
+        include: [
+          [sequelize.literal(SELECT_VIEWS), "viewsCount"],
+          [sequelize.literal(SELECT_PARTICIPANTS), "participantsCount"],
+        ],
+      },
       include: [
         {
           model: User,
@@ -21,18 +32,16 @@ export const getAll = async (req, res) => {
         {
           model: User,
           as: "participants",
-          attributes: ["id"],
-          through: { attributes: [] },
+          attributes: [],
         },
         {
           model: User,
           as: "views",
-          attributes: ["id"],
-          through: { attributes: [] },
+          attributes: [],
         },
       ],
     });
-    res.send({ data: events.map(event => eventFormater(event)) });
+    res.send({ data: events });
   } catch (err) {
     console.log(err);
     res.status(500).send({
@@ -110,6 +119,7 @@ export const getById = async (req, res) => {
       where: {
         id: eventId,
       },
+
       group: ["id", "views.id", "participants.id"],
       include: [
         {
