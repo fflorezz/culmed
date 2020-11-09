@@ -110,7 +110,7 @@ export const getById = async (req, res) => {
       where: {
         id: eventId,
       },
-      group: ["id"],
+      group: ["id", "views.id", "participants.id"],
       include: [
         {
           model: User,
