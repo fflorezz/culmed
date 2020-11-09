@@ -6,7 +6,6 @@ import cloudinary from "./../../middlewares/cloudinary";
 import Event from "./event.model";
 import User from "./../user/user.model";
 import EventViews from "./../eventViews/eventViews.model";
-import eventFormater from "./../../helpers/eventFormater";
 import sequelize from "./../../db";
 
 const SELECT_VIEWS =
@@ -17,7 +16,6 @@ const SELECT_PARTICIPANTS =
 export const getAll = async (req, res) => {
   try {
     const events = await Event.findAll({
-      group: ["id"],
       attributes: {
         include: [
           [sequelize.literal(SELECT_VIEWS), "viewsCount"],
@@ -28,16 +26,6 @@ export const getAll = async (req, res) => {
         {
           model: User,
           attributes: ["userName", "avatarImg"],
-        },
-        {
-          model: User,
-          as: "participants",
-          attributes: [],
-        },
-        {
-          model: User,
-          as: "views",
-          attributes: [],
         },
       ],
     });
@@ -119,24 +107,16 @@ export const getById = async (req, res) => {
       where: {
         id: eventId,
       },
-
-      group: ["id", "views.id", "participants.id"],
+      attributes: {
+        include: [
+          [sequelize.literal(SELECT_VIEWS), "viewsCount"],
+          [sequelize.literal(SELECT_PARTICIPANTS), "participantsCount"],
+        ],
+      },
       include: [
         {
           model: User,
           attributes: ["userName", "avatarImg"],
-        },
-        {
-          model: User,
-          as: "participants",
-          attributes: ["id"],
-          through: { attributes: [] },
-        },
-        {
-          model: User,
-          as: "views",
-          attributes: ["id"],
-          through: { attributes: [] },
         },
       ],
     });
@@ -157,7 +137,7 @@ export const getById = async (req, res) => {
         });
       }
     }
-    res.send({ data: eventFormater(event) });
+    res.send({ data: event });
   } catch (err) {
     console.log(err);
     res.status(500).send({
