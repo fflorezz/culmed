@@ -79,7 +79,10 @@ const Event = ({ event, isCalendarEvent, isOwnEvent }) => {
             size="sm"
             text
           />
-          <ViewsAndParticipants participantsCount={event.participantsCount} />
+          <ViewsAndParticipants
+            participants={event.participants}
+            views={event.views}
+          />
         </div>
         <p className="description">{event.description}</p>
         <Tags category={event.category} />

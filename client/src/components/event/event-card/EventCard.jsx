@@ -14,7 +14,7 @@ const EventCard = ({
   title,
   date,
   views,
-  participantsCount,
+  participants,
   startDate,
   User: { userName, avatarImg },
 }) => {
@@ -38,10 +38,7 @@ const EventCard = ({
               text
             />
           </Link>
-          <ViewsAndParticipants
-            views={views}
-            participantsCount={participantsCount}
-          />
+          <ViewsAndParticipants views={views} participants={participants} />
         </div>
       </StyledCard>
     </>
