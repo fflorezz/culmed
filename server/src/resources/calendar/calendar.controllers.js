@@ -2,6 +2,7 @@ import Calendar from "./calendar.model";
 import User from "./../user/user.model";
 import Event from "./../event/event.model";
 import sequelize from "./../../db";
+import eventFormater from "./../../helpers/eventFormater";
 
 export const getByUserId = async (req, res) => {
   const { userId } = req.params;
@@ -12,29 +13,14 @@ export const getByUserId = async (req, res) => {
     }
     const { calendarEvents } = await User.findOne({
       where: { id: userId },
-      group: ["calendarEvents.id"],
+      group: [
+        "calendarEvents.id",
+        "calendarEvents.views.id",
+        "calendarEvents.participants.id",
+      ],
       include: {
         model: Event,
         as: "calendarEvents",
-        attributes: [
-          "id",
-          "title",
-          "startDate",
-          "endDate",
-          "location",
-          "description",
-          "location",
-          "category",
-          "eventImg",
-          "authorId",
-          [
-            sequelize.fn(
-              "COUNT",
-              sequelize.col("calendarEvents.participants.id")
-            ),
-            "participantsCount",
-          ],
-        ],
         include: [
           {
             model: User,
@@ -43,7 +29,14 @@ export const getByUserId = async (req, res) => {
           {
             model: User,
             as: "participants",
-            attributes: [],
+            attributes: ["id"],
+            through: { attributes: [] },
+          },
+          {
+            model: User,
+            as: "views",
+            attributes: ["id"],
+            through: { attributes: [] },
           },
         ],
         through: {
@@ -51,7 +44,7 @@ export const getByUserId = async (req, res) => {
         },
       },
     });
-    res.send({ data: calendarEvents });
+    res.send({ data: calendarEvents.map(event => eventFormater(event)) });
   } catch (err) {
     console.log(err);
     res.status(500).send({
