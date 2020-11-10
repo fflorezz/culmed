@@ -18,7 +18,7 @@ const DeleteModal = ({ showModal, eventId }) => {
   }
 
   useEffect(() => {
-    if (status === 200) {
+    if (status === "OK") {
       history.push(`/${id}/events`);
       return () => {
         dispatch(clearStatus());

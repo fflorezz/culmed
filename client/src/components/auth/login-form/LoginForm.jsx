@@ -22,7 +22,7 @@ const LoginForm = () => {
   }
 
   useEffect(() => {
-    if (status === "LOGIN") {
+    if (status === "OK") {
       dispatch(setUser(localStorage.getItem("userId")));
       history.push("/");
       return () => {

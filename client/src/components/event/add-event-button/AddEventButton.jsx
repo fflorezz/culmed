@@ -27,7 +27,7 @@ const AddEventButton = ({ eventId, isCalendarEvent }) => {
   }
 
   useEffect(() => {
-    if (status === 200) {
+    if (status === "OK") {
       setCalendarEvent(!calendarEvent);
       dispatch(clearStatus());
     }

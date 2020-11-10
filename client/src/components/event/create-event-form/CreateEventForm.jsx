@@ -35,7 +35,7 @@ const CreateEventForm = () => {
   }
 
   useEffect(() => {
-    if (status === 201) {
+    if (status === "OK") {
       history.push(`/${session.id}/events`);
       return () => {
         dispatch(clearStatus());

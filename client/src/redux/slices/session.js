@@ -172,7 +172,7 @@ const sessionSlice = createSlice({
     // ADD EVENT TO CALENDAR
     [addEventToCalendar.fulfilled]: (state, { payload }) => {
       state.calendar = [...state.calendar, payload];
-      state.status = 200;
+      state.status = "OK";
       state.error = null;
       state.loading = false;
       return state;
@@ -189,7 +189,7 @@ const sessionSlice = createSlice({
     // REMOVE EVENT FROM CALENDAR
     [removeEventFromCalendar.fulfilled]: (state, { payload }) => {
       state.calendar = state.calendar.filter(e => e.id !== payload.id);
-      state.status = 200;
+      state.status = "OK";
       state.error = null;
       state.loading = false;
       return state;
@@ -206,7 +206,7 @@ const sessionSlice = createSlice({
     // CREATE EVENT
     [createEvent.fulfilled]: (state, { payload }) => {
       state.events = [...state.events, payload];
-      state.status = 201;
+      state.status = "OK";
       state.error = null;
       state.loading = false;
     },
@@ -222,7 +222,7 @@ const sessionSlice = createSlice({
     // DELETE EVENT
     [deleteEvent.fulfilled]: (state, { payload }) => {
       state.events = state.events.filter(e => e.id !== payload.id);
-      state.status = 200;
+      state.status = "OK";
       state.error = null;
       state.loading = false;
       return state;
@@ -245,7 +245,7 @@ const sessionSlice = createSlice({
           return e;
         }
       });
-      state.status = 201;
+      state.status = "OK";
       state.error = null;
       state.loading = false;
     },
@@ -261,7 +261,7 @@ const sessionSlice = createSlice({
     // LOGIN
     [login.fulfilled]: (state, { payload }) => {
       state.isLogin = true;
-      state.status = "LOGIN";
+      state.status = "OK";
       state.error = null;
       state.loading = false;
       return state;
@@ -289,7 +289,7 @@ const sessionSlice = createSlice({
     // SIGNUP
     [signup.fulfilled]: (state, { payload }) => {
       state.isLogin = true;
-      state.status = "SIGNUP";
+      state.status = "OK";
       state.error = null;
       state.loading = false;
       return state;

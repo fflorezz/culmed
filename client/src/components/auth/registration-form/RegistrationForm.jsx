@@ -22,7 +22,7 @@ const RegistrationForm = () => {
   }
 
   useEffect(() => {
-    if (status === "SIGNUP") {
+    if (status === "OK") {
       dispatch(setUser(localStorage.getItem("userId")));
       history.push("/");
       return () => {
