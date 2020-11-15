@@ -7,13 +7,25 @@ const StyledEditProfile = styled.div`
   border-radius: 0.8rem;
   display: inline-flex;
   flex-direction: column;
+  align-items: center;
   background-color: ${styles.colors.white};
   position: relative;
+
   form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 1rem;
+    & h2 {
+      margin-bottom: 4rem;
+    }
+    .imgPicker {
+      width: 22rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6rem;
+    }
     label {
       font: ${styles.font.p1};
       color: ${styles.colorsDark.gray};

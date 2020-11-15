@@ -45,4 +45,4 @@ const Avatar = ({
   );
 };
 
-export default React.memo(Avatar);
+export default Avatar;
