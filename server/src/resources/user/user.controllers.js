@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 
 import User from "./user.model";
 import { createToken } from "./../../helpers/jwt";
+import cloudinary from "./../../middlewares/cloudinary";
 
 export const getAll = async (req, res) => {
   try {
@@ -133,4 +134,40 @@ export const login = async (req, res) => {
   }
 
   res.status(200).send({ data: { id: existingUser.id, token } });
+};
+
+export const editProfile = async (req, res) => {
+  const user = req.user;
+  const newUserName = req.body.userName;
+
+  try {
+    let image;
+    if (req.file) {
+      image = await cloudinary.uploader.upload(req.file.path, {
+        width: 200,
+      });
+    }
+    await User.update(
+      { userName: newUserName || user.userName, avatarImg: image.url || null },
+      {
+        where: {
+          id: user.id,
+        },
+      }
+    );
+    const userUpdate = await User.findByPk(user.id);
+    res
+      .status(200)
+      .send({
+        data: {
+          avatarImg: userUpdate.avatarImg,
+          userName: userUpdate.userName,
+        },
+      });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      message: err.message || "Something went wrong, Try again later",
+    });
+  }
 };

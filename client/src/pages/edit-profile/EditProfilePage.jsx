@@ -1,19 +1,20 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import StyledEditProfile from "./EditProfile-styles";
 import Button from "./../../components/shared/button/Button";
 import { mergeRefs } from "./../../utilities/mergeRefs";
 import Avatar from "./../../components/user/avatar/Avatar";
+import { editProfile } from "../../redux/slices/session";
 
 const EditProfilePage = () => {
   const { register, handleSubmit, errors } = useForm();
   const session = useSelector(state => state.session);
+  const dispatch = useDispatch();
   const [file, setFile] = useState();
   const [previewUrl, setPreviewUrl] = useState();
   const [isValid, setIsValid] = useState(false);
-
   const filePickeRef = useRef(null);
 
   const pickImageHandler = e => {
@@ -42,7 +43,14 @@ const EditProfilePage = () => {
   }, [file, isValid]);
 
   function onSubmit(data) {
-    console.log(data);
+    if (session.loading) {
+      return;
+    }
+    const formData = new FormData();
+    formData.append("userName", data.userName);
+    formData.append("bio", data.bio);
+    formData.append("avatarImg", data.avatarImg[0]);
+    dispatch(editProfile(formData));
   }
 
   return (
@@ -55,10 +63,10 @@ const EditProfilePage = () => {
             style={{ display: "none" }}
             accept=".jpg,.png,jpeg"
             ref={mergeRefs(filePickeRef, register)}
-            name="image"
+            name="avatarImg"
             onChange={pickedHandler}
           />
-          <Avatar src={previewUrl} size="lg" />
+          <Avatar src={previewUrl || session.avatarImg} size="lg" />
           <Button
             color="gray"
             size="sm"
@@ -82,8 +90,8 @@ const EditProfilePage = () => {
 
         <label htmlFor="password">Bio</label>
         <textarea
-          name="description"
-          id="description"
+          name="bio"
+          id="bio"
           cols="30"
           rows="3"
           ref={register({ maxLength: 300 })}

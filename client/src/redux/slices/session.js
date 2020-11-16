@@ -102,6 +102,14 @@ export const signup = createAsyncThunk("session/signupStatus", async user => {
   return response;
 });
 
+export const editProfile = createAsyncThunk(
+  "session/editProfileStatus",
+  async data => {
+    const response = await User.editProfile(data);
+    return response;
+  }
+);
+
 const sessionSlice = createSlice({
   name: "session",
   initialState: {
@@ -299,6 +307,23 @@ const sessionSlice = createSlice({
       state.loading = false;
     },
     [signup.pending]: state => {
+      state.loading = true;
+    },
+
+    // EDIT PROFILE
+    [editProfile.fulfilled]: (state, { payload }) => {
+      state.avatarImg = payload.avatarImg;
+      state.userName = payload.userName;
+      state.status = "OK";
+      state.error = null;
+      state.loading = false;
+    },
+    [editProfile.rejected]: (state, action) => {
+      state.status = null;
+      state.error = action.error;
+      state.loading = false;
+    },
+    [editProfile.pending]: state => {
       state.loading = true;
     },
   },

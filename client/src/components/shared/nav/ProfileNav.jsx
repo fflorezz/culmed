@@ -6,6 +6,7 @@ import * as styles from "../../../global-styles";
 import StyledProfileNav from "./ProfileNav-styles";
 import Avatar from "../../user/avatar/Avatar";
 import FollowingButton from "./../button/FollowingButton";
+import { useSelector } from "react-redux";
 
 const linkActiveStyle = {
   backgroundColor: styles.colors.complementary,
@@ -13,7 +14,10 @@ const linkActiveStyle = {
 };
 
 const ProfileNav = ({ user, isOwnProfile, isFollowing }) => {
-  const { id, userName, avatarImg, following, followers } = user;
+  const session = useSelector(state => state.session);
+  const { id, userName, avatarImg, following, followers } = isOwnProfile
+    ? session
+    : user;
 
   return (
     <StyledProfileNav>

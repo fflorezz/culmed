@@ -16,6 +16,7 @@ const StyledEditProfile = styled.div`
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 1rem;
+    margin-top: 4rem;
     & h2 {
       margin-bottom: 4rem;
     }

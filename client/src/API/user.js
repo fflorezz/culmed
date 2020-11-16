@@ -36,3 +36,21 @@ export async function signup(user) {
     throw new Error(error.message);
   }
 }
+
+export async function editProfile(data) {
+  const { Authorization } = authHeader();
+  try {
+    const response = await axios({
+      url: "/users/editProfile",
+      data: data,
+      method: "POST",
+      headers: {
+        "content-type": "multipart/form-data",
+        Authorization,
+      },
+    });
+    return response.data.data;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
