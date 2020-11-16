@@ -1,5 +1,6 @@
 import { validationResult } from "express-validator";
 import bcrypt from "bcrypt";
+import fs from "fs-extra";
 
 import User from "./user.model";
 import { createToken } from "./../../helpers/jwt";
@@ -155,15 +156,16 @@ export const editProfile = async (req, res) => {
         },
       }
     );
+    if (image) {
+      await fs.unlink(req.file.path);
+    }
     const userUpdate = await User.findByPk(user.id);
-    res
-      .status(200)
-      .send({
-        data: {
-          avatarImg: userUpdate.avatarImg,
-          userName: userUpdate.userName,
-        },
-      });
+    res.status(200).send({
+      data: {
+        avatarImg: userUpdate.avatarImg,
+        userName: userUpdate.userName,
+      },
+    });
   } catch (err) {
     console.log(err);
     res.status(500).send({

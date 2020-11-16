@@ -102,7 +102,11 @@ const EditProfilePage = () => {
             Tu Bio no puede exceder los 300 caracteres
           </p>
         )}
-        <Button size="sm" text="Guardar" color="complementary" />
+        <Button
+          size="sm"
+          text="Guardar"
+          color={session.loading ? "gray" : "complementary"}
+        />
       </form>
     </StyledEditProfile>
   );
