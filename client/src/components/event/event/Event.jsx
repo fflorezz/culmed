@@ -12,6 +12,7 @@ import Button from "./../../shared/button/Button";
 import { formatDate, formatHour } from "./../../../utilities/formaters";
 import DeleteModal from "../delete-modal/DeleteModal";
 import EditForm from "./../edit-form/EditForm";
+import { Link } from "react-router-dom";
 
 const Event = ({ event, isCalendarEvent, isOwnEvent }) => {
   const [showDeleteModal, setDeleteModal] = useState(false);
@@ -73,12 +74,14 @@ const Event = ({ event, isCalendarEvent, isOwnEvent }) => {
           <Icon size="md" type="location" color="white" />
         </div>
         <div className="user-info">
-          <Avatar
-            src={event.User.avatarImg}
-            name={event.User.userName}
-            size="sm"
-            text
-          />
+          <Link to={`/${event.authorId}`}>
+            <Avatar
+              src={event.User.avatarImg}
+              name={event.User.userName}
+              size="sm"
+              text
+            />
+          </Link>
           <ViewsAndParticipants
             participants={event.participantsCount}
             views={event.viewsCount}
