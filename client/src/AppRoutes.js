@@ -10,9 +10,11 @@ import ProfilePage from "./pages/profile/ProfilePage";
 import NotFoundPage from "./pages/not-found/NotFoundPage";
 import EventPage from "./pages/event/EventPage";
 import { isTokenExpired } from "./utilities/jwtHelpers";
+import { useSelector } from "react-redux";
 
 let AppRoutes = () => {
   let location = useLocation();
+  const session = useSelector(state => state.session);
 
   let background = location.state && location.state.background;
 
@@ -20,7 +22,7 @@ let AppRoutes = () => {
     <>
       <Switch location={background || location}>
         <Route exact path="/">
-          <Redirect to={"/events"} />
+          <Redirect to={session.isLogin ? "/events" : "landing"} />
         </Route>
         <Route exact path="/landing" component={LandingPage} />
         <Route exact path="/login" component={LoginPage} />
