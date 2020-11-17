@@ -56,9 +56,19 @@ const StyledEvent = styled.main`
       height: 27rem;
       object-fit: cover;
     }
+    & .image-info {
+      position: absolute;
+      width: 100%;
+      height: 5rem;
+      background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0) 20%,
+        rgba(0, 0, 0, 0.3) 100%
+      );
+    }
     .price {
       position: absolute;
-      top: 1.5rem;
+      top: 1rem;
       left: 1rem;
       font: ${styles.font.p1};
       color: ${styles.colors.white};
@@ -66,7 +76,7 @@ const StyledEvent = styled.main`
     }
     ${StyledIcon} {
       position: absolute;
-      top: 1rem;
+      top: 0.5rem;
       right: 1.5rem;
       z-index: 2;
     }

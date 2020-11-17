@@ -70,8 +70,10 @@ const Event = ({ event, isCalendarEvent, isOwnEvent }) => {
         <p className="location">{event.location}</p>
         <div className="image">
           <img src={event.eventImg || eventImageDefault} alt={event.title} />
-          <h6 className="price">${event.price}</h6>
-          <Icon size="md" type="location" color="white" />
+          <div className="image-info">
+            <h6 className="price">${event.price}</h6>
+            <Icon size="md" type="location" color="white" />
+          </div>
         </div>
         <div className="user-info">
           <Link to={`/${event.authorId}`}>
