@@ -149,7 +149,10 @@ export const editProfile = async (req, res) => {
       });
     }
     await User.update(
-      { userName: newUserName || user.userName, avatarImg: image.url || null },
+      {
+        userName: newUserName || user.userName,
+        avatarImg: image ? image.url : user.avatarImg,
+      },
       {
         where: {
           id: user.id,

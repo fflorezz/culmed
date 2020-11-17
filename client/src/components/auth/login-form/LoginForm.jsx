@@ -10,7 +10,7 @@ import { clearStatus, login, setUser } from "./../../../redux/slices/session";
 
 const LoginForm = () => {
   const { handleSubmit, errors, register } = useForm();
-  const { loading, status } = useSelector(state => state.session);
+  const { loading, status, error } = useSelector(state => state.session);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -67,6 +67,7 @@ const LoginForm = () => {
             Es necesaria una contraseña de mínimo 6 caracteres
           </p>
         )}
+        {error && <p className="alert-text">Email o contraseña invalido</p>}
         <Button size="lg" text="Iniciar Sesión" color="secondary" />
       </form>
     </StyledLoginForm>
