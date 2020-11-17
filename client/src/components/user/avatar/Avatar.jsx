@@ -14,7 +14,16 @@ const Avatar = ({
   handleMouseEnter,
   handleMouseLeave,
   text,
+  fullName,
 }) => {
+  let formatName;
+  if (fullName) {
+    formatName = name;
+  } else {
+    formatName =
+      name && name.length > 12 ? `${name.substring(0, 12)}...` : name;
+  }
+
   return (
     <StyledAvatar
       size={size}
@@ -27,9 +36,7 @@ const Avatar = ({
       <img src={src || avatarImgDefault} alt="" />
       {text && (
         <div className="text">
-          <p className="name">
-            {name.length > 12 ? `${name.substring(0, 12)}...` : name}
-          </p>
+          <p className="name">{formatName}</p>
           <div className="follow">
             <p className="followers">
               Seguidores <span>{followers && followers.length}</span>

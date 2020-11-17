@@ -79,6 +79,7 @@ const Event = ({ event, isCalendarEvent, isOwnEvent }) => {
               src={event.User.avatarImg}
               name={event.User.userName}
               size="sm"
+              fullName
               text
             />
           </Link>
