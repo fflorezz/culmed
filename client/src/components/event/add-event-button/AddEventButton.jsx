@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import StyledAddEventButton from "./AddEventButton-styles";
 import Icon from "./../../shared/icon/Icon";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import {
   addEventToCalendar,
   removeEventFromCalendar,
@@ -10,10 +11,11 @@ import {
 
 const AddEventButton = ({ eventId, isCalendarEvent }) => {
   const dispatch = useDispatch();
-  const { status, loading } = useSelector(state => state.session);
+  const { status, loading, user } = useSelector(state => state.session);
   const [calendarEvent, setCalendarEvent] = useState(isCalendarEvent);
+  const history = useHistory();
 
-  //PENDING: ERROR HANDLING
+  //PENDING: ERROR HANDLING (Modal)
 
   function handleClick() {
     if (loading) {
@@ -26,6 +28,10 @@ const AddEventButton = ({ eventId, isCalendarEvent }) => {
     }
   }
 
+  function redirect() {
+    history.push("/login");
+  }
+
   useEffect(() => {
     if (status === "OK") {
       setCalendarEvent(!calendarEvent);
@@ -35,7 +41,7 @@ const AddEventButton = ({ eventId, isCalendarEvent }) => {
   }, [status]);
 
   return (
-    <StyledAddEventButton onClick={handleClick}>
+    <StyledAddEventButton onClick={user ? handleClick : redirect}>
       <Icon
         type={calendarEvent ? "check" : "add"}
         color={calendarEvent ? "gray" : "primary"}
