@@ -265,3 +265,13 @@ export const remove = async (req, res) => {
     });
   }
 };
+
+export const addComment = async (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).send({ errors: errors.array() }).end();
+  }
+
+  res.status(201).send({ body: req.body, params: req.params });
+};

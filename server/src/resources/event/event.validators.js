@@ -15,3 +15,7 @@ export const eventValidator = [
     .isNumeric({ no_symbols: true })
     .withMessage("price should contain only numbers without symbols"),
 ];
+
+export const commentValidator = [
+  body("text").not().isEmpty().trim().escape().withMessage("text is required"),
+];

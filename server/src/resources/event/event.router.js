@@ -1,5 +1,5 @@
 import express from "express";
-import { eventValidator } from "./event.validators";
+import { commentValidator, eventValidator } from "./event.validators";
 
 import { upload } from "../../middlewares/multer";
 
@@ -11,6 +11,7 @@ import {
   update,
   remove,
   getByUserId,
+  addComment,
 } from "./event.controllers";
 
 const router = express.Router();
@@ -25,6 +26,8 @@ router
   .get(getById)
   .put(checkAuth, eventValidator, update)
   .delete(checkAuth, remove);
+
+router.route("/:eventId/comment").post(commentValidator, addComment);
 
 router.get("/user/:userId", checkAuth, getByUserId);
 
