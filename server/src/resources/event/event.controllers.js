@@ -119,6 +119,16 @@ export const getById = async (req, res) => {
           model: User,
           attributes: ["userName", "avatarImg"],
         },
+        {
+          model: Comment,
+          attributes: ["userId", "text", "eventId", "createdAt"],
+          include: [
+            {
+              model: User,
+              attributes: ["userName", "avatarImg"],
+            },
+          ],
+        },
       ],
     });
     if (!event) {
