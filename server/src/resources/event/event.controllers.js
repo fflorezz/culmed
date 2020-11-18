@@ -273,5 +273,14 @@ export const addComment = async (req, res) => {
     return res.status(400).send({ errors: errors.array() }).end();
   }
 
-  res.status(201).send({ body: req.body, params: req.params });
+  const { eventId } = req.params;
+  const { text, userId } = req.body;
+
+  try {
+    const comment = await Comment.create({ text, eventId, userId });
+
+    res.status(201).send({ eventId, userId, text, comment });
+  } catch (err) {
+    console.log(err);
+  }
 };
