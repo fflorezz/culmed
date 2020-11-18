@@ -11,7 +11,7 @@ import {
 
 const AddEventButton = ({ eventId, isCalendarEvent }) => {
   const dispatch = useDispatch();
-  const { status, loading, user } = useSelector(state => state.session);
+  const { status, loading, isLogin } = useSelector(state => state.session);
   const [calendarEvent, setCalendarEvent] = useState(isCalendarEvent);
   const history = useHistory();
 
@@ -41,7 +41,7 @@ const AddEventButton = ({ eventId, isCalendarEvent }) => {
   }, [status]);
 
   return (
-    <StyledAddEventButton onClick={user ? handleClick : redirect}>
+    <StyledAddEventButton onClick={isLogin ? handleClick : redirect}>
       <Icon
         type={calendarEvent ? "check" : "add"}
         color={calendarEvent ? "gray" : "primary"}

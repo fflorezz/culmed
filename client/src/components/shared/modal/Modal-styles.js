@@ -8,7 +8,7 @@ const StyledModal = styled.div`
   width: 100%;
   height: 100%;
   overflow-y: scroll;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.5);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   .closeBtn {
     position: absolute;

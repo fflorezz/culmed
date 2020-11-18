@@ -6,7 +6,7 @@ import StyledEditProfile from "./EditProfile-styles";
 import Button from "./../../components/shared/button/Button";
 import { mergeRefs } from "./../../utilities/mergeRefs";
 import Avatar from "./../../components/user/avatar/Avatar";
-import { editProfile } from "../../redux/slices/session";
+import { clearStatus, editProfile } from "../../redux/slices/session";
 
 const EditProfilePage = () => {
   const { register, handleSubmit, errors } = useForm();
@@ -52,6 +52,15 @@ const EditProfilePage = () => {
     formData.append("avatarImg", data.avatarImg[0]);
     dispatch(editProfile(formData));
   }
+
+  useEffect(() => {
+    if (session.status === "OK") {
+      return () => {
+        dispatch(clearStatus());
+      };
+    }
+    // eslint-disable-next-line
+  }, [session.status]);
 
   return (
     <StyledEditProfile>

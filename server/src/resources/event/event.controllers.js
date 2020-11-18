@@ -5,6 +5,7 @@ import cloudinary from "./../../middlewares/cloudinary";
 
 import Event from "./event.model";
 import User from "./../user/user.model";
+import Comment from "./comment.model";
 import EventViews from "./../eventViews/eventViews.model";
 import sequelize from "./../../db";
 

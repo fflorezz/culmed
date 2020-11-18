@@ -6,7 +6,6 @@ import { clearStatus, updateEvent } from "../../../redux/slices/session";
 import { formatDateInput } from "./../../../utilities/formaters";
 
 import Button from "./../../shared/button/Button";
-import PageContainer from "./../../shared/page-container/PageContainer";
 
 import StyledEditForm from "./EditForm-styles";
 
@@ -44,9 +43,9 @@ const EditForm = ({ toggleEditForm, event }) => {
 
   if (error) {
     return (
-      <PageContainer>
+      <StyledEditForm>
         <h4>Algo salió mal, intentalo más tarde ...</h4>
-      </PageContainer>
+      </StyledEditForm>
     );
   }
 

@@ -71,7 +71,7 @@ const Event = ({ event, isCalendarEvent, isOwnEvent }) => {
         <div className="image">
           <img src={event.eventImg || eventImageDefault} alt={event.title} />
           <div className="image-info">
-            <h6 className="price">${event.price}</h6>
+            <h6 className="price">${event.price ? event.price : "Gratis"}</h6>
             <Icon size="md" type="location" color="white" />
           </div>
         </div>

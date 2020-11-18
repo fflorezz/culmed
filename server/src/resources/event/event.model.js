@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 
 import sequelize from "./../../db";
-import User from "./../user/user.model";
+import User from "../user/user.model";
 
 class Event extends Model {}
 
@@ -53,5 +53,3 @@ Event.init(
 );
 
 export default Event;
-
-//Event.sync({ force: true });
