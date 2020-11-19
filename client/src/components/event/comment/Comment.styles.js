@@ -4,25 +4,24 @@ import * as styles from "../../../global-styles";
 const StyledComment = styled.div`
   display: flex;
   align-items: flex-start;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   .info {
     display: flex;
     align-items: flex-end;
     margin-bottom: 0.2rem;
     .name {
-      font: ${styles.font.p1};
+      font: ${styles.font.p2};
       color: ${styles.colors.black};
       font-weight: 700;
-      margin-right: 2rem;
+      margin-right: 1rem;
     }
     .date {
       font: ${styles.font.psm};
       font-size: 1.1rem;
       color: ${styles.colors.gray};
-      margin-bottom: 0;
+      margin-bottom: 0.25rem;
     }
   }
-
   .comment {
     width: 35rem;
     font: ${styles.font.p2};

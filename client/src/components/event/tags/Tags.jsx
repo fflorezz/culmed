@@ -9,7 +9,7 @@ const Tags = ({ category }) => {
 
   return (
     <StyledTags>
-      <Icon type="tag" color="primary" size="sm" />
+      <Icon type="tag" color="primary" size="xs" />
       <p> {category} </p>
     </StyledTags>
   );

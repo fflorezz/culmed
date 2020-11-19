@@ -1,17 +1,17 @@
 import React from "react";
 import Comment from "../comment/Comment";
+import StyledCommentList from "./CommentList-styles";
 
 const CommentList = ({ comments }) => {
-  console.log(comments);
   if (comments && comments.length === 0) {
     return null;
   }
   return (
-    <div>
+    <StyledCommentList>
       {comments.map(comment => {
         return <Comment key={comment.id} comment={comment} />;
       })}
-    </div>
+    </StyledCommentList>
   );
 };
 
