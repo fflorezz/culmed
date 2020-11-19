@@ -16,6 +16,7 @@ const CommentField = ({ sessionAvatar }) => {
       return;
     }
     console.log(text);
+    setText("");
   }
 
   return (
@@ -28,6 +29,7 @@ const CommentField = ({ sessionAvatar }) => {
           cols="30"
           rows="2"
           onChange={updateText}
+          value={text}
         ></textarea>
         <Button
           size="sm"

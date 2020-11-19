@@ -231,10 +231,22 @@ export const update = async (req, res) => {
       where: {
         id: eventId,
       },
-      include: {
-        model: User,
-        attributes: ["userName", "avatarImg"],
-      },
+      include: [
+        {
+          model: User,
+          attributes: ["userName", "avatarImg"],
+        },
+        {
+          model: Comment,
+          attributes: ["userId", "text", "eventId", "createdAt", "id"],
+          include: [
+            {
+              model: User,
+              attributes: ["userName", "avatarImg"],
+            },
+          ],
+        },
+      ],
     });
     res.send({ data: updatedEvent });
   } catch (err) {

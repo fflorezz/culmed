@@ -88,7 +88,7 @@ const eventsSlice = createSlice({
       state.loading = true;
     },
 
-    //************ UPDATE EVENT
+    // UPDATE EVENT
     [updateEvent.fulfilled]: (state, { payload }) => {
       state.event = payload;
     },

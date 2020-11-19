@@ -3,6 +3,9 @@ import Comment from "../comment/Comment";
 import StyledCommentList from "./CommentList-styles";
 
 const CommentList = ({ comments }) => {
+  if (!comments) {
+    return null;
+  }
   if (comments && comments.length === 0) {
     return null;
   }
