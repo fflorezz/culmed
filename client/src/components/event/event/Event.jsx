@@ -22,6 +22,7 @@ const Event = ({
   isOwnEvent,
   sessionAvatar,
   isLogin,
+  sessionId,
 }) => {
   const [showDeleteModal, setDeleteModal] = useState(false);
   const [showEditForm, setEditForm] = useState(false);
@@ -42,7 +43,6 @@ const Event = ({
 
   return (
     <StyledEvent onClick={e => e.stopPropagation()}>
-      {console.log(event)}
       <div className="event-body">
         {isOwnEvent ? (
           <div className="buttons">
@@ -102,7 +102,7 @@ const Event = ({
         <p className="description">{event.description}</p>
         <Tags category={event.category} />
         <CommentList comments={event.Comments} />
-        {isLogin && <CommentField sessionAvatar={sessionAvatar} />}
+        {isLogin && <CommentField eventId={event.id} />}
       </div>
     </StyledEvent>
   );

@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import StyledCommentField from "./CommentField-styles";
 import Avatar from "./../../user/avatar/Avatar";
 import Button from "./../../shared/button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { addComment } from "../../../redux/slices/events";
 
-const CommentField = ({ sessionAvatar }) => {
+const CommentField = ({ eventId }) => {
+  const session = useSelector(state => state.session);
   const [text, setText] = useState("");
+  const dispatch = useDispatch();
 
   function updateText({ target }) {
     setText(target.value);
@@ -15,13 +19,13 @@ const CommentField = ({ sessionAvatar }) => {
     if (text.trim() === "") {
       return;
     }
-    console.log(text);
+    dispatch(addComment({ text, eventId, userId: session.id }));
     setText("");
   }
 
   return (
     <StyledCommentField>
-      <Avatar size="sm" src={sessionAvatar} />
+      <Avatar size="sm" src={session.avatarImg} />
       <form action="">
         <textarea
           name="comment"

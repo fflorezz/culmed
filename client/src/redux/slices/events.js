@@ -26,6 +26,14 @@ export const fetchEventById = createAsyncThunk(
   }
 );
 
+export const addComment = createAsyncThunk(
+  "events/addCommentStatus",
+  async data => {
+    const result = await API.addComment(data);
+    return result;
+  }
+);
+
 const eventsSlice = createSlice({
   name: "events",
   initialState: {
@@ -88,9 +96,23 @@ const eventsSlice = createSlice({
       state.loading = true;
     },
 
-    // UPDATE EVENT
+    // UPDATE EVENT (Share with session slice)
     [updateEvent.fulfilled]: (state, { payload }) => {
       state.event = payload;
+    },
+
+    // ADD COMMENT
+    [addComment.fulfilled]: (state, { payload }) => {
+      state.event.Comments = [...state.event.Comments, payload];
+      state.error = null;
+      state.loading = false;
+    },
+    [addComment.rejected]: (state, action) => {
+      state.error = action.error;
+      state.loading = false;
+    },
+    [addComment.pending]: state => {
+      state.loading = true;
     },
   },
 });

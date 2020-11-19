@@ -299,9 +299,19 @@ export const addComment = async (req, res) => {
   const { text, userId } = req.body;
 
   try {
-    const comment = await Comment.create({ text, eventId, userId });
-
-    res.status(201).send({ comment });
+    const createdComment = await Comment.create({ text, eventId, userId });
+    const comment = await Comment.findOne({
+      where: {
+        id: createdComment.id,
+      },
+      include: [
+        {
+          model: User,
+          attributes: ["userName", "avatarImg"],
+        },
+      ],
+    });
+    res.status(201).send({ data: comment });
   } catch (err) {
     console.log(err);
     res.status(500).send({

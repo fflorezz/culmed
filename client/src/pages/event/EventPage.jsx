@@ -39,6 +39,7 @@ const EventPage = () => {
           isOwnEvent={event.authorId === session.id}
           sessionAvatar={session.avatarImg}
           isLogin={session.isLogin}
+          sessionId={session.id}
         />
       )}
     </Modal>

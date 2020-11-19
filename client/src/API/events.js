@@ -76,3 +76,16 @@ export async function updateEvent(event) {
     throw new Error(error.message);
   }
 }
+
+export async function addComment({ eventId, text, userId }) {
+  try {
+    const response = await axios.post(`/events/${eventId}/comment`, {
+      text,
+      userId,
+    });
+    return response.data.data;
+  } catch (err) {
+    console.log(err);
+    throw new Error(err.message);
+  }
+}
