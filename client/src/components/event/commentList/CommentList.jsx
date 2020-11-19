@@ -16,5 +16,3 @@ const CommentList = ({ comments }) => {
 };
 
 export default CommentList;
-{
-}
