@@ -13,6 +13,7 @@ import { formatDate, formatHour } from "./../../../utilities/formaters";
 import DeleteModal from "../delete-modal/DeleteModal";
 import EditForm from "./../edit-form/EditForm";
 import { Link } from "react-router-dom";
+import CommentList from "../commentList/CommentList";
 
 const Event = ({ event, isCalendarEvent, isOwnEvent }) => {
   const [showDeleteModal, setDeleteModal] = useState(false);
@@ -34,6 +35,7 @@ const Event = ({ event, isCalendarEvent, isOwnEvent }) => {
 
   return (
     <StyledEvent onClick={e => e.stopPropagation()}>
+      {console.log(event)}
       <div className="event-body">
         {isOwnEvent ? (
           <div className="buttons">
@@ -92,6 +94,7 @@ const Event = ({ event, isCalendarEvent, isOwnEvent }) => {
         </div>
         <p className="description">{event.description}</p>
         <Tags category={event.category} />
+        <CommentList comments={event.Comments} />
       </div>
     </StyledEvent>
   );

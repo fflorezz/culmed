@@ -1,19 +1,23 @@
 import React from "react";
 import Avatar from "./../../user/avatar/Avatar";
 import StyledComment from "./Comment.styles";
+import { Link } from "react-router-dom";
 
-const Comment = () => {
+const Comment = ({ comment }) => {
+  const { createdAt, text, userId, User } = comment;
   return (
     <StyledComment>
-      <Avatar size="sm" />
+      <Link to={`/${userId}`}>
+        <Avatar size="sm" src={User.avatarImg} />
+      </Link>
       <div className="text">
         <div className="info">
-          <p className="name">Luis Castro</p>
-          <p className="date">Hace 12 horas</p>
+          <Link to={`/${userId}`}>
+            <p className="name">{User.userName}</p>
+          </Link>
+          <p className="date">{createdAt}</p>
         </div>
-        <p className="comment">
-          ullamco laboris nisi ut aliquip ex ea commodo consequat!!!
-        </p>
+        <p className="comment">{text}</p>
       </div>
     </StyledComment>
   );

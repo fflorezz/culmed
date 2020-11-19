@@ -121,7 +121,7 @@ export const getById = async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ["userId", "text", "eventId", "createdAt"],
+          attributes: ["userId", "text", "eventId", "createdAt", "id"],
           include: [
             {
               model: User,
@@ -289,8 +289,11 @@ export const addComment = async (req, res) => {
   try {
     const comment = await Comment.create({ text, eventId, userId });
 
-    res.status(201).send({ eventId, userId, text, comment });
+    res.status(201).send({ comment });
   } catch (err) {
     console.log(err);
+    res.status(500).send({
+      message: err.message || "Something went wrong, Try again later",
+    });
   }
 };
