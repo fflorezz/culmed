@@ -5,6 +5,11 @@ const StyledComment = styled.div`
   display: flex;
   align-items: flex-start;
   margin-bottom: 3rem;
+  &:hover {
+    .close-button {
+      visibility: visible;
+    }
+  }
   .info {
     display: flex;
     align-items: flex-end;
@@ -25,6 +30,13 @@ const StyledComment = styled.div`
   .comment {
     width: 35rem;
     font: ${styles.font.p2};
+    color: ${styles.colorsDark.gray};
+  }
+  .close-button {
+    padding: 0.5rem;
+    cursor: pointer;
+    visibility: hidden;
+    font-size: 1.1rem;
     color: ${styles.colorsDark.gray};
   }
 `;

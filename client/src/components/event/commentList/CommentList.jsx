@@ -5,6 +5,7 @@ import StyledCommentList from "./CommentList-styles";
 
 const CommentList = () => {
   const comments = useSelector(state => state.event.comments);
+  const sessionId = useSelector(state => state.session.id);
 
   if (comments && comments.length === 0) {
     return null;
@@ -13,7 +14,13 @@ const CommentList = () => {
   return (
     <StyledCommentList>
       {comments.map(comment => {
-        return <Comment key={comment.id} comment={comment} />;
+        return (
+          <Comment
+            key={comment.id}
+            comment={comment}
+            isOwnComment={sessionId === comment.userId}
+          />
+        );
       })}
     </StyledCommentList>
   );

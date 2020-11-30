@@ -7,9 +7,13 @@ import "moment/locale/es";
 
 moment.locale("es");
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, isOwnComment }) => {
   const { createdAt, text, userId, User } = comment;
   const relativeTime = moment(createdAt).fromNow();
+
+  function deleteComment() {
+    console.log("delete");
+  }
   return (
     <StyledComment>
       <Link to={`/${userId}`}>
@@ -24,6 +28,11 @@ const Comment = ({ comment }) => {
         </div>
         <p className="comment">{text}</p>
       </div>
+      {isOwnComment && (
+        <div className="close-button" onClick={deleteComment}>
+          x
+        </div>
+      )}
     </StyledComment>
   );
 };
