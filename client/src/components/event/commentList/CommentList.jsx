@@ -4,7 +4,7 @@ import Comment from "../comment/Comment";
 import StyledCommentList from "./CommentList-styles";
 
 const CommentList = () => {
-  const comments = useSelector(state => state.events.comments);
+  const comments = useSelector(state => state.event.comments);
 
   if (comments && comments.length === 0) {
     return null;

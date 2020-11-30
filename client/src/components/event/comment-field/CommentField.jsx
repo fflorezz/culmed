@@ -3,7 +3,7 @@ import StyledCommentField from "./CommentField-styles";
 import Avatar from "./../../user/avatar/Avatar";
 import Button from "./../../shared/button/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { addComment } from "../../../redux/slices/events";
+import { addComment } from "../../../redux/slices/event";
 
 const CommentField = ({ eventId }) => {
   const session = useSelector(state => state.session);

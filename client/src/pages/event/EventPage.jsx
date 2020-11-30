@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchEventById } from "./../../redux/slices/events";
+import { fetchEventById } from "./../../redux/slices/event";
 
 import Modal from "./../../components/shared/modal/Modal";
 import Event from "./../../components/event/event/Event";
@@ -10,7 +10,7 @@ const EventPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { eventId } = useParams();
-  const { event, error, loading } = useSelector(state => state.events);
+  const { event, error, loading } = useSelector(state => state.event);
   const session = useSelector(state => state.session);
   const isCalendarEvent = session.calendar.some(
     e => e.id === parseInt(eventId)
