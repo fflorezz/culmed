@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useSelector } from "react-redux";
 import Comment from "../comment/Comment";
 import StyledCommentList from "./CommentList-styles";
@@ -9,6 +9,7 @@ const CommentList = () => {
   if (comments && comments.length === 0) {
     return null;
   }
+
   return (
     <StyledCommentList>
       {comments.map(comment => {
@@ -18,4 +19,4 @@ const CommentList = () => {
   );
 };
 
-export default CommentList;
+export default memo(CommentList);

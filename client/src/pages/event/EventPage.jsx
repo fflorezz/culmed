@@ -37,9 +37,7 @@ const EventPage = () => {
           event={event}
           isCalendarEvent={isCalendarEvent}
           isOwnEvent={event.authorId === session.id}
-          sessionAvatar={session.avatarImg}
           isLogin={session.isLogin}
-          sessionId={session.id}
         />
       )}
     </Modal>
