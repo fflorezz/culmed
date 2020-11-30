@@ -16,14 +16,7 @@ import { Link } from "react-router-dom";
 import CommentList from "../commentList/CommentList";
 import CommentField from "./../comment-field/CommentField";
 
-const Event = ({
-  event,
-  isCalendarEvent,
-  isOwnEvent,
-  sessionAvatar,
-  isLogin,
-  sessionId,
-}) => {
+const Event = ({ event, isCalendarEvent, isOwnEvent, isLogin }) => {
   const [showDeleteModal, setDeleteModal] = useState(false);
   const [showEditForm, setEditForm] = useState(false);
   const date = formatDate(event.startDate);
@@ -101,7 +94,7 @@ const Event = ({
         </div>
         <p className="description">{event.description}</p>
         <Tags category={event.category} />
-        <CommentList comments={event.Comments} />
+        <CommentList />
         {isLogin && <CommentField eventId={event.id} />}
       </div>
     </StyledEvent>

@@ -40,6 +40,7 @@ const eventsSlice = createSlice({
     all: [],
     userEvents: [],
     event: null,
+    comments: [],
     error: null,
     loading: false,
     exploreFilter: "todos",
@@ -84,7 +85,9 @@ const eventsSlice = createSlice({
 
     // FETCH EVENT BY ID
     [fetchEventById.fulfilled]: (state, { payload }) => {
-      state.event = payload;
+      const { Comments, ...event } = payload;
+      state.event = event;
+      state.comments = Comments;
       state.error = null;
       state.loading = false;
     },
@@ -103,16 +106,16 @@ const eventsSlice = createSlice({
 
     // ADD COMMENT
     [addComment.fulfilled]: (state, { payload }) => {
-      state.event.Comments = [...state.event.Comments, payload];
-      state.error = null;
-      state.loading = false;
+      state.comments = [...state.comments, payload];
+      state.commentError = null;
+      state.commentLoading = false;
     },
     [addComment.rejected]: (state, action) => {
-      state.error = action.error;
-      state.loading = false;
+      state.commentError = action.error;
+      state.commentLoading = false;
     },
     [addComment.pending]: state => {
-      state.loading = true;
+      state.commentLoading = true;
     },
   },
 });
