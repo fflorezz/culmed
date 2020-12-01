@@ -11,8 +11,13 @@ const sequelize = new Sequelize(
   }
 );
 
-// sequelize.sync().catch(err => {
-//   console.log(err);
-// });
+// sequelize
+//   .sync({ force: true })
+//   .then(() => {
+//     console.log("DB sync!");
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
 
 export default sequelize;

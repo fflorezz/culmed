@@ -299,7 +299,11 @@ export const addComment = async (req, res) => {
   const { text, userId } = req.body;
 
   try {
-    const createdComment = await Comment.create({ text, eventId, userId });
+    const createdComment = await Comment.create({
+      text,
+      UserId: userId,
+      EventId: eventId,
+    });
     const comment = await Comment.findOne({
       where: {
         id: createdComment.id,

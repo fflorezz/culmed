@@ -8,22 +8,6 @@ class Comment extends Model {}
 
 Comment.init(
   {
-    userId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: User,
-        key: "id",
-      },
-    },
-    eventId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: Event,
-        key: "id",
-      },
-    },
     text: {
       type: DataTypes.STRING(1000),
       allowNull: false,
@@ -33,11 +17,25 @@ Comment.init(
 );
 
 Comment.belongsTo(User);
-User.hasMany(Comment, {
-  foreignKey: "userId",
-});
+User.hasMany(Comment);
 
-Comment.belongsTo(Event);
-Event.hasMany(Comment, { foreignKey: "eventId" });
+Comment.belongsTo(Event, { onDelete: "cascade", hooks: true });
+Event.hasMany(Comment, { onDelete: "cascade", hooks: true });
+
+// Comment.drop()
+//   .then(() => {
+//     console.log("drop***************");
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
+
+// Comment.sync()
+//   .then(() => {
+//     console.log("sync***************");
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
 
 export default Comment;
