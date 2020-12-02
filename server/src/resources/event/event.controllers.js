@@ -296,7 +296,8 @@ export const addComment = async (req, res) => {
   }
 
   const { eventId } = req.params;
-  const { text, userId } = req.body;
+  const { text } = req.body;
+  const userId = req.user.id;
 
   try {
     const createdComment = await Comment.create({

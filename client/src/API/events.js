@@ -77,12 +77,15 @@ export async function updateEvent(event) {
   }
 }
 
-export async function addComment({ eventId, text, userId }) {
+export async function addComment({ eventId, text }) {
   try {
-    const response = await axios.post(`/events/${eventId}/comment`, {
-      text,
-      userId,
-    });
+    const response = await axios.post(
+      `/events/${eventId}/comments`,
+      { text },
+      {
+        headers: authHeader(),
+      }
+    );
     return response.data.data;
   } catch (err) {
     console.log(err);

@@ -27,7 +27,9 @@ router
   .put(checkAuth, eventValidator, update)
   .delete(checkAuth, remove);
 
-router.route("/:eventId/comment").post(commentValidator, addComment);
+router
+  .route("/:eventId/comments")
+  .post(checkAuth, commentValidator, addComment);
 
 router.get("/user/:userId", checkAuth, getByUserId);
 
