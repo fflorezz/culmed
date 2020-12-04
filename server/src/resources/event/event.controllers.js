@@ -258,10 +258,6 @@ export const update = async (req, res) => {
 };
 
 export const remove = async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(500).send({ Error: errors.array()[0].msg }).end();
-  }
   const eventId = req.params.eventId;
   const userId = req.user.id;
   try {
@@ -317,6 +313,20 @@ export const addComment = async (req, res) => {
       ],
     });
     res.status(201).send({ data: comment });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      message: err.message || "Something went wrong, Try again later",
+    });
+  }
+};
+
+export const removeComment = async (req, res) => {
+  const userId = req.user.id;
+  const { eventId, commentId } = req.params;
+
+  try {
+    res.status(201).send({});
   } catch (err) {
     console.log(err);
     res.status(500).send({

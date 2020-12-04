@@ -12,6 +12,7 @@ import {
   remove,
   getByUserId,
   addComment,
+  removeComment,
 } from "./event.controllers";
 
 const router = express.Router();
@@ -30,6 +31,8 @@ router
 router
   .route("/:eventId/comments")
   .post(checkAuth, commentValidator, addComment);
+
+router.route("/:eventId/comments/:commentId").delete(checkAuth, removeComment);
 
 router.get("/user/:userId", checkAuth, getByUserId);
 
