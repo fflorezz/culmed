@@ -92,3 +92,18 @@ export async function addComment({ eventId, text }) {
     throw new Error(err.message);
   }
 }
+
+export async function deleteComment({ eventId, commentId }) {
+  try {
+    const response = await axios.delete(
+      `/events/${eventId}/comments/${commentId}`,
+      {
+        headers: authHeader(),
+      }
+    );
+    return response.data.data;
+  } catch (err) {
+    console.log(err);
+    throw new Error(err.message);
+  }
+}
