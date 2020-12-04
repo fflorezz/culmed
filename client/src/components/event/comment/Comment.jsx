@@ -4,15 +4,20 @@ import StyledComment from "./Comment.styles";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import "moment/locale/es";
+import { useDispatch } from "react-redux";
+import { deleteComment } from "./../../../redux/slices/event";
 
 moment.locale("es");
 
 const Comment = ({ comment, isOwnComment }) => {
   const { createdAt, text, userId, User } = comment;
   const relativeTime = moment(createdAt).fromNow();
+  const dispatch = useDispatch();
 
-  function deleteComment() {
-    console.log("delete");
+  function handleDelete() {
+    dispatch(
+      deleteComment({ commentId: comment.id, eventId: comment.eventId })
+    );
   }
   return (
     <StyledComment>
@@ -29,7 +34,7 @@ const Comment = ({ comment, isOwnComment }) => {
         <p className="comment">{text}</p>
       </div>
       {isOwnComment && (
-        <div className="close-button" onClick={deleteComment}>
+        <div className="close-button" onClick={handleDelete}>
           x
         </div>
       )}

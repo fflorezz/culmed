@@ -326,7 +326,31 @@ export const removeComment = async (req, res) => {
   const { eventId, commentId } = req.params;
 
   try {
-    res.status(201).send({});
+    const comment = await Comment.findOne({
+      where: {
+        id: commentId,
+        EventId: eventId,
+      },
+    });
+    if (!comment) {
+      return res.status(404).send({ message: "Couldn't find comment" });
+    }
+    if (comment.UserId !== userId) {
+      return res
+        .status(401)
+        .send({ message: "You are not allowed to delete this comment" });
+    }
+    const deletedComment = await Comment.destroy({
+      where: {
+        id: commentId,
+      },
+    });
+    if (deletedComment === 0) {
+      return res.status(500).send({
+        message: "Something went wrong, Try again later",
+      });
+    }
+    res.status(200).send({ data: { commentId: comment.id } });
   } catch (err) {
     console.log(err);
     res.status(500).send({

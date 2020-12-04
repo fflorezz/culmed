@@ -12,8 +12,16 @@ export const fetchEventById = createAsyncThunk(
 
 export const addComment = createAsyncThunk(
   "event/addCommentStatus",
-  async data => {
-    const result = await API.addComment(data);
+  async commentData => {
+    const result = await API.addComment(commentData);
+    return result;
+  }
+);
+
+export const deleteComment = createAsyncThunk(
+  "event/deleteCommentStatus",
+  async commentData => {
+    const result = await API.deleteComment(commentData);
     return result;
   }
 );
@@ -51,15 +59,29 @@ const eventSlice = createSlice({
     // ADD COMMENT
     [addComment.fulfilled]: (state, { payload }) => {
       state.comments = [...state.comments, payload];
-      state.commentError = null;
-      state.commentLoading = false;
+      state.commentsError = null;
+      state.commentsLoading = false;
     },
     [addComment.rejected]: (state, action) => {
-      state.commentError = action.error;
-      state.commentLoading = false;
+      state.commentsError = action.error;
+      state.commentsLoading = false;
     },
     [addComment.pending]: state => {
-      state.commentLoading = true;
+      state.commentsLoading = true;
+    },
+
+    // DELETE COMMENT
+    [deleteComment.fulfilled]: (state, { payload }) => {
+      state.comments = state.comments.filter(c => c.id !== payload.commentId);
+      state.commentsError = null;
+      state.commentsLoading = false;
+    },
+    [deleteComment.rejected]: (state, action) => {
+      state.commentsError = action.error;
+      state.commentsLoading = false;
+    },
+    [deleteComment.pending]: state => {
+      state.commentsLoading = true;
     },
   },
 });
