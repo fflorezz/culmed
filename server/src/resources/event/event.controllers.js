@@ -305,6 +305,7 @@ export const addComment = async (req, res) => {
       where: {
         id: createdComment.id,
       },
+      attributes: ["userId", "text", "eventId", "createdAt", "id"],
       include: [
         {
           model: User,
